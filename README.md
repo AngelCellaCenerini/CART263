@@ -1,2 +1,2 @@
 # CART263
-Repository for CART263 works
+CART263 - Course works
