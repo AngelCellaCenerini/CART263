@@ -12,8 +12,13 @@ Here is a description of this template p5 project.
 const NUM_ANIMAL_IMAGES = 10;
 const NUM_ANIMALS = 100;
 
+// Animals
 let animalImages = [];
 let animals = [];
+
+// SausageDog
+let sausageDogImage = undefined;
+let sausageDog = undefined;
 
 // preload()
 //
@@ -24,6 +29,8 @@ function preload() {
     let animalImage = loadImage(`assets/images/animal${i}.png`);
     animalImages.push(animalImage);
   }
+
+  sausageDogImage = loadImage(`assets/images/sausage-dog.png`);
 
 }
 
@@ -42,6 +49,11 @@ function setup() {
     let animal = new Animal(x, y, animalImage);
     animals.push(animal);
   }
+
+  // Create Sausage Dog
+  let x = random(0, width);
+  let y = random(0, height);
+  sausageDog = new SausageDog(x, y, sausageDogImage);
 }
 
 // draw()
@@ -50,9 +62,24 @@ function setup() {
 function draw() {
 background(148, 221, 185); // greenish background
 
-// Animals
-for(let i = 0; i < animals.length; i ++){
- animals[i].update();
+updateAnimals();
+updateSausageDog();
+
 }
 
+// Animals
+function updateAnimals() {
+  for (let i = 0; i < animals.length; i++) {
+    animals[i].update();
+  }
+}
+
+// Sausage Dog
+function updateSausageDog() {
+  sausageDog.update();
+}
+
+// p5 Events
+function mousePressed() {
+  sausageDog.mousePressed();
 }
