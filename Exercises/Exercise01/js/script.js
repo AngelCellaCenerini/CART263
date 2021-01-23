@@ -10,7 +10,7 @@ Here is a description of this template p5 project.
 **************************************************/
 
 const NUM_ANIMAL_IMAGES = 10;
-const NUM_ANIMALS = 100;
+const NUM_ANIMALS = 150;
 
 // Animals
 let animalImages = [];

@@ -17,10 +17,10 @@ class SausageDog extends Animal {
   }
 
   mousePressed(){
-    if(mouseX > this.x - this.image.width/2 ||
-       mouseX < this.x + this.image.width/2 ||
-       mouseX > this.y - this.image.height/2 ||
-       mouseX < this.y + this.image.height/2 ){
+    if(mouseX > this.x - this.image.width/2 &&
+       mouseX < this.x + this.image.width/2 &&
+       mouseY > this.y - this.image.height/2 &&
+       mouseY < this.y + this.image.height/2 ){
       this.found = true;
     }
   }
