@@ -42,18 +42,10 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   // Create Animals
-  for(let i = 0; i < NUM_ANIMALS; i++){
-    let x = random(0, width);
-    let y = random(0, height);
-    let animalImage = random(animalImages);
-    let animal = new Animal(x, y, animalImage);
-    animals.push(animal);
-  }
+  createAnimals();
 
   // Create Sausage Dog
-  let x = random(0, width);
-  let y = random(0, height);
-  sausageDog = new SausageDog(x, y, sausageDogImage);
+  createSausageDog();
 }
 
 // draw()
@@ -68,6 +60,15 @@ updateSausageDog();
 }
 
 // Animals
+function createAnimals(){
+  for(let i = 0; i < NUM_ANIMALS; i++){
+    let x = random(0, width);
+    let y = random(0, height);
+    let animalImage = random(animalImages);
+    let animal = new Animal(x, y, animalImage);
+    animals.push(animal);
+  }
+}
 function updateAnimals() {
   for (let i = 0; i < animals.length; i++) {
     animals[i].update();
@@ -75,6 +76,11 @@ function updateAnimals() {
 }
 
 // Sausage Dog
+function createSausageDog(){
+  let x = random(0, width);
+  let y = random(0, height);
+  sausageDog = new SausageDog(x, y, sausageDogImage);
+}
 function updateSausageDog() {
   sausageDog.update();
 }
