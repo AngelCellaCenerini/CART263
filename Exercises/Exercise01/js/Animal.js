@@ -4,6 +4,7 @@ class Animal{
   this.y = y;
   this.image = image;
   this.angle = 0;
+  this.rotationSpeed = random(0.1, 1);
   }
 
   update(){
@@ -12,7 +13,6 @@ class Animal{
 
   display(){
     push();
-    imageMode(CENTER);
     translate(this.x, this.y);
     rotate(this.angle);
     image(this.image, 0, 0);
