@@ -145,6 +145,8 @@ const ANIMALS = [
     ];
 
 let currentAnimal = ``;
+let currentAnswer = ``;
+
 /**
 Description of preload
 */
@@ -158,6 +160,16 @@ Description of setup
 */
 function setup() {
 
+ if(annyang){
+   let commands = {
+   'I think it is *animal' : guessAnimal
+   };
+   annyang.addCommands(commands);   // can be added here for it's strictly related to annyang
+   annyang.start();                 // can be added here for it's strictly related to annyang
+
+   textSize(25);
+   textAlign(CENTER, CENTER);
+ }
 }
 
 
@@ -173,6 +185,11 @@ function mousePressed(){
 currentAnimal = random(ANIMALS);
 let reverseAnimal = reverseString(currentAnimal);
 responsiveVoice.speak(reverseAnimal);
+}
+
+// Guess Animal
+function guessAnimal(animal){
+  currentAnswer = animal;
 }
 
 // Read animal in reverse
