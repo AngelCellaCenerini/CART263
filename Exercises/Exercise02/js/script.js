@@ -168,6 +168,13 @@ function draw() {
 
 }
 
+// p5 Events
+function mousePressed(){
+currentAnimal = random(ANIMALS);
+let reverseAnimal = reverseString(currentAnimal);
+responsiveVoice.speak(reverseAnimal);
+}
+
 // Read animal in reverse
 function reverseString(string){
  let characters = string.split('');  // splitting string into characters (array)
