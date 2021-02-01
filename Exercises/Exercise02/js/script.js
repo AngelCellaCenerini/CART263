@@ -160,6 +160,8 @@ Description of setup
 */
 function setup() {
 
+  createCanvas(windowWidth, windowHeight);
+
  if(annyang){
    let commands = {
    'I think it is *animal' : guessAnimal
@@ -177,19 +179,29 @@ function setup() {
 Description of draw()
 */
 function draw() {
+  background(0);
+
+  // Check if guess is correct
+  if(currentAnswer === currentAnimal){
+    fill(0, 255, 0);
+  }
+  else{
+    fill(255, 0, 0);
+  }
+  text(currentAnswer, width/2, height/2);
 
 }
 
 // p5 Events
 function mousePressed(){
-currentAnimal = random(ANIMALS);
-let reverseAnimal = reverseString(currentAnimal);
-responsiveVoice.speak(reverseAnimal);
+  currentAnimal = random(ANIMALS);
+  let reverseAnimal = reverseString(currentAnimal);
+  responsiveVoice.speak(reverseAnimal);
 }
 
 // Guess Animal
 function guessAnimal(animal){
-  currentAnswer = animal;
+  currentAnswer = animal.toLowerCase();
 }
 
 // Read animal in reverse
