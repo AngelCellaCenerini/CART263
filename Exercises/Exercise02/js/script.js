@@ -181,6 +181,12 @@ Description of draw()
 function draw() {
   background(0);
 
+  displayAnswer();
+
+}
+
+// Check if answer is correct and display it
+function displayAnswer(){
   // Check if guess is correct
   if(currentAnswer === currentAnimal){
     fill(0, 255, 0);
@@ -189,19 +195,18 @@ function draw() {
     fill(255, 0, 0);
   }
   text(currentAnswer, width/2, height/2);
-
-}
-
-// p5 Events
-function mousePressed(){
-  currentAnimal = random(ANIMALS);
-  let reverseAnimal = reverseString(currentAnimal);
-  responsiveVoice.speak(reverseAnimal);
 }
 
 // Guess Animal
 function guessAnimal(animal){
   currentAnswer = animal.toLowerCase();
+}
+
+//
+function readAnimalBackwards(){
+  currentAnimal = random(ANIMALS);
+  let reverseAnimal = reverseString(currentAnimal);
+  responsiveVoice.speak(reverseAnimal);
 }
 
 // Read animal in reverse
@@ -211,4 +216,9 @@ function reverseString(string){
  let result = reverseCharacters.join(''); // reassemble
  return result;
 
+}
+
+// p5 Events
+function mousePressed(){
+ readAnimalBackwards();
 }
