@@ -1,11 +1,10 @@
 "use strict";
 
 /**
-Title of Project
-Author Name
+Noah's Ark
+Angel Cella Cenerini
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+Guess correctly the animal and save the Earth. Don't, and bring Doom upon the animal kingdom.
 */
 const NUM_ANIMAL_IMAGES = 11;
 const NUM_ANIMALS = 8;
