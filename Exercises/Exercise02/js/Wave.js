@@ -35,21 +35,8 @@ class Wave{
     else if( this.x < width/3){
         this.vx = this.speed;
     }
-
-
-
   }
 
-  // wrap(){
-  //
-  //   // Orizontally
-  //   if (this.x > 2*width/3) {
-  //     this.x -= this.speed;
-  //   }
-  //   else if(this.x < width/3){
-  //     this.x += this.speed;
-  //   }
-  // }
 
   display(){
     image(this.image, this.x, this.y, this.width);

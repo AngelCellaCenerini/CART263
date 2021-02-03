@@ -12,13 +12,27 @@ class Animal{
   this.timer = 0;
   }
 
-  update(){
+  update(){                       // Called with Correct Guess
     if(this.active){
       this.rotate();
       this.display();
       this.timer++;
 
-      if (this.timer > 2*60){
+      if (this.timer > 3*60){
+        this.active = false;
+        this.timer = 0;
+       }
+    }
+  }
+
+  upgrade(){                       // Called with Wrong Guess
+    if(this.active){
+      this.angle = 180;
+      this.float();
+      this.display();
+      this.timer++;
+
+      if (this.timer > 3*60){
         this.active = false;
         this.timer = 0;
        }
@@ -29,6 +43,16 @@ class Animal{
       this.angle = this.angle + this.rotationSpeed;
   }
 
+  float(){
+
+    this.y = this.y + this.vy;
+
+    let change = random(0, 1);
+    if (change < 0.5){
+      this.vy = random(-this.speed, this.speed);
+    }
+  }
+
   display(){
     push();
     translate(this.x, this.y);
@@ -36,17 +60,5 @@ class Animal{
     image(this.image, 0, 0);
     pop();
   }
-
-//   overlap(x, y){
-//     if(x > this.x - this.image.width/2 &&
-//        x < this.x + this.image.width/2 &&
-//        y > this.y - this.image.height/2 &&
-//        y < this.y + this.image.height/2){
-//         return true;
-//     }
-//     else{
-//        return false;
-//   }
-// }
 
 }

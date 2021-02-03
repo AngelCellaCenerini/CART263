@@ -8,7 +8,7 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 */
 const NUM_ANIMAL_IMAGES = 11;
-const NUM_ANIMALS = 5;
+const NUM_ANIMALS = 8;
 
 // Waves
 // Wave01
@@ -25,9 +25,18 @@ let wave3 = undefined;
 let boatImage = undefined;
 let boat = undefined;
 
+// Sun
+let sunImage = undefined;
+// Trees
+let treesImage = undefined;
+
+// Rain
+let rainImage = undefined;
+
 // Animals
 let animalImages = [];
 let animals = [];
+let drowingAnimals = [];
 
 const ANIMALS = [
       "aardvark",
@@ -173,10 +182,9 @@ let correctGuesses = [];
 let wrongGuesses = [];
 
 
+let state = `title`;  // Title, Simulation, Endings: Failure, Success
 
-/**
-Description of preload
-*/
+
 function preload() {
   // Load Images
   // Animals
@@ -192,12 +200,18 @@ function preload() {
 
   // Boat
   boatImage = loadImage(`assets/images/boat.png`);
+
+  // Boat
+  sunImage = loadImage(`assets/images/sun.png`);
+  // Boat
+  treesImage = loadImage(`assets/images/trees.png`);
+
+  // Boat
+  rainImage = loadImage(`assets/images/rain.gif`);
 }
 
 
-/**
-Description of setup
-*/
+
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
@@ -212,6 +226,7 @@ function setup() {
    textSize(25);
    textAlign(CENTER, CENTER);
    imageMode(CENTER);
+   rectMode(CENTER);
  }
 
  // Create Waves
@@ -225,30 +240,64 @@ function setup() {
 }
 
 
-/**
-Description of draw()
-*/
+
 function draw() {
   background(189, 229, 234);
 
+  if(state === `title`){
+    background(0);
+    titleText();
+  }
+  else if(state === `simulation`){
 
+    // Waves
+    wave1.update();
+    wave2.update();
+    upgradeDrowningAnimals();   // Animals (inserted in-between waves to create "immersive" experience XD)
+    boat.update();              // Boat (inserted in-between waves to create "immersive" experience XD)
+    wave3.update();
 
-  // Waves
-  wave1.update();
-  wave2.update();
-  wave3.update();
+    // Animals
+    updateAnimals();
 
-  // Boat
-  boat.update();
+    // Answers
+    displayAnswer();
+    trackAnswers();
+  }
+  else if (state === `failure`){
+    background(200); // light gray
+    // Animals
+    upgradeDrowningAnimals();
+    // Rain
+    image(rainImage, width/2, height/2, width, height);
+  }
+  else if(state === `success`){
+    // Sun
+    image(sunImage, 3*width/4, height/3);
+    // Trees
+    image(treesImage, width/2, 2*height/3, width);
 
-  // Animals
-  updateAnimals();
-
-  // Answers
-  displayAnswer();
-  trackAnswers();
+  }
 
 }
+
+// Title
+function titleText(){
+  push();
+  fill(255);
+  textSize(42);
+  text(`Noah's Ark`, width/2, height/3);
+  textSize(23);
+  text(`Guess the animal correctly to save as many species as possible.
+    Or fail and bring Doom upon the animal kingdom.
+
+    Feel free to skip any prompt by clicking the mouse.
+    If you turn out to be as successful as I am with guessing, you can use the Console.`, width/2, height/2);
+  textSize(18);
+  text(`Press ENTER to play god.`, width/2, 2*height/3);
+  pop();
+}
+//
 
 // Simulation
 // Waves
@@ -269,6 +318,7 @@ function createWaves(){
   imageWidth = 4*width/3;
   wave3 = new Wave(x, y, wave3Image, imageWidth);
 }
+
 // Boat
 function createBoat(){
   let x = width/2;
@@ -280,38 +330,53 @@ function createBoat(){
 function createAnimals(){
   for(let i = 0; i < NUM_ANIMALS; i++){
     let x = random(0, width);
-    let y = random( 0, height);
+    let y = random( 0, height/3);
     let animalImage = random(animalImages);
     let animal = new Animal(x, y, animalImage);
     animals.push(animal);
   }
+  for(let i = 0; i < NUM_ANIMALS; i++){
+    let x = random(0, width);
+    let y = random(height/2, height);
+    let animalImage = random(animalImages);
+    let drowingAnimal = new Animal(x, y, animalImage);
+    drowingAnimals.push(drowingAnimal);
+  }
 }
-
 function updateAnimals() {
   for (let i = 0; i < animals.length; i++) {
     animals[i].update();
   }
 }
-
-// Check if answer is correct and display it
-function displayAnswer(){
-  // Check if guess is correct
-  if(currentAnswer === currentAnimal){
-    fill(0, 255, 0);
+function upgradeDrowningAnimals() {
+  for (let i = 0; i < drowingAnimals.length; i++) {
+    drowingAnimals[i].upgrade();
   }
-  else{
-    fill(255, 0, 0);
-  }
-  text(currentAnswer, width/2, height/2);
 }
 
-//
+// Display Answer
+function displayAnswer(){
+  pop();
+  noStroke();
+  fill(255);
+  let rectWidth = 210;
+  let rectHeight = 90;
+  let rectRadius = 10;
+  rect(width/2, height/3, rectWidth, rectHeight, rectRadius);
+  fill(0);
+  text(currentAnswer, width/2, height/3);
+  push();
+}
+
+// Track Answers
 function trackAnswers(){
   if (correctGuesses.length > 2){
-    console.log(`success`);
+    state = `success`;
+    responsiveVoice.speak(`Congrats, you saved the Earth!`);
   }
-  if (wrongGuesses.length > 4){
-    console.log(`fail`);
+  if (wrongGuesses.length > 5){
+    state = `failure`;
+    responsiveVoice.speak(`The world could no longer take your failure. You have let everybody down.`);
   }
 }
 
@@ -320,25 +385,26 @@ function guessAnimal(animal){
   currentAnswer = animal.toLowerCase();
   if(currentAnswer === currentAnimal){
     correctGuesses.push(currentAnswer);
-    console.log(correctGuesses);
     for (let i = 0; i < animals.length; i++) {
       animals[i].active = true;
     }
   }
   else{
     wrongGuesses.push(currentAnswer);
-    console.log(wrongGuesses);
+    for (let i = 0; i < drowingAnimals.length; i++) {
+      drowingAnimals[i].active = true;
+    }
   }
 }
 
-//
+// Read animal in reverse
 function readAnimalBackwards(){
   currentAnimal = random(ANIMALS);
   let reverseAnimal = reverseString(currentAnimal);
   responsiveVoice.speak(reverseAnimal);
 }
 
-// Read animal in reverse
+// Reverse words
 function reverseString(string){
  let characters = string.split('');  // splitting string into characters (array)
  let reverseCharacters = characters.reverse(); // reverse order of array's elements
@@ -349,5 +415,12 @@ function reverseString(string){
 
 // p5 Events
 function mousePressed(){
- readAnimalBackwards();
+  if (state === `simulation`){
+    readAnimalBackwards();
+  }
+}
+function keyPressed(){
+  if (keyCode === 13 && state === `title`){
+     state = `simulation`;
+  }
 }

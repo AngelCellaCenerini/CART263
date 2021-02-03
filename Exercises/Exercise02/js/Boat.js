@@ -25,7 +25,7 @@ class Boat{
     }
     // Constrain
     this.x = constrain( this.x, 0, width);
-    this.y = constrain( this.y, height/3, height);
+    this.y = constrain( this.y, height/2, height);
 
   }
 
