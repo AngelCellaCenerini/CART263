@@ -35,7 +35,18 @@ Description of setup
 function setup() {
 createCanvas(windowWidth, windowHeight);
 
-generateSpyProfile();
+let data = JSON.parse(localStorage.getItem(`spy-profile-data`));  // attempt to load data
+
+if (data !== null){
+  spyProfile.name = data.name;
+  spyProfile.alias = data.alias;
+  spyProfile.secretWeapon = data.secretWeapon;
+  spyProfile.password = data.password;
+
+}
+else {
+  generateSpyProfile();
+}
 }
 
 function generateSpyProfile(){
@@ -44,6 +55,8 @@ function generateSpyProfile(){
   spyProfile.alias = `The ${ukPoliticaParties}`;
   spyProfile.secretWeapon = random(charitiesData.charities);
   spyProfile.password = random(personalityTestData.personality_test);
+
+  localStorage.setItem(`spy-profile-data`, JSON.stringify(spyProfile));
 }
 
 
