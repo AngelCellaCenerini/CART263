@@ -38,10 +38,17 @@ createCanvas(windowWidth, windowHeight);
 let data = JSON.parse(localStorage.getItem(`spy-profile-data`));  // attempt to load data
 
 if (data !== null){
-  spyProfile.name = data.name;
-  spyProfile.alias = data.alias;
-  spyProfile.secretWeapon = data.secretWeapon;
-  spyProfile.password = data.password;
+
+  let password = prompt(`State your password.`);
+  if (password === data.password){
+    spyProfile.name = data.name;
+    spyProfile.alias = data.alias;
+    spyProfile.secretWeapon = data.secretWeapon;
+    spyProfile.password = data.password;
+  }
+  // else{
+  //
+  // }
 
 }
 else {
