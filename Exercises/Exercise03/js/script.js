@@ -19,13 +19,18 @@ let ukPoliticaPartiesData = undefined;
 let charitiesData = undefined;
 let personalityTestData = undefined;
 
+const KEY_NAME = `spy-profile-data`;
+const UK_POLITICAL_PARTIES_LIST = `https://raw.githubusercontent.com/dariusk/corpora/master/data/governments/uk_political_parties.json`;
+const CHARITIES_LIST = `https://raw.githubusercontent.com/dariusk/corpora/master/data/corporations/charities.json`;
+const PERSONALITY_TEST_LIST = `https://raw.githubusercontent.com/dariusk/corpora/master/data/psychology/personality_test.json`;
+
 /**
 Description of preload
 */
 function preload() {
-  ukPoliticaPartiesData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/governments/uk_political_parties.json`);
-  charitiesData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/corporations/charities.json`);
-  personalityTestData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/psychology/personality_test.json`);
+  ukPoliticaPartiesData = loadJSON(UK_POLITICAL_PARTIES_LIST);
+  charitiesData = loadJSON(CHARITIES_LIST);
+  personalityTestData = loadJSON(PERSONALITY_TEST_LIST);
 }
 
 
@@ -35,16 +40,13 @@ Description of setup
 function setup() {
 createCanvas(windowWidth, windowHeight);
 
-let data = JSON.parse(localStorage.getItem(`spy-profile-data`));  // attempt to load data
+let data = JSON.parse(localStorage.getItem(KEY_NAME));  // attempt to load data
 
 if (data !== null){
 
   let password = prompt(`State your password.`);
   if (password === data.password){
-    spyProfile.name = data.name;
-    spyProfile.alias = data.alias;
-    spyProfile.secretWeapon = data.secretWeapon;
-    spyProfile.password = data.password;
+    setSpyData();
   }
   // else{
   //
@@ -63,7 +65,17 @@ function generateSpyProfile(){
   spyProfile.secretWeapon = random(charitiesData.charities);
   spyProfile.password = random(personalityTestData.personality_test);
 
-  localStorage.setItem(`spy-profile-data`, JSON.stringify(spyProfile));
+  localStorage.setItem(KEY_NAME, JSON.stringify(spyProfile));
+}
+
+function setSpyData(){
+
+  let data = JSON.parse(localStorage.getItem(KEY_NAME));
+  
+  spyProfile.name = data.name;
+  spyProfile.alias = data.alias;
+  spyProfile.secretWeapon = data.secretWeapon;
+  spyProfile.password = data.password;
 }
 
 
