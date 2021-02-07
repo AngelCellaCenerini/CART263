@@ -15,11 +15,17 @@ let spyProfile = {
   password: `**REDACTED**`
 };
 
+let ukPoliticaPartiesData = undefined;
+let charitiesData = undefined;
+let personalityTestData = undefined;
+
 /**
 Description of preload
 */
 function preload() {
-
+  ukPoliticaPartiesData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/governments/uk_political_parties.json`);
+  charitiesData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/corporations/charities.json`);
+  personalityTestData = loadJSON(`https://raw.githubusercontent.com/dariusk/corpora/master/data/psychology/personality_test.json`);
 }
 
 
@@ -28,7 +34,16 @@ Description of setup
 */
 function setup() {
 createCanvas(windowWidth, windowHeight);
-spyProfile.name = prompt(`Identify yourself.`);
+
+generateSpyProfile();
+}
+
+function generateSpyProfile(){
+  spyProfile.name = prompt(`Identify yourself.`);
+  let ukPoliticaParties = random(ukPoliticaPartiesData.parties);
+  spyProfile.alias = `The ${ukPoliticaParties}`;
+  spyProfile.secretWeapon = random(charitiesData.charities);
+  spyProfile.password = random(personalityTestData.personality_test);
 }
 
 
