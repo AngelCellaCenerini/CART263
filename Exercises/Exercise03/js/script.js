@@ -82,15 +82,15 @@ let data = JSON.parse(localStorage.getItem(KEY_NAME));  // attempt to load data
 
 if (data !== null){
 
-  // let password = prompt(`State your password.`);
-  // if (password === data.password){
-  //   setSpyData();
-  // }
-  // else{
-  // // displayRedHue();
-  // // Siren
-  // image(sirenImage, width/2, 2*height/3);
-  // }
+  let password = prompt(`State your password.`);
+  if (password === data.password){
+    setSpyData();
+  }
+  else{
+  redHue.active = true;  // Red Hue-Light
+  alarmSFX.play();  // play Alarm
+  responsiveVoice.speak(`Intruder! Intruder! Intruder! Intruder! Intruder!`);  // let British Lady scream "INTRUDER" at you
+  }
 
 }
 else {
