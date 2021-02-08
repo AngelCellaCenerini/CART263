@@ -1,11 +1,11 @@
 "use strict";
 
 /**
-Title of Project
-Author Name
+Exercise 03:  Inappropriate Spy Profile Generator
+Angel Cella Cenerini
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+Sometimes we get to choose our own name, but not our weakness.
+However, we do have the power to reset the button ;)
 */
 
 let spyProfile = {
@@ -63,14 +63,12 @@ function preload() {
   norwegianCitiesData = loadJSON(NORWEGIAN_CITIES_LIST);
   personalityTestData = loadJSON(PERSONALITY_TEST_LIST);
 
-  sirenImage = loadImage(`assets/images/siren.gif`);
-
   alarmSFX = loadSound(`assets/sounds/alarm.mp3`);
 }
 
 
 /**
-Description of setup
+General Settings
 */
 function setup() {
 createCanvas(windowWidth, windowHeight);
@@ -127,7 +125,7 @@ function setSpyData(){
 
 
 /**
-Description of draw()
+Generate Profile + Display Button
 */
 function draw() {
 background(0);
@@ -148,39 +146,14 @@ Stash Location: ${spyProfile.stash_location}
 
 Password: ${spyProfile.password}`;
 
-push();
-fill(255);
-textSize(22);
-textFont(`Courier`);
-textAlign(LEFT, TOP);
-text(profile, 100, 100);
-pop();
+// Profile Text
+profileText();
 
 // Red Button
-push();
-fill(170);
-rect(3*width/4, height/2 + 35, 250);
-fill(220);
-rect(3*width/4, height/2 + 6, 250);
-fill(185, 0, 0);
-ellipse(3*width/4, height/2 + 10, 150);
-fill(255, 0, 0);
-ellipse(3*width/4, height/2, 150);
-noFill();
-stroke(255);
-strokeWeight(3);
-rect(3*width/4, height/2 + 20, 360);
-pop();
+displayRedButton();
 
-// Button Warning
-push();
-fill(255);
-textSize(24);
-textFont(`Courier`);
-textAlign(CENTER, CENTER);
-text(`BREAK IN CASE OF EMERGENCY`, 3*width/4, height/2 - 200);
-text(`PRESS "B" TO BREAK`, 3*width/4, height/2 + 240);
-pop();
+// Button Warning/Instructions
+buttonInstructions();
 
 // Glass
 displayGlass();
@@ -188,6 +161,47 @@ displayGlass();
 // Red Hue
 displayRedHue();
 
+}
+
+function profileText(){
+  // Profile Text
+  push();
+  fill(255);
+  textSize(22);
+  textFont(`Courier`);
+  textAlign(LEFT, TOP);
+  text(profile, 100, 100);
+  pop();
+}
+
+function displayRedButton(){
+  // Red Button
+  push();
+  fill(170);
+  rect(3*width/4, height/2 + 35, 250);
+  fill(220);
+  rect(3*width/4, height/2 + 6, 250);
+  fill(185, 0, 0);
+  ellipse(3*width/4, height/2 + 10, 150);
+  fill(255, 0, 0);
+  ellipse(3*width/4, height/2, 150);
+  noFill();
+  stroke(255);
+  strokeWeight(3);
+  rect(3*width/4, height/2 + 20, 360);
+  pop();
+}
+
+function buttonInstructions(){
+  // Button Warning/Instructions
+  push();
+  fill(255);
+  textSize(24);
+  textFont(`Courier`);
+  textAlign(CENTER, CENTER);
+  text(`BREAK IN CASE OF EMERGENCY`, 3*width/4, height/2 - 200);
+  text(`PRESS "B" TO BREAK`, 3*width/4, height/2 + 240);
+  pop();
 }
 
 function displayRedHue(){
@@ -219,9 +233,10 @@ function displayGlass(){
 
 function keyPressed(){
   if(keyCode === 66){
+    // Press B to reset Profile
     localStorage.removeItem(KEY_NAME);
-    alarmSFX.play();
-    glass.active = false;
-    redHue.active = true;
+    alarmSFX.play(); // Blast that siren alarm
+    glass.active = false; // "Break" glass
+    redHue.active = true; // "Turn on" red light
   }
 }
