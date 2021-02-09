@@ -37,6 +37,13 @@ let sirenImage = undefined;
 
 let alarmSFX = undefined;
 
+// Red Button
+let redButton = {
+  x: 0,
+  y: 0,
+  width: 150
+}
+
 // Glass
 let glass = {
  x: 0,
@@ -51,6 +58,8 @@ let redHue = {
   y: 0,
   active: false
 };
+
+let state = `title` // Title, simulation
 
 /**
 Description of preload
@@ -76,24 +85,6 @@ noStroke();
 rectMode(CENTER);
 imageMode(CENTER);
 
-let data = JSON.parse(localStorage.getItem(KEY_NAME));  // attempt to load data
-
-if (data !== null){
-
-  let password = prompt(`State your password.`);
-  if (password === data.password){
-    setSpyData();
-  }
-  else{
-  redHue.active = true;  // Red Hue-Light
-  alarmSFX.play();  // play Alarm
-  responsiveVoice.speak(`Intruder! Intruder! Intruder! Intruder! Intruder!`);  // let British Lady scream "INTRUDER" at you
-  }
-
-}
-else {
-  generateSpyProfile();
-}
 }
 
 function generateSpyProfile(){
@@ -104,7 +95,7 @@ function generateSpyProfile(){
   spyProfile.weakness = random(symptomsData.symptoms);
   spyProfile.nickname_given_by_Mother = random(plantsData.cannabis);
   let norwegianCity = random(norwegianCitiesData.cities);
-  spyProfile.stash_location = random(norwegianCity.city);
+  spyProfile.stash_location = norwegianCity.city;
   spyProfile.password = random(personalityTestData.personality_test);
 
   localStorage.setItem(KEY_NAME, JSON.stringify(spyProfile));
@@ -130,6 +121,12 @@ Generate Profile + Display Button
 function draw() {
 background(0);
 
+if(state === `title`){
+  // Title Text
+  titleText();
+}
+else if(state === `profileGenerator`){
+
 let profile = `**AGENT IDENTIFICATION**
 
 Name: ${spyProfile.name}
@@ -147,7 +144,7 @@ Stash Location: ${spyProfile.stash_location}
 Password: ${spyProfile.password}`;
 
 // Profile Text
-profileText();
+profileText(profile);
 
 // Red Button
 displayRedButton();
@@ -160,10 +157,46 @@ displayGlass();
 
 // Red Hue
 displayRedHue();
+}
 
 }
 
-function profileText(){
+// Title
+function titleText(){
+  // Profile Text
+  push();
+  fill(255);
+  textSize(22);
+  textFont(`Courier`);
+  textAlign(CENTER, CENTER);
+  text(`THIS IS SENSITIVE INFORMATION. HOWEVER, YOU CAN ACCESS IT BY PRESSING 'ENTER'.`, width/2, height/2);
+  pop();
+}
+//
+
+// Profile Generator
+function generatingProfile(){
+  let data = JSON.parse(localStorage.getItem(KEY_NAME));  // attempt to load data
+
+  if (data !== null){
+
+    let password = prompt(`State your password.`);
+    if (password === data.password){
+      setSpyData();
+    }
+    else{
+    redHue.active = true;  // Red Hue-Light
+    alarmSFX.play();  // play Alarm
+    responsiveVoice.speak(`Intruder! Intruder! Intruder! Intruder! Intruder!`);  // let British Lady scream "INTRUDER" at you
+    }
+
+  }
+  else {
+    generateSpyProfile();
+  }
+}
+
+function profileText(profile){
   // Profile Text
   push();
   fill(255);
@@ -176,19 +209,23 @@ function profileText(){
 
 function displayRedButton(){
   // Red Button
+
+  redButton.x = 3*width/4;
+  redButton.y = height/2;
+
   push();
   fill(170);
-  rect(3*width/4, height/2 + 35, 250);
+  rect(redButton.x, redButton.y + 7*redButton.width/30, 5*redButton.width/3);
   fill(220);
-  rect(3*width/4, height/2 + 6, 250);
+  rect(redButton.x, redButton.y + 6, 5*redButton.width/3);
   fill(185, 0, 0);
-  ellipse(3*width/4, height/2 + 10, 150);
+  ellipse(3*width/4, redButton.y + redButton.width/15, redButton.width);
   fill(255, 0, 0);
-  ellipse(3*width/4, height/2, 150);
+  ellipse(redButton.x, redButton.y, redButton.width);
   noFill();
   stroke(255);
   strokeWeight(3);
-  rect(3*width/4, height/2 + 20, 360);
+  rect(redButton.x, redButton.y + glass.width/18, glass.width);
   pop();
 }
 
@@ -232,7 +269,12 @@ function displayGlass(){
 }
 
 function keyPressed(){
-  if(keyCode === 66){
+  if(keyCode === 13 && state === `title`){
+    state = `profileGenerator`;
+    generatingProfile();
+  }
+
+  if(keyCode === 66 && state === `profileGenerator`){
     // Press B to reset Profile
     localStorage.removeItem(KEY_NAME);
     alarmSFX.play(); // Blast that siren alarm
