@@ -17,6 +17,9 @@ let handpose = undefined;
 // Store Predictions
 let predictions = [];
 
+// Bubble
+let bubble = undefined;
+
 /**
 Description of preload
 */
@@ -47,6 +50,15 @@ handpose = ml5.handpose(video, {
    console.log(results);
    predictions = results;
  });
+
+ // Bubble
+ bubble = {
+   x: random(width),
+   y: height,
+   size: 100,
+   vx: 0,
+   vy: -5
+ };
 
 }
 
@@ -88,6 +100,22 @@ if(predictions.length > 0){
   ellipse(baseX, baseY, 20);
   pop();
 
+}
+
+// Move Bubble
+bubble.x += bubble.vx;
+bubble.y += bubble.vy;
+
+if(bubble.y < 0){
+  bubble.x = random(width);
+  bubblue.y = height;
+
+// Display Bubble
+push();
+noStroke();
+fill(163, 180, 201, 200);
+ellipse(bubble.x, bubble.y, bubble.size);
+pop();
 }
 
 
