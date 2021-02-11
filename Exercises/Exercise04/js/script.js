@@ -56,4 +56,40 @@ Description of draw()
 */
 function draw() {
 
+background(0);
+
+if(predictions.length > 0){
+  let hand = predictions[0];
+  // Locate Index Finger
+  let index = hand.annotations.indexFinger;
+  // Locate Index Finger's Base
+  let base = index[0];
+  // Base's Coordinates
+  let baseX = base[0];
+  let baseY = base[1];
+    // Locate Index Finger's Tip
+  let tip = index[3];
+  // Tip's Coordinates
+  let tipX = tip[0];
+  let tipY = tip[1];
+
+  // Draw Pin
+  push();
+  noFill();
+  stroke(255);
+  strokeWeight(4);
+  line(baseX, baseY, tipX, tipY);
+  pop();
+
+  // Draw Pin Head
+  push();
+  noStroke();
+  fill(255, 0, 0);
+  ellipse(baseX, baseY, 20);
+  pop();
+
+}
+
+
+
 }
