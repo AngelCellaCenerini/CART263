@@ -100,6 +100,13 @@ if(predictions.length > 0){
   ellipse(baseX, baseY, 20);
   pop();
 
+  // Check Bubble Popping
+  let d = dist(tipX, tipY, bubble.x, bubble.y);
+  if (d < bubble.size/2){
+    bubble.x = random(width);
+    bubblue.y = height;
+  }
+
 }
 
 // Move Bubble
