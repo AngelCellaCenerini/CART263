@@ -42,7 +42,7 @@ let applause = undefined;
 let cheeringSFX = undefined;
 
 // State
-let state = `title`;  // Loading, Running
+let state = `loading`;  // Loading, Running
 /**
 Description of preload
 */
@@ -72,23 +72,23 @@ imageMode(CENTER);
 textFont(`Courier`);
 textAlign(CENTER, CENTER);
 
-// // Access User's Webcam
-// video = createCapture(VIDEO);
-// video.hide();  // hide HTML element
-//
-// // Load Handpose Model
-// handpose = ml5.handpose(video, {
-//    flipHorizontal: true
-//  }, function(){
-//    console.log(`Handpose Model Loaded`);
-//    state = `title`;
-//  });
-//
-//  // Set up Handpose Model
-//  handpose.on(`predict`, function(results){
-//    console.log(results);
-//    predictions = results;
-//  });
+// Access User's Webcam
+video = createCapture(VIDEO);
+video.hide();  // hide HTML element
+
+// Load Handpose Model
+handpose = ml5.handpose(video, {
+   flipHorizontal: true
+ }, function(){
+   console.log(`Handpose Model Loaded`);
+   state = `title`;
+ });
+
+ // Set up Handpose Model
+ handpose.on(`predict`, function(results){
+   console.log(results);
+   predictions = results;
+ });
 
 // Bubbles
 // Pink Bubble
@@ -138,7 +138,7 @@ if (state === `loading`){
 
   push();
   fill(255);
-  textAlign(CENTER, CENTER);
+  textSize(40);
   // text(`Great things take time. Please enjoy the loading screen.`, width/2, height/3);
   text(`GREAT THINGS TAKE TIME. PLEASE ENJOY THE LOADING SCREEN.`, width/2, height/3);
   textSize(25);
@@ -162,42 +162,47 @@ else if(state === `title`){
 }
 else if(state === `running`){
 
-  // if(predictions.length > 0){
-  //   let hand = predictions[0];
-  //   // Locate Index Finger
-  //   let index = hand.annotations.indexFinger;
-  //   // Locate Index Finger's Base
-  //   let base = index[0];
-  //   // Base's Coordinates
-  //   let baseX = base[0];
-  //   let baseY = base[1];
-  //     // Locate Index Finger's Tip
-  //   let tip = index[3];
-  //   // Tip's Coordinates
-  //   let tipX = tip[0];
-  //   let tipY = tip[1];
-  //
-  //   // Draw Pin
-  //   push();
-  //   noFill();
-  //   stroke(255);
-  //   strokeWeight(4);
-  //   line(baseX, baseY, tipX, tipY);
-  //   pop();
-  //
-  //   // Draw Pin Head
-  //   push();
-  //   noStroke();
-  //   fill(255, 0, 0);
-  //   ellipse(baseX, baseY, 20);
-  //   pop();
+  if(predictions.length > 0){
+    let hand = predictions[0];
+    // Locate Index Finger
+    let index = hand.annotations.indexFinger;
+    // Locate Index Finger's Base
+    let base = index[0];
+    // Base's Coordinates
+    let baseX = base[0];
+    let baseY = base[1];
+      // Locate Index Finger's Tip
+    let tip = index[3];
+    // Tip's Coordinates
+    let tipX = tip[0];
+    let tipY = tip[1];
+
+    // Draw Pin
+    push();
+    noFill();
+    stroke(255);
+    strokeWeight(4);
+    line(baseX, baseY, tipX, tipY);
+    pop();
+
+    // Draw Pin Head
+    push();
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(baseX, baseY, 20);
+    pop();
   //
   //   // Check Bubble Popping
-  //   let d = dist(tipX, tipY, bubble.x, bubble.y);
-  //   if (d < bubble.size/2){
-  //     bubble.x = random(width);
-  //     bubblue.y = height;
-  //   }
+  for (let i = 0; i < bubbles.length; i++) {
+    let bubble = bubbles[i];
+    let d = dist(tipX, tipY, bubble.x, bubble.y);
+    if(d < bubble.size/2 ){
+         bubble.play();
+         bubble.reset();
+         poppedBubbles.push(bubble);
+    }
+  }
+}
 
   // for (let i = 0; i < bubbles.length; i++) {
   //   let bubble = bubbles[i];
@@ -217,6 +222,7 @@ else if(state === `running`){
   checkPoppedBubbles();
 
 }
+
 else if(state === `success`){
 
   image(applause, width/2, height/2, width, height);
@@ -244,16 +250,16 @@ function keyPressed(){
   }
 }
 
-function mousePressed(){
-    for (let i = 0; i < bubbles.length; i++) {
-      let bubble = bubbles[i];
-      if(mouseX > bubble.x - bubble.size/2 &&
-         mouseX < bubble.x + bubble.size/2 &&
-         mouseY > bubble.y - bubble.size/2 &&
-         mouseY < bubble.y + bubble.size/2){
-           bubble.play();
-           bubble.reset();
-           poppedBubbles.push(bubble);
-      }
-    }
-}
+// function mousePressed(){
+//     for (let i = 0; i < bubbles.length; i++) {
+//       let bubble = bubbles[i];
+//       if(mouseX > bubble.x - bubble.size/2 &&
+//          mouseX < bubble.x + bubble.size/2 &&
+//          mouseY > bubble.y - bubble.size/2 &&
+//          mouseY < bubble.y + bubble.size/2){
+//            bubble.play();
+//            bubble.reset();
+//            poppedBubbles.push(bubble);
+//       }
+//     }
+// }
