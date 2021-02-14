@@ -25,6 +25,7 @@ class PinkBubble{
   }
 
   relocate(){
+    // Respawn bubble when off-screen
     if( this.y < 0 ){
       this.x = random(width);
       this.y = height;
@@ -32,8 +33,9 @@ class PinkBubble{
   }
 
   reset(){
-      this.x = random(width);
-      this.y = height;
+    // Reset Bubble when popped
+    this.x = random(width);
+    this.y = height;
   }
 
   display(){
@@ -47,6 +49,7 @@ class PinkBubble{
   }
 
   play(){
+    // play specific tune when Bubble pops
     this.twinkle.play();
   }
 }

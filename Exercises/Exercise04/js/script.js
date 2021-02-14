@@ -4,8 +4,7 @@
 Exercise04 - Bubble Popper
 Angel Cella Cenerini
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+A laggy popping simulation with melodies. Because if you can't be excellent in real life, you can here :)
 */
 
 // Store User's Webcam
@@ -63,11 +62,11 @@ function preload() {
 
 
 /**
-Description of setup
+General Settings + Create Objects
 */
 function setup() {
 createCanvas(windowWidth, windowHeight);
-// noCursor();
+noCursor();
 imageMode(CENTER);
 textFont(`Courier`);
 textAlign(CENTER, CENTER);
@@ -128,7 +127,7 @@ for (let i = 0; i < numGreenBubbles; i++) {
 
 
 /**
-Description of draw()
+States
 */
 function draw() {
 
@@ -136,32 +135,60 @@ background(0);
 
 if (state === `loading`){
 
+  loadingText();
+
+}
+else if(state === `title`){
+
+  titleText();
+
+}
+else if(state === `running`){
+
+  // Track User's Index + Draw Pin
+  trackIndexFinger();
+
+  // Draw and Update Bubbles' movements
+  updateBubbles();
+
+  // Track Popped Bubbles
+  checkPoppedBubbles();
+
+}
+
+else if(state === `success`){
+
+  endingLayout();  // text + image (gif)
+}
+
+}
+
+function loadingText(){
   push();
   fill(255);
   textSize(40);
-  // text(`Great things take time. Please enjoy the loading screen.`, width/2, height/3);
   text(`GREAT THINGS TAKE TIME. PLEASE ENJOY THE LOADING SCREEN.`, width/2, height/3);
   textSize(25);
   text(`This is a loading screen. The program is loading...`, width/2, height/2);
   pop();
-
 }
-else if(state === `title`){
+
+function titleText(){
   push();
   fill(255);
   textSize(45);
   text(`TWINKLIG BUBBLES`, width/2, height/3);
   textSize(25);
   textAlign(TOP, LEFT);
-  text(`Can you pop 30 bubbles using only a computational projection of your index finger?
+  text(`Can you pop 20 bubbles using only a computational projection of your index finger?
 
   It's...pretty easy actually, it'd be worrisome if you can't :/`, width/2, height/2);
   textSize(22);
   text(`Press ENTER to begin.`, width/2, 3*height/4);
   pop();
 }
-else if(state === `running`){
 
+function trackIndexFinger(){
   if(predictions.length > 0){
     let hand = predictions[0];
     // Locate Index Finger
@@ -171,7 +198,7 @@ else if(state === `running`){
     // Base's Coordinates
     let baseX = base[0];
     let baseY = base[1];
-      // Locate Index Finger's Tip
+    // Locate Index Finger's Tip
     let tip = index[3];
     // Tip's Coordinates
     let tipX = tip[0];
@@ -191,8 +218,8 @@ else if(state === `running`){
     fill(255, 0, 0);
     ellipse(baseX, baseY, 20);
     pop();
-  //
-  //   // Check Bubble Popping
+
+  // Check Bubble Popping
   for (let i = 0; i < bubbles.length; i++) {
     let bubble = bubbles[i];
     let d = dist(tipX, tipY, bubble.x, bubble.y);
@@ -203,29 +230,26 @@ else if(state === `running`){
     }
   }
 }
+}
 
-  // for (let i = 0; i < bubbles.length; i++) {
-  //   let bubble = bubbles[i];
-  //   let d = dist(tipX, tipY, bubble.x, bubble.y);
-  //   bubble.play();
-  // }
-  //
-  // }
-
+function updateBubbles(){
   // Bubbles
   for (let i = 0; i < bubbles.length; i++) {
     let bubble = bubbles[i];
     bubble.update();
   }
-
-  // Track Popped Bubbles
-  checkPoppedBubbles();
-
 }
 
-else if(state === `success`){
+function checkPoppedBubbles(){
+  // Check if User popped 20 bubbles
+  if(poppedBubbles.length > 19){
+    state = `success`;
+    cheeringSFX.play();
+}
+}
 
-  image(applause, width/2, height/2, width, height);
+function endingLayout(){
+  image(applause, width/2, height/2, width, height); // .gif background
   push();
   fill(0);
   textSize(35);
@@ -234,32 +258,8 @@ else if(state === `success`){
   pop();
 }
 
-
-}
-
-function checkPoppedBubbles(){
-  if(poppedBubbles.length > 29){
-    state = `success`;
-    cheeringSFX.play();
-}
-}
-
 function keyPressed(){
   if(keyCode === 13 && state === `title`){
     state = `running`;
   }
 }
-
-// function mousePressed(){
-//     for (let i = 0; i < bubbles.length; i++) {
-//       let bubble = bubbles[i];
-//       if(mouseX > bubble.x - bubble.size/2 &&
-//          mouseX < bubble.x + bubble.size/2 &&
-//          mouseY > bubble.y - bubble.size/2 &&
-//          mouseY < bubble.y + bubble.size/2){
-//            bubble.play();
-//            bubble.reset();
-//            poppedBubbles.push(bubble);
-//       }
-//     }
-// }
