@@ -177,7 +177,7 @@ function titleText(){
   push();
   fill(255);
   textSize(45);
-  text(`TWINKLIG BUBBLES`, width/2, height/3);
+  text(`TWINKLING BUBBLES`, width/2, height/3);
   textSize(25);
   textAlign(TOP, LEFT);
   text(`Can you pop 20 bubbles using only a computational projection of your index finger?
