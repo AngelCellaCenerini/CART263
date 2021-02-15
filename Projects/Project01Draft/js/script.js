@@ -8,8 +8,19 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 */
 
+// "Canvas" proportions (illustration background)
+let canvaWidth = 1000;
+let canvaHeight = 530;
 
+// Jeep
+let jeep = undefined;
+let jeepImage = undefined;
 
+// Obstacles
+const NUM_OBSTACLES = 5;
+const NUM_OBSTACLE_IMAGES = 10;
+let obstacles = [];
+let obstacleImages = [];
 
 // Blood Splatter
 let bloodSplatterImage = undefined;
@@ -17,13 +28,22 @@ let bloodSplatterImage = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `credits`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
+let state = `chase`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
 
 /**
 Description of preload
 */
 function preload() {
-bloodSplatterImage = loadImage(`assets/images/splatter.png`)
+
+  // Jeep
+  jeepImage = loadImage(`assets/images/clown.png`);
+  bloodSplatterImage = loadImage(`assets/images/splatter.png`);
+
+  // Obstacles
+  for(let i = 0; i < NUM_OBSTACLE_IMAGES; i++){
+    let obstacleImage = loadImage(`assets/images/animal${i}.png`);
+    obstacleImages.push(obstacleImage);
+  }
 }
 
 
@@ -41,9 +61,24 @@ imageMode(CENTER);
 noStroke();
 
 
-// Create Credits String
+// Jeep
 let x = width/2;
-let y = 3*height/2;
+let y = height/2;
+jeep = new Jeep(x, y, jeepImage);
+
+// Obstacles
+for(let i = 0; i < NUM_OBSTACLES; i++){
+  let x = random(width/2 + canvaWidth/2);
+  let y = random(height/2 - canvaHeight/2, height/2 + canvaHeight/2);
+  let obstacleImage = random(obstacleImages);
+  let obstacle = new Obstacle(x, y, obstacleImage);
+  obstacles.push(obstacle);
+}
+
+
+// Create Credits String
+x = width/2;
+y = 3*height/2;
 credits = new Credits(x, y);
 
 
@@ -81,6 +116,20 @@ function draw() {
   else if (state === `chase`){
 
     chaseText();
+
+    // Jeep
+    jeep.update();
+
+    // Obstacles
+    for (let i = 0; i < obstacles.length; i++) {
+    obstacles[i].update();
+  }
+
+  // Black rectangle
+  push();
+  fill(0);
+  rect(7*width/8, height/2, 440, height);
+  pop();
 
   }
   else if (state === `badEnding01`){
@@ -173,8 +222,8 @@ function chaseText(){
   push();
   fill(255);
   rect(width/2, height/2, 1000, 530);
-  text(`You embark on your journey in search of the Jurassic Moment.`, width/2, height/7);
-  text(`Among the lush vegetation, you hear a sound...`, width/2, 6*height/7);
+  text(`RUN! Use the arrow keys to escape!`, width/2, height/7);
+  text(`Watch out for unexpected obstacles!`, width/2, 6*height/7);
   pop();
 }
 

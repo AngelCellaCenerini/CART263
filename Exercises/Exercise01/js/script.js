@@ -133,7 +133,6 @@ function titleText(){
 
 // Simulation
 // Animals
-function createAnimals(){
   for(let i = 0; i < NUM_ANIMALS; i++){
     let x = random(0, width);
     let y = random(0, height);
@@ -141,7 +140,7 @@ function createAnimals(){
     let animal = new Animal(x, y, animalImage);
     animals.push(animal);
   }
-}
+
 function updateAnimals() {
   for (let i = 0; i < animals.length; i++) {
     animals[i].update();
