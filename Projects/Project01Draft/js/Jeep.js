@@ -53,7 +53,7 @@ class Jeep{
   crash(obstacle){
     // Check if Jeep crashes against obstacles
     d = dist(this.x, this.y, obstacle.x, obstacle.y);
-    if (d < this.){
+    if (d < this.image.width/3){
       state = `badEnding01`;
     }
   }
