@@ -75,7 +75,6 @@ for(let i = 0; i < NUM_OBSTACLES; i++){
   obstacles.push(obstacle);
 }
 
-
 // Create Credits String
 x = width/2;
 y = 3*height/2;
@@ -122,7 +121,7 @@ function draw() {
 
     // Obstacles
     for (let i = 0; i < obstacles.length; i++) {
-    obstacles[i].update();
+      obstacles[i].update(jeep);
   }
 
   // Black rectangle

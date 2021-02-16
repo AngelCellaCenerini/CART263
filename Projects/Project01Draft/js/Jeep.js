@@ -3,6 +3,7 @@ class Jeep{
     this.x = x;
     this.y = y;
     this.image = image;
+    this.width = 150;
     this.vx = 0;
     this.vy = 0;
     this.speed = 3;
@@ -13,7 +14,6 @@ class Jeep{
   update(){
     this.move();
     this.constrain();
-    this.crash(obstacle);
     this.display();
   }
 
@@ -50,15 +50,7 @@ class Jeep{
     this.y = constrain(this.y, height/2 - this.borderY, height/2 + this.borderY);
   }
 
-  crash(obstacle){
-    // Check if Jeep crashes against obstacles
-    d = dist(this.x, this.y, obstacle.x, obstacle.y);
-    if (d < this.image.width/3){
-      state = `badEnding01`;
-    }
-  }
-
   display(){
-    image(this.image, this.x, this.y);
+    image(this.image, this.x, this.y, this.width);
   }
 }
