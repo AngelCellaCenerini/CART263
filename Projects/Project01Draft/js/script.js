@@ -12,6 +12,24 @@ author, and this description to match your project!
 let canvaWidth = 1000;
 let canvaHeight = 530;
 
+// User Input - Dino Call
+let dinoCall = ``;
+
+// TextBox (Intro)
+let textBox = {
+  x: 0,
+  y: 0,
+  width: 700,
+  height: 100,
+  radius: 15
+}
+
+// Timers - levels are timed
+let timerCutScene = 8;
+let timerChase = 5;
+let timerJurassicMoment = 15;
+let timerPetDino = 10;
+
 // Jeep
 let jeep = undefined;
 let jeepImage = undefined;
@@ -28,7 +46,7 @@ let bloodSplatterImage = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `chase`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
+let state = `title`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
 
 /**
 Description of preload
@@ -80,8 +98,6 @@ x = width/2;
 y = 3*height/2;
 credits = new Credits(x, y);
 
-
-
 }
 
 
@@ -100,6 +116,7 @@ function draw() {
   else if (state === `intro`){
 
     introText();
+    introTextBox();
 
   }
   else if (state === `carRide`){
@@ -110,11 +127,13 @@ function draw() {
   else if (state === `cutScene`){
 
     cutSceneText();
+    timingCutScene();
 
   }
   else if (state === `chase`){
 
     chaseText();
+    timingChase();
 
     // Jeep
     jeep.update();
@@ -142,11 +161,12 @@ function draw() {
   else if (state === `jurassicParkMoment`){
 
     jurassicParkMomentText();
+    timingJurassicMoment();
 
   }
   else if (state === `petDino`){
 
-    petDino();
+    petDinoText();
 
   }
   else if (state === `badEnding02`){
@@ -193,6 +213,18 @@ function introText(){
   pop();
 
 }
+function introTextBox(){
+  push();
+  // White Textbox
+  fill(255, 100);
+  textBox.x = width/2;
+  textBox.y = 3*height/5;
+  rect(textBox.x, textBox.y, textBox.width, textBox.height, textBox.radius);
+  // Display User Input
+  fill(0);
+  text(dinoCall, width/2, 3*height/5);
+  pop();
+}
 
 // Car Ride
 function carRideText(){
@@ -215,6 +247,14 @@ function cutSceneText(){
   text(`Quick! Press G to step on the gas!`, width/2, 6*height/7);
   pop();
 }
+function timingCutScene(){
+  if (frameCount % 60 == 0 && timerCutScene > 0) {
+        timerCutScene --;
+      }
+  if (timerCutScene == 0) {
+        state = `badEnding01`;
+     }
+}
 
 // Chase
 function chaseText(){
@@ -224,6 +264,15 @@ function chaseText(){
   text(`RUN! Use the arrow keys to escape!`, width/2, height/7);
   text(`Watch out for unexpected obstacles!`, width/2, 6*height/7);
   pop();
+}
+function timingChase(){
+  if (frameCount % 60 == 0 && timerChase > 0) {
+        timerChase --;
+      }
+  if (timerChase == 0) {
+        state = `jurassicParkMoment`;
+        setTimeout(readDinoCall, 3000);
+     }
 }
 
 // Bad Ending 01
@@ -245,6 +294,17 @@ function jurassicParkMomentText(){
   pop();
 
 }
+function timingJurassicMoment(){
+  if (frameCount % 60 == 0 && timerJurassicMoment > 0) {
+        timerJurassicMoment --;
+      }
+  if (timerJurassicMoment == 0) {
+        state = `petDino`;
+     }
+}
+function readDinoCall(){
+  responsiveVoice.speak(dinoCall);  // read Dino Call previously typed by User
+}
 
 // Pet Dino
 function petDinoText(){
@@ -255,6 +315,14 @@ function petDinoText(){
   text(`...Unless that might not be the brightest idea? You could also wait for it to pass...`, width/2, 6*height/7);
   pop();
 
+}
+function timingPetDino(){
+  if (frameCount % 60 == 0 && timerPetDino > 0) {
+        timerPetDino --;
+      }
+  if (timerPetDino == 0) {
+        state = `selfie`;
+     }
 }
 
 // Bad Ending 02
@@ -309,4 +377,12 @@ function keyPressed(){
     state = `chase`;
   }
 
+}
+
+function keyTyped(){
+  if (keyCode !== 13){
+      if( state === `intro`){
+          dinoCall += key;
+      }
+  }
 }
