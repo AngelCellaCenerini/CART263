@@ -1,0 +1,46 @@
+{
+   "description": "Various (yet not necessarily accurate) facts about dinosaurs.",
+   "sources": [ "sda", "link "],
+   "facts": [
+      {
+        "type": "general",
+        "description": "general facts concerning dinosaurs",
+        "fun_fact": "The word dinosaur comes from the combination of Greek words 'deinos', meaning terrible, and 'sauros', meaning lizard. Jurassic Park is just an gathering site for big, bully lizards."
+      },
+      {
+        "type": "general",
+        "description": "general facts concerning dinosaurs",
+        "fun_fact": "In most cultures we respect our elders. Modern birds are believed to be the closest descendants of dinosaurs. So kids, respect your chickens."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "Jurassic Park used live-actions dinousaur robots. It is thus safe to conclude that living organisms are none other but machines. Yes, we've actually always been the AI we've come to fear."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "In the creation of Jurassic Park, the digital artists took video of themselves acting like the dinosaur herd for reference before they animated the scene. It helped them create more realistic instinctive behavior."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "The sound design of the T-rex's roar in Jurassic Park was reportedly a composite of tiger, alligator, and baby elephant sounds."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "In the movie, T-rexs are known for having their vision based on movement. Turns out, they actually had excellent sight."
+      },
+      {
+        "type": "specific",
+        "description": "facts concerning a specific species of dinousaur",
+        "fun_fact": "202"
+      },
+      {
+        "type": "specific",
+        "description": "facts concerning a specific species of dinousaur",
+        "fun_fact": "202"
+      }
+   ]
+}

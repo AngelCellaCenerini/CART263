@@ -30,6 +30,12 @@ let timerChase = 5;
 let timerJurassicMoment = 15;
 let timerPetDino = 10;
 
+// Store data from JSON file - Car Ride State
+let dinosaurusFacts = undefined;
+let specificFact = undefined;
+let index = 0;
+let radioChannel = undefined;
+
 // Jeep
 let jeep = undefined;
 let jeepImage = undefined;
@@ -46,12 +52,15 @@ let bloodSplatterImage = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `title`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
+let state = `intro`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
 
 /**
 Description of preload
 */
 function preload() {
+
+  // Fun Facts - Radio Channels
+  dinosaurusFacts =  loadJSON(`assets/data/dinosaurs_facts.json`);
 
   // Jeep
   jeepImage = loadImage(`assets/images/clown.png`);
@@ -122,6 +131,9 @@ function draw() {
   else if (state === `carRide`){
 
     carRideText();
+
+    specificFact = dinosaurusFacts.facts[index];
+    radioChannel = specificFact.fun_fact;
 
   }
   else if (state === `cutScene`){
@@ -368,9 +380,22 @@ function keyPressed(){
   }
 
   // User presses Right Arrow
-  if(keyCode === 39 && state === `carRide`){
-
+  if (state === `carRide`){
+    if( keyCode === 39 && keyCode !== 39){
+        index ++;
+        if(index >= specificFact.length){
+           index = 0;
+        }
+    }
+    else if (keyCode === 37){
+        index --;
+        if(index < 0){
+           index = specificFact.length;
+        }
+    }
+    responsiveVoice.speak(radioChannel);
   }
+
 
   // User presses G
   if(keyCode === 71 && state === `cutScene`){
