@@ -2,10 +2,10 @@ class Credits{
   constructor(x, y){
     this.x = x;
     this.y = y;
-    this.string = `"You have to treat it almost like a little animal; it's good at certain things and not good at certain other things."
-    
+    this.string = `"You have to treat it almost like a little animal - it's good at certain things and not good at certain other things."
 
-    "We can do a Pinch Siulator now - pinch, pinch!"`;
+
+    "We can do a Pinch Simulator now - pinch, pinch!"`;
     this.vx = 0;
     this.vy = 0;
     this.speed = -1;

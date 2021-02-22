@@ -28,7 +28,8 @@ let textBox = {
 let timerCutScene = 8;
 let timerChase = 5;
 let timerJurassicMoment = 15;
-let timerPetDino = 10;
+let timerPetDino = 2;
+let timerCredits = 3;
 
 // Store data from JSON file - Car Ride State
 let dinosaurusFacts = undefined;
@@ -49,10 +50,15 @@ let obstacleImages = [];
 // Blood Splatter
 let bloodSplatterImage = undefined;
 
+// Selfie
+let capture = undefined;
+let dinoCloseUpImage = undefined;
+let bobbleHeadDollImage = undefined;
+
 // Credits String
 let credits = undefined;
 
-let state = `intro`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
+let state = `selfie`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
 
 /**
 Description of preload
@@ -71,6 +77,12 @@ function preload() {
     let obstacleImage = loadImage(`assets/images/animal${i}.png`);
     obstacleImages.push(obstacleImage);
   }
+
+  // Dino Close Up
+  dinoCloseUpImage = loadImage(`assets/images/dinoCloseUp.png`);
+  // Bobble Head Doll
+  bobbleHeadDollImage = loadImage(`assets/images/doll2.png`);
+
 }
 
 
@@ -102,6 +114,10 @@ for(let i = 0; i < NUM_OBSTACLES; i++){
   obstacles.push(obstacle);
 }
 
+// Capture User's Webcam
+capture = createCapture(VIDEO);
+capture.hide();
+
 // Create Credits String
 x = width/2;
 y = 3*height/2;
@@ -120,6 +136,7 @@ function draw() {
   if (state === `title`){
 
     titleText();
+    // fadeIn();
 
   }
   else if (state === `intro`){
@@ -132,8 +149,6 @@ function draw() {
 
     carRideText();
 
-    specificFact = dinosaurusFacts.facts[index];
-    radioChannel = specificFact.fun_fact;
 
   }
   else if (state === `cutScene`){
@@ -179,6 +194,7 @@ function draw() {
   else if (state === `petDino`){
 
     petDinoText();
+    timingPetDino();
 
   }
   else if (state === `badEnding02`){
@@ -192,22 +208,53 @@ function draw() {
   else if (state === `selfie`){
 
     selfieText();
+    image(capture, width/2, height/2, 1000, 630);
+    image(dinoCloseUpImage, width/2 - canvaWidth/6, height/2 + canvaHeight/6);
+    image(bobbleHeadDollImage, width/2 + canvaWidth/4, 2*height/3 + canvaHeight/13); // ugly to look at, I know, but it's logic math!
+
 
   }
   else if (state === `credits`){
 
     credits.update();
+    timingCredits();
 
   }
 
 
 }
 
+function fgfgfg(){
+  specificFact = dinosaurusFacts.facts[index];
+  radioChannel = specificFact.fun_fact;
+
+}
+
 // Title
+function fadeIn(){
+  let fadingEffect = {
+    x: 0,
+    y: 0,
+    width: 1200,
+    height: 1000,
+    opacity: 255,
+    fading: -60
+  }
+
+
+
+  push();
+  fill(0, fadingEffect.opacity);
+  fadingEffect.x = width/2;
+  fadingEffect.y = height/2;
+  rect(fadingEffect.x, fadingEffect.y, fadingEffect.width, fadingEffect.height);
+  pop();
+
+  fadingEffect.opacity = fadingEffect.opacity + fadingEffect.fading;
+}
 function titleText(){
   push();
   fill(255);
-  rect(width/2, height/2, 1000, 530);
   textSize(40);
   text(`JURASSIC PARK...`, width/2, height/7);
   text(`...MOMENT.`, width/2, 6*height/7);
@@ -221,7 +268,7 @@ function introText(){
   fill(255);
   rect(width/2, height/2, 1000, 530);
   text(`You embark on your journey in search of the Jurassic Park Moment.`, width/2, height/7);
-  text(`Among the lush vegetation, you hear a sound...Type it down as to document it.`, width/2, 6*height/7);
+  text(`Among the lush vegetation, you hear a sound...Type it down as to document it. Press ENTER to confirm.`, width/2, 6*height/7);
   pop();
 
 }
@@ -350,15 +397,21 @@ function badEnding02Text(){
 function selfieText(){
   push();
   fill(255);
-  text(`Wise choice! Why not take a picture to commemorate your accomplished mission?`, width/2, 6*height/7);
+  text(`Wise choice! Why not take a picture to commemorate your accomplished mission?`, width/2, height/9);
+  text(`Press ENTER when you're done taking your screenshot.`, width/2, 8*height/9);
   pop();
 
 }
 
 // Credits
-// function selfieText(){
-//
-// }
+function timingCredits(){
+  if (frameCount % 60 == 0 && timerCredits > 0) {
+        timerCredits --;
+      }
+  if (timerCredits == 0) {
+        state = `title`;
+     }
+}
 
 function keyPressed(){
 
@@ -381,14 +434,17 @@ function keyPressed(){
 
   // User presses Right Arrow
   if (state === `carRide`){
-    if( keyCode === 39 && keyCode !== 39){
+    if( keyCode === RIGHT_ARROW ){
         index ++;
+        fgfgfg();
+
         if(index >= specificFact.length){
            index = 0;
         }
     }
-    else if (keyCode === 37){
+    else if (keyCode === LEFT_ARROW){
         index --;
+        fgfgfg();
         if(index < 0){
            index = specificFact.length;
         }
