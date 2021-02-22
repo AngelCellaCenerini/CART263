@@ -27,9 +27,9 @@ let textBox = {
 // Timers - levels are timed
 let timerCutScene = 8;
 let timerChase = 5;
-let timerJurassicMoment = 15;
+let timerJurassicMoment = 35;
 let timerPetDino = 2;
-let timerCredits = 3;
+let timerCredits = 50;
 
 // Store data from JSON file - Car Ride State
 let dinosaurusFacts = undefined;
@@ -50,6 +50,10 @@ let obstacleImages = [];
 // Blood Splatter
 let bloodSplatterImage = undefined;
 
+// Dino
+let stillDinoImage = undefined;
+let roaringDinoImage = undefined;
+
 // Selfie
 let capture = undefined;
 let dinoCloseUpImage = undefined;
@@ -58,7 +62,7 @@ let bobbleHeadDollImage = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `selfie`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
+let state = `intro`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
 
 /**
 Description of preload
@@ -77,6 +81,10 @@ function preload() {
     let obstacleImage = loadImage(`assets/images/animal${i}.png`);
     obstacleImages.push(obstacleImage);
   }
+
+  // Dino
+  stillDinoImage = loadImage(`assets/images/catRex12.png`);
+  roaringDinoImage = loadImage(`assets/images/catRex22.png`);
 
   // Dino Close Up
   dinoCloseUpImage = loadImage(`assets/images/dinoCloseUp.png`);
@@ -107,7 +115,7 @@ jeep = new Jeep(x, y, jeepImage);
 
 // Obstacles
 for(let i = 0; i < NUM_OBSTACLES; i++){
-  let x = random(width/2 + canvaWidth/2);
+  let x = random(width/2 + canvaWidth/3, width/2 + canvaWidth/2);
   let y = random(height/2 - canvaHeight/2, height/2 + canvaHeight/2);
   let obstacleImage = random(obstacleImages);
   let obstacle = new Obstacle(x, y, obstacleImage);
@@ -189,6 +197,9 @@ function draw() {
 
     jurassicParkMomentText();
     timingJurassicMoment();
+
+    displayDino();
+
 
   }
   else if (state === `petDino`){
@@ -330,7 +341,7 @@ function timingChase(){
       }
   if (timerChase == 0) {
         state = `jurassicParkMoment`;
-        setTimeout(readDinoCall, 3000);
+        setTimeout(readDinoCall, 5000);
      }
 }
 
@@ -348,7 +359,7 @@ function jurassicParkMomentText(){
   push();
   fill(255);
   rect(width/2, height/2, 1000, 530);
-  text(`You're heart is booming in your your chest! Could this be it?`, width/2, height/7);
+  text(`You're heart is booming in your chest! Could this be it?`, width/2, height/7);
   text(`Is this...the legendary jUraSsIc PaRK mOmENt?!`, width/2, 6*height/7);
   pop();
 
@@ -362,7 +373,19 @@ function timingJurassicMoment(){
      }
 }
 function readDinoCall(){
-  responsiveVoice.speak(dinoCall);  // read Dino Call previously typed by User
+  // Read Dino Call previously typed by User
+  responsiveVoice.speak(dinoCall);
+}
+function displayDino(){
+  // Dino
+  if(responsiveVoice.isPlaying()) {
+    // Open mouth when making noise - Dino Call
+    image(roaringDinoImage, width/2, height/2 + canvaHeight/22);
+  }
+  else{
+    // Close mouth if silent
+    image(stillDinoImage, width/2, height/2 + canvaHeight/22);
+  }
 }
 
 // Pet Dino
@@ -424,12 +447,22 @@ function keyPressed(){
       state = `carRide`;
     }
     else if(state === `carRide`){
+
       state = `cutScene`;
+      // Stop "Radio" if level changes while it plays
+      if(responsiveVoice.isPlaying()) {
+          responsiveVoice.cancel();
+      }
     }
     else if(state === `selfie`){
       state = `credits`;
     }
 
+  }
+
+  // User resets Dino Sound
+  if (keyCode === 8 && state === `intro`) {
+    dinoCall = ``;
   }
 
   // User presses Right Arrow
@@ -438,7 +471,7 @@ function keyPressed(){
         index ++;
         fgfgfg();
 
-        if(index >= specificFact.length){
+        if(index > specificFact.length){
            index = 0;
         }
     }
@@ -461,9 +494,8 @@ function keyPressed(){
 }
 
 function keyTyped(){
-  if (keyCode !== 13){
-      if( state === `intro`){
+  // User types Dino Sound
+  if (keyCode !== 13 && state === `intro`){
           dinoCall += key;
-      }
   }
 }
