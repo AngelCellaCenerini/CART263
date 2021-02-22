@@ -25,7 +25,7 @@ let textBox = {
 }
 
 // Timers - levels are timed
-let timerCutScene = 8;
+let timerCutScene = 10;
 let timerChase = 5;
 let timerJurassicMoment = 35;
 let timerPetDino = 2;
@@ -41,8 +41,18 @@ let radioChannel = undefined;
 let jeep = undefined;
 let jeepImage = undefined;
 
+// Dinosaur Mouth
+let dinosaurMouthImage = undefined;
+let dinosaurMouth = {
+  x: 0,
+  y: 0,
+  width: 369,
+  height: 658,
+  image: undefined;
+}
+
 // Obstacles
-const NUM_OBSTACLES = 5;
+const NUM_OBSTACLES = 4;
 const NUM_OBSTACLE_IMAGES = 10;
 let obstacles = [];
 let obstacleImages = [];
@@ -75,6 +85,9 @@ function preload() {
   // Jeep
   jeepImage = loadImage(`assets/images/clown.png`);
   bloodSplatterImage = loadImage(`assets/images/splatter.png`);
+
+  // Dinosaur Mouth
+  dinosaurMouth = loadImage(`assets/images/mouth.png`);
 
   // Obstacles
   for(let i = 0; i < NUM_OBSTACLE_IMAGES; i++){
@@ -163,6 +176,19 @@ function draw() {
 
     cutSceneText();
     timingCutScene();
+
+    // Display Dinosaur Open Mouth
+    dinosaurMouth.x = width/2;
+    dinosaurMouth.y = canvaHeight/3;
+    dinosaurMouth.image = image(dinosaurMouth, dinosaurMouth.x, dinosaurMouth.y);
+
+    // Dinosaur Mouth "Approaching"
+    dinosaurMouth.width++ ;
+    dinosaurMouth.height++ ;
+
+
+
+
 
   }
   else if (state === `chase`){
@@ -482,7 +508,7 @@ function keyPressed(){
            index = specificFact.length;
         }
     }
-    responsiveVoice.speak(radioChannel);
+    responsiveVoice.speak(radioChannel, "UK English Male", {rate: 1});
   }
 
 
