@@ -25,7 +25,7 @@ let textBox = {
 }
 
 // Timers - levels are timed
-let timerCutScene = 10;
+let timerCutScene = 9;
 let timerChase = 5;
 let timerJurassicMoment = 35;
 let timerPetDino = 2;
@@ -41,14 +41,16 @@ let radioChannel = undefined;
 let jeep = undefined;
 let jeepImage = undefined;
 
+// Car Interior Background
+let carInteriorImage = undefined;
 // Dinosaur Mouth
 let dinosaurMouthImage = undefined;
 let dinosaurMouth = {
   x: 0,
   y: 0,
-  width: 369,
-  height: 658,
-  image: undefined;
+  width: 92,
+  height: 128,
+  image: undefined
 }
 
 // Obstacles
@@ -72,7 +74,7 @@ let bobbleHeadDollImage = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `intro`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
+let state = `cutScene`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
 
 /**
 Description of preload
@@ -85,6 +87,9 @@ function preload() {
   // Jeep
   jeepImage = loadImage(`assets/images/clown.png`);
   bloodSplatterImage = loadImage(`assets/images/splatter.png`);
+
+  // Car Interior Background
+  carInteriorImage = loadImage(`assets/images/carP.png`);
 
   // Dinosaur Mouth
   dinosaurMouth = loadImage(`assets/images/mouth.png`);
@@ -174,19 +179,15 @@ function draw() {
   }
   else if (state === `cutScene`){
 
-    cutSceneText();
     timingCutScene();
+    backgroundColor();
 
-    // Display Dinosaur Open Mouth
-    dinosaurMouth.x = width/2;
-    dinosaurMouth.y = canvaHeight/3;
-    dinosaurMouth.image = image(dinosaurMouth, dinosaurMouth.x, dinosaurMouth.y);
+    approachingDinosaur(); // Display "Approaching" Dinosaur Mouth - image expanding
+    drawBorder(); // draw black rectabgle to best constrain Dinosaur Image to "Canva"
 
-    // Dinosaur Mouth "Approaching"
-    dinosaurMouth.width++ ;
-    dinosaurMouth.height++ ;
+    cutSceneText();
 
-
+    image(carInteriorImage, width/2, height/2); // Car Interior Background Image
 
 
 
@@ -335,10 +336,22 @@ function carRideText(){
 }
 
 // Cut Scene
+function drawBorder(){
+  // Draw Black rectangle to constrict Dinosaur Mouth Image to "Canva"
+  push();
+  fill(0);
+  rect(width/2, height/5, canvaWidth/2, canvaHeight/6);
+  pop();
+}
+function backgroundColor(){
+  push();
+  fill(208, 216, 218);
+  rect(width/2, height/2, canvaWidth, canvaHeight);
+  pop();
+}
 function cutSceneText(){
   push();
   fill(255);
-  rect(width/2, height/2, 1000, 530);
   text(`Looks like all that noise attracted unwanted attention!`, width/2, height/7);
   text(`Quick! Press G to step on the gas!`, width/2, 6*height/7);
   pop();
@@ -350,6 +363,18 @@ function timingCutScene(){
   if (timerCutScene == 0) {
         state = `badEnding01`;
      }
+}
+function approachingDinosaur(){
+  // Display Dinosaur Open Mouth
+  dinosaurMouth.x = width/2;
+  dinosaurMouth.y = 4*canvaHeight/9;
+  dinosaurMouth.image = image(dinosaurMouth, dinosaurMouth.x, dinosaurMouth.y, dinosaurMouth.width, dinosaurMouth.height);
+
+  // Dinosaur Mouth "Approaching"
+  let growth = 0.07;
+  dinosaurMouth.width += growth;
+  dinosaurMouth.height += growth;
+
 }
 
 // Chase
