@@ -12,6 +12,18 @@ author, and this description to match your project!
 let canvaWidth = 1000;
 let canvaHeight = 530;
 
+// Fading Effect
+let fadingEffect = {
+  x: 0,
+  y: 0,
+  width: 1200,
+  height: 1000,
+  vx: 0,
+  vy: 0,
+  speed: 0.7,
+  opacity: 255,
+}
+
 // User Input - Dino Call
 let dinoCall = ``;
 
@@ -74,7 +86,7 @@ let bobbleHeadDollImage = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `cutScene`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
+let state = `title`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
 
 /**
 Description of preload
@@ -162,7 +174,7 @@ function draw() {
   if (state === `title`){
 
     titleText();
-    // fadeIn();
+    fadeIn();
 
   }
   else if (state === `intro`){
@@ -222,10 +234,12 @@ function draw() {
   }
   else if (state === `jurassicParkMoment`){
 
-    jurassicParkMomentText();
+
     timingJurassicMoment();
 
     displayDino();
+    scrollUpwards();
+    jurassicParkMomentText();
 
 
   }
@@ -270,16 +284,8 @@ function fgfgfg(){
 
 // Title
 function fadeIn(){
-  let fadingEffect = {
-    x: 0,
-    y: 0,
-    width: 1200,
-    height: 1000,
-    opacity: 255,
-    fading: -60
-  }
 
-
+  let fading = 0.5;
 
   push();
   fill(0, fadingEffect.opacity);
@@ -288,7 +294,7 @@ function fadeIn(){
   rect(fadingEffect.x, fadingEffect.y, fadingEffect.width, fadingEffect.height);
   pop();
 
-  fadingEffect.opacity = fadingEffect.opacity + fadingEffect.fading;
+  fadingEffect.opacity -= fading;
 }
 function titleText(){
   push();
@@ -296,6 +302,8 @@ function titleText(){
   textSize(40);
   text(`JURASSIC PARK...`, width/2, height/7);
   text(`...MOMENT.`, width/2, 6*height/7);
+  textSize(18);
+  text(`Press ENTER to start your adventure.`, width/2, 12*height/13);
   pop();
 
 }
@@ -392,7 +400,7 @@ function timingChase(){
       }
   if (timerChase == 0) {
         state = `jurassicParkMoment`;
-        setTimeout(readDinoCall, 5000);
+        setTimeout(readDinoCall, 23000);
      }
 }
 
@@ -406,15 +414,6 @@ function badEnding01Text(){
 }
 
 // Jurassic Park Moment
-function jurassicParkMomentText(){
-  push();
-  fill(255);
-  rect(width/2, height/2, 1000, 530);
-  text(`You're heart is booming in your chest! Could this be it?`, width/2, height/7);
-  text(`Is this...the legendary jUraSsIc PaRK mOmENt?!`, width/2, 6*height/7);
-  pop();
-
-}
 function timingJurassicMoment(){
   if (frameCount % 60 == 0 && timerJurassicMoment > 0) {
         timerJurassicMoment --;
@@ -437,6 +436,31 @@ function displayDino(){
     // Close mouth if silent
     image(stillDinoImage, width/2, height/2 + canvaHeight/22);
   }
+}
+function scrollUpwards(){
+  // "Scroll Upwards" effect
+  // black rectangle reveals background image slowly (just a cheap cinematic trick)
+  // Center
+  fadingEffect.x = width/2;
+
+  // Move
+  fadingEffect.y -= fadingEffect.vy;
+  fadingEffect.vy = fadingEffect.speed;
+
+  // Display "Effect"
+  push();
+  fill(0);
+  rect(fadingEffect.x, fadingEffect.y, fadingEffect.width, fadingEffect.height);
+  pop();
+
+}
+function jurassicParkMomentText(){
+  push();
+  fill(255);
+  text(`You're heart is booming in your chest! Could this be it?`, width/2, height/7);
+  text(`Is this...the legendary jUraSsIc PaRK mOmENt?!`, width/2, 6*height/7);
+  pop();
+
 }
 
 // Pet Dino
