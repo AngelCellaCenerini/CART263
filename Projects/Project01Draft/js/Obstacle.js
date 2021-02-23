@@ -6,9 +6,9 @@ class Obstacle{
     this.width = 130;
     this.vx = 0;
     this.vy = 0;
-    this.speed = -2;
-    this.borderX = 400;  // To respect "canvas" (illustration background)
-    this.borderY = 80;   // To respect "canvas" (illustration background)
+    this.speed = 2;
+    this.borderX = 400;  // To respect "canvas" (background illustration )
+    this.borderY = 80;   // To respect "canvas" (background illustration )
 
   }
 
@@ -20,14 +20,14 @@ class Obstacle{
   }
 
   move(){
-    this.x += this.vx;
+    this.x -= this.vx;
     this.vx = this.speed;
   }
 
   reset(){
     // Reset Obstacle if off-screen
     if (this.x < (width/2 - this.borderX)){
-      this.x = ( width/2 + this.borderX, width/2 + 2*this.borderX );
+      this.x = random( width/2 + this.borderX, width/2 + 2*this.borderX );
       this.y = random( height/2 - this.borderY, height/2 + this.borderY);
     }
   }

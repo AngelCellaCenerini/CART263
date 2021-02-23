@@ -38,7 +38,7 @@ let textBox = {
 
 // Timers - levels are timed
 let timerCutScene = 9;
-let timerChase = 5;
+let timerChase = 10;
 let timerJurassicMoment = 32;
 let timerPetDino = 10;
 let timerCredits = 53;
@@ -49,9 +49,16 @@ let specificFact = undefined;
 let index = 0;
 let radioChannel = undefined;
 
+// Background Image
+let backImage = undefined;
 // Jeep
 let jeep = undefined;
 let jeepImage = undefined;
+// Vegetation
+const NUM_PLANTS = 55;
+const NUM_PLANTS_IMAGES = 4;
+let plants = [];
+let plantImages = [];
 
 // Car Interior Background
 let carInteriorImage = undefined;
@@ -102,13 +109,24 @@ function preload() {
 
   // Jeep
   jeepImage = loadImage(`assets/images/clown.png`);
-  bloodSplatterImage = loadImage(`assets/images/splatter.png`);
+
+  // Jeep
+  backImage = loadImage(`assets/images/radioBac.jpg`);
+
+  // Vegetation
+  for(let i = 0; i < NUM_PLANTS_IMAGES; i++){
+    let plantImage = loadImage(`assets/images/vegetation${i}.png`);
+    plantImages.push(plantImage);
+  }
 
   // Car Interior Background
   carInteriorImage = loadImage(`assets/images/carP.png`);
 
   // Dinosaur Mouth
   dinosaurMouth = loadImage(`assets/images/mouth.png`);
+
+  // Splatter
+  bloodSplatterImage = loadImage(`assets/images/splatter.png`);
 
   // Obstacles
   for(let i = 0; i < NUM_OBSTACLE_IMAGES; i++){
@@ -147,6 +165,23 @@ userStartAudio();
 let x = width/2;
 let y = height/2;
 jeep = new Jeep(x, y, jeepImage);
+
+
+// Vegetation
+for(let i = 0; i < NUM_PLANTS; i++){
+  let x = random(width/2 - canvaWidth/2, width/2 + canvaWidth/2);
+  let y = random(height/2 - canvaHeight/2, height/2 + canvaHeight/2);
+  let change = random(0, 1);
+  if (change < 0.5){
+      y = random(height/2 - canvaHeight/3, height/2 - canvaHeight/2);
+    }
+    else{
+      y = random(height/2 + canvaHeight/4, height/2 + canvaHeight/2);
+    }
+  let plantImage = random(plantImages);
+  let plant = new Vegetation (x, y, plantImage, change);
+  plants.push(plant);
+}
 
 // Obstacles
 for(let i = 0; i < NUM_OBSTACLES; i++){
@@ -195,8 +230,28 @@ function draw() {
   }
   else if (state === `carRide`){
 
-    carRideText();
 
+
+    // Background Image
+    image(backImage, width/2, height/2);
+
+    // Vegetation
+    for (let i = 0; i < plants.length; i++) {
+      plants[i].update();
+    }
+
+
+
+    // Black rectangle
+    push();
+    fill(0);
+    rect(7*width/8, height/2, 440, height);
+    rect(width/8, height/2, 440, height);
+    rect(width/2, height/8, width, 145);
+    rect(width/2, 7*height/8, width, 145);
+    pop();
+
+    carRideText();
 
   }
   else if (state === `cutScene`){
@@ -225,13 +280,13 @@ function draw() {
     // Obstacles
     for (let i = 0; i < obstacles.length; i++) {
       obstacles[i].update(jeep);
-  }
+    }
 
-  // Black rectangle
-  push();
-  fill(0);
-  rect(7*width/8, height/2, 440, height);
-  pop();
+      // Black rectangle
+      push();
+      fill(0);
+      rect(7*width/8, height/2, 440, height);
+      pop();
 
   }
   else if (state === `badEnding01`){
@@ -351,7 +406,6 @@ function introTextBox(){
 function carRideText(){
   push();
   fill(255);
-  rect(width/2, height/2, 1000, 530);
   text(`You keep the radio on while travelling. Press the arrow key > to skip channel frequencies. Press ENTER to skip this level.`, width/2, height/7);
   textStyle(ITALIC);
   text(`<<Country roads, take me home...>>`, width/2, 6*height/7);
