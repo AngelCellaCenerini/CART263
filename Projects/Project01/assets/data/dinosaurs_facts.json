@@ -1,0 +1,71 @@
+{
+   "description": "Various (yet not necessarily accurate) facts about dinosaurs.",
+   "sources": [ "sda", "link "],
+   "facts": [
+      {
+        "type": "general",
+        "description": "general facts concerning dinosaurs",
+        "fun_fact": "The word dinosaur comes from the combination of Greek words 'deinos' meaning terrible, and 'sauros', meaning lizard. Jurassic Park is just an gathering site for big, bully lizards."
+      },
+      {
+        "type": "general",
+        "description": "general facts concerning dinosaurs",
+        "fun_fact": "In most cultures we respect our elders. Modern birds are believed to be the closest descendants of dinosaurs. So, kids, respect your chickens."
+      },
+      {
+        "type": "general",
+        "description": "general facts concerning dinosaurs",
+        "fun_fact": "People have only been on Earth about 2.5 million years. Dinosaurs lived on Earth for about 160 million years, about 64 times longer than humanity."
+      },
+      {
+        "type": "general",
+        "description": "general facts concerning dinosaurs",
+        "fun_fact": "No one knows exactly how long a dinosaur’s lifespan was. Some scientists speculate some dinosaurs lived for as long as 200 years. See what happens when you have a clean planet?"
+      },
+      {
+        "type": "general",
+        "description": "general facts concerning dinosaurs",
+        "fun_fact": "While many may think dinosaurs were massive, they were usually human sized or smaller. Scientists believe that the larger bones were just easier to be fossilized. Ha ha, midgets are doomed."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "Jurassic Park used live-actions dinousaur robots. It is thus safe to conclude that living organisms are none other but machines. Yes, we've actually always been the AI we've come to fear."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "In the creation of Jurassic Park, the digital artists recorded themselves acting like the dinosaur herd before animating the scene. It helped them create more realistic instinctive behavior."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "The sound design of the T rex's roar in Jurassic Park was reportedly a composite of tiger, alligator and baby elephant sounds."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "In Jurassic Park, there are only 15 minutes of dinosaur footage: 6 minutes of CGI and 9 minutes of animatronics. Ha. you fool."
+      },
+      {
+        "type": "jurassic_park",
+        "description": "facts concerning the movie Jurassic Park",
+        "fun_fact": "In the movie, T-rexs are known for having their vision based on movement. Turns out, they actually had excellent sight."
+      },
+      {
+        "type": "specific",
+        "description": "facts concerning a specific species of dinousaur",
+        "fun_fact": "Stegosauruses' brain weighed approximately 85 grams, while their body mass was approximately 5 tons. An elephant with a brain the size of two walnuts. Nice."
+      },
+      {
+        "type": "specific",
+        "description": "facts concerning a specific species of dinousaur",
+        "fun_fact": "The name Velociraptor means speedy thief."
+      },
+      {
+        "type": "specific",
+        "description": "facts concerning a specific species of dinousaur",
+        "fun_fact": "The Pegomastax is described as a cross between a parrot and porcupine, with a beak with teeth that sharpened themselves against each other. Now you know what to call your neighbour's dog."
+      }
+   ]
+}
