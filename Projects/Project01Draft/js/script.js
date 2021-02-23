@@ -81,6 +81,8 @@ let obstacleImages = [];
 // Blood Splatter
 let bloodSplatterImage = undefined;
 
+// Jungle Background
+let jungleImage = undefined;
 // Dino
 let stillDinoImage = undefined;
 let roaringDinoImage = undefined;
@@ -108,7 +110,7 @@ function preload() {
   dinosaurusFacts =  loadJSON(`assets/data/dinosaurs_facts.json`);
 
   // Jeep
-  jeepImage = loadImage(`assets/images/jeep1.png`);
+  jeepImage = loadImage(`assets/images/jeep.gif`);
 
   // Jeep
   backImage = loadImage(`assets/images/radioBac.jpg`);
@@ -134,6 +136,8 @@ function preload() {
     obstacleImages.push(obstacleImage);
   }
 
+  // Jungle Backgorund
+  jungleImage = loadImage(`assets/images/jungle.jpg`);
   // Dino
   stillDinoImage = loadImage(`assets/images/catRex12.png`);
   roaringDinoImage = loadImage(`assets/images/catRex22.png`);
@@ -173,10 +177,10 @@ for(let i = 0; i < NUM_PLANTS; i++){
   let y = random(height/2 - canvaHeight/2, height/2 + canvaHeight/2);
   let change = random(0, 1);
   if (change < 0.5){
-      y = random(height/2 - canvaHeight/3, height/2 - canvaHeight/2);
+      y = random(height/2 - 2*canvaHeight/5, height/2 - canvaHeight/2);
     }
     else{
-      y = random(height/2 + canvaHeight/4, height/2 + canvaHeight/2);
+      y = random(height/2 + canvaHeight/5, height/2 + canvaHeight/2);
     }
   let plantImage = random(plantImages);
   let plant = new Vegetation (x, y, plantImage, change);
@@ -235,13 +239,15 @@ function draw() {
     // Background Image
     image(backImage, width/2, height/2);
 
+    // Jeep
+    image(jeepImage, width/2, height/2);
+
     // Vegetation
     for (let i = 0; i < plants.length; i++) {
       plants[i].update();
     }
 
-    // Jeep
-    image(jeepImage, width/2, height/2);
+
 
 
 
@@ -304,6 +310,7 @@ function draw() {
 
 
     timingJurassicMoment();
+    image(jungleImage, wofth/2, height/2);
 
     displayDino();
     scrollUpwards();
