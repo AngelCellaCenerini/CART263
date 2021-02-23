@@ -39,8 +39,8 @@ let textBox = {
 // Timers - levels are timed
 let timerCutScene = 9;
 let timerChase = 5;
-let timerJurassicMoment = 35;
-let timerPetDino = 2;
+let timerJurassicMoment = 5;
+let timerPetDino = 10;
 let timerCredits = 50;
 
 // Store data from JSON file - Car Ride State
@@ -77,6 +77,10 @@ let bloodSplatterImage = undefined;
 // Dino
 let stillDinoImage = undefined;
 let roaringDinoImage = undefined;
+
+//  User Mic
+// Mic Input
+let mic = undefined;
 
 // Selfie
 let capture = undefined;
@@ -136,6 +140,7 @@ textSize(20);
 rectMode(CENTER);
 imageMode(CENTER);
 noStroke();
+userStartAudio();
 
 
 // Jeep
@@ -151,6 +156,11 @@ for(let i = 0; i < NUM_OBSTACLES; i++){
   let obstacle = new Obstacle(x, y, obstacleImage);
   obstacles.push(obstacle);
 }
+
+// User Mic
+// Mic Input
+mic = new p5.AudioIn();
+mic.start();
 
 // Capture User's Webcam
 capture = createCapture(VIDEO);
@@ -247,6 +257,12 @@ function draw() {
 
     petDinoText();
     timingPetDino();
+
+    // Mic Input Catching Dino's Attention
+    let level = mic.getLevel();
+    if (level > 0.3){
+      state = `badEnding02`;
+    }
 
   }
   else if (state === `badEnding02`){
