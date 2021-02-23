@@ -90,7 +90,7 @@ let bobbleHeadDollImage = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `title`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
+let state = `carRide`; // Title, Intro/Instructions, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, PetDino, Selfie, Credits
 
 /**
 Description of preload
