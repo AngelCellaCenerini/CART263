@@ -39,9 +39,9 @@ let textBox = {
 // Timers - levels are timed
 let timerCutScene = 9;
 let timerChase = 5;
-let timerJurassicMoment = 5;
+let timerJurassicMoment = 32;
 let timerPetDino = 10;
-let timerCredits = 50;
+let timerCredits = 53;
 
 // Store data from JSON file - Car Ride State
 let dinosaurusFacts = undefined;
@@ -260,7 +260,7 @@ function draw() {
 
     // Mic Input Catching Dino's Attention
     let level = mic.getLevel();
-    if (level > 0.3){
+    if (level > 0.1){
       state = `badEnding02`;
     }
 
@@ -524,6 +524,7 @@ function timingCredits(){
       }
   if (timerCredits == 0) {
         state = `title`;
+        fadingEffect.opacity = 255;  // Reset Fading Effect
      }
 }
 

@@ -39,7 +39,10 @@ class Credits{
     "I used all of that potential to help us eat flies."
 
 
-    "Ciao bella!"`;
+    "Ciao bella!"
+
+
+    SPECIAL THANKS: NOT Handpose Model`;
     this.vx = 0;
     this.vy = 0;
     this.speed = -0.64;
