@@ -1,15 +1,15 @@
 "use strict";
 
 /**
-Title of Project
-Author Name
+Jurassic Park Moment
+Angel Cella Cenerini
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+A silly homage to Jurassic Park. Survive the jungle and experience your very own 'Jurassic Park Moment'!
+Now lacking the Handpose Model :)
 */
 
 /**
-Description of preload
+Preloading assets - JSON file, Image files, Sound Files
 */
 function preload() {
 
@@ -17,7 +17,7 @@ function preload() {
 
 
 /**
-Description of setup
+General Settings, Creating Objects
 */
 function setup() {
 
@@ -25,7 +25,7 @@ function setup() {
 
 
 /**
-Description of draw()
+States
 */
 function draw() {
 
