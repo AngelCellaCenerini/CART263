@@ -38,7 +38,7 @@ let textBox = {
 
 // Timers - levels are timed
 let timerCutScene = 9;
-let timerChase = 10;
+let timerChase = 20;
 let timerJurassicMoment = 32;
 let timerPetDino = 10;
 let timerCredits = 53;
@@ -108,7 +108,7 @@ function preload() {
   dinosaurusFacts =  loadJSON(`assets/data/dinosaurs_facts.json`);
 
   // Jeep
-  jeepImage = loadImage(`assets/images/clown.png`);
+  jeepImage = loadImage(`assets/images/jeep1.png`);
 
   // Jeep
   backImage = loadImage(`assets/images/radioBac.jpg`);
@@ -239,6 +239,9 @@ function draw() {
     for (let i = 0; i < plants.length; i++) {
       plants[i].update();
     }
+
+    // Jeep
+    image(jeepImage, width/2, height/2);
 
 
 
