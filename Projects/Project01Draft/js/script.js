@@ -310,7 +310,7 @@ function draw() {
 
 
     timingJurassicMoment();
-    image(jungleImage, wofth/2, height/2);
+    image(jungleImage, width/2, height/2);
 
     displayDino();
     scrollUpwards();
