@@ -221,10 +221,13 @@ function draw() {
     image(carInteriorImage, width/2, height/2); // Car Interior Background Image
 
   }
-  else if ( state === `chase` ){
+  else if ( state === `badEnding01` ){
+
+    image(bloodSplatterImage, 2*width/3, 2*height/3); //  background image (Blood Splatter - not as graphic as it sounds)
+    badEnding01Text();
 
   }
-  else if ( state === `badEnding01` ){
+  else if ( state === `chase` ){
 
   }
   else if ( state === `jurassicParkMoment` ){
@@ -351,6 +354,15 @@ function approachingDinosaur(){
   let growth = 0.07;
   dinosaurMouth.width += growth;
   dinosaurMouth.height += growth;
+
+}
+
+// Bad Ending 01
+function badEnding01Text(){
+  push();
+  fill(255);
+  text(`You weren't quick enough and got just too close to the dinosaur :/`, width/2, height/2);
+  pop();
 
 }
 
