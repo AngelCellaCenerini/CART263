@@ -8,7 +8,22 @@ A silly homage to Jurassic Park. Survive the jungle and experience your very own
 Now lacking the Handpose Model :)
 */
 
+// "Canvas" proportions (illustration background)
+let canvaWidth = 1000;
+let canvaHeight = 530;
+
 // Title
+// Fading Effect
+let fadingEffect = {
+  x: 0,
+  y: 0,
+  width: 1200,
+  height: 1000,
+  vx: 0,
+  vy: 0,
+  speed: 0.7,
+  opacity: 255,
+}
 // Logo
 let logoImage = undefined;
 
@@ -127,7 +142,13 @@ States
 */
 function draw() {
 
+  background(0);
+
   if ( state === `title`){
+
+    titleText(); // Display white Text
+    image(logoImage, width/2, 2*height/5); // display Logo
+    fadeIn(); // "Fade-In" Effect
 
   }
   else if ( state === `intro` ){
@@ -164,6 +185,33 @@ function draw() {
 
 }
 
+// Title
+function titleText(){
+  push();
+  fill(255);
+  textSize(40);
+  text(`JURASSIC PARK...`, width/2, height/6);
+  text(`...MOMENT.`, width/2, 4*height/6);
+  textSize(18);
+  text(`Press ENTER to start your adventure.`, width/2, 6*height/7);
+  pop();
+
+}
+function fadeIn(){
+
+  let fading = 0.5;
+
+  push();
+  fill(0, fadingEffect.opacity);
+  fadingEffect.x = width/2;
+  fadingEffect.y = height/2;
+  rect(fadingEffect.x, fadingEffect.y, fadingEffect.width, fadingEffect.height);
+  pop();
+
+  fadingEffect.opacity -= fading;
+}
+
+
 function keyPressed(){
 
   // User presses ENTER
@@ -176,7 +224,6 @@ function keyPressed(){
     }
     else if(state === `carRide`){
       state = `cutScene`;
-      }
     }
     else if(state === `selfie`){
       state = `credits`;
