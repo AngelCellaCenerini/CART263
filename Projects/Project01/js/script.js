@@ -12,6 +12,9 @@ Now lacking the Handpose Model :)
 let canvaWidth = 1000;
 let canvaHeight = 530;
 
+// Timers - Certain levels are timed
+let timerCutScene = 9;
+
 // Title
 // Fading Effect
 let fadingEffect = {
@@ -206,6 +209,17 @@ function draw() {
   }
   else if ( state === `cutScene` ){
 
+    timingCutScene();
+
+    backgroundColor();  // necessary for mirror
+
+    approachingDinosaur();  // display "Approaching" Dinosaur Mouth - expanding image
+    defineBorders();  // define "canva"'s borders bt drawing black rectangles
+
+    cutSceneText();
+
+    image(carInteriorImage, width/2, height/2); // Car Interior Background Image
+
   }
   else if ( state === `chase` ){
 
@@ -303,6 +317,43 @@ function defineBorders(){
   pop();
 }
 
+// Cut Scene
+function timingCutScene(){
+  if (frameCount % 60 == 0 && timerCutScene > 0) {
+        timerCutScene --;
+      }
+  if (timerCutScene == 0) {
+        state = `badEnding01`;
+        dinosaurApproachSFX.stop();
+        crunchingSFX.play();
+     }
+}
+function backgroundColor(){
+  push();
+  fill(208, 216, 218);
+  rect(width/2, height/2, canvaWidth, canvaHeight);
+  pop();
+}
+function cutSceneText(){
+  push();
+  fill(255);
+  text(`Looks like all that noise attracted unwanted attention!`, width/2, height/7);
+  text(`Quick! Press G to step on the gas!`, width/2, 6*height/7);
+  pop();
+}
+function approachingDinosaur(){
+  // Display Dinosaur Open Mouth
+  dinosaurMouth.x = width/2;
+  dinosaurMouth.y = 4*canvaHeight/9;
+  dinosaurMouth.image = image(dinosaurMouth, dinosaurMouth.x, dinosaurMouth.y, dinosaurMouth.width, dinosaurMouth.height);
+
+  // Dinosaur Mouth "Approaching"
+  let growth = 0.07;
+  dinosaurMouth.width += growth;
+  dinosaurMouth.height += growth;
+
+}
+
 // p5 events
 function keyPressed(){
 
@@ -324,6 +375,7 @@ function keyPressed(){
       if(responsiveVoice.isPlaying()) {
           responsiveVoice.cancel();
       }
+      dinosaurApproachSFX.play();
     }
     else if(state === `selfie`){
       state = `credits`;
@@ -353,6 +405,13 @@ function keyPressed(){
         }
     }
     responsiveVoice.speak(radioStation, "UK English Male", {rate: 1}, {volume: 1});
+  }
+
+  // User presses G
+  if(keyCode === 71 && state === `cutScene`){
+    state = `chase`;
+    dinosaurApproachSFX.stop();
+    chaseSoundtrack.play();
   }
 }
 function assignStation(){
