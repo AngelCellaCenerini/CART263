@@ -6,8 +6,8 @@ class Obstacle{
     this.width = 130;
     this.vx = 0;
     this.vy = 0;
-    this.speed = 2;
-    this.acceleration = 1;
+    this.speed = 4;
+    this.acceleration = 0.6;
     this.borderX = 1000;  // "canvas" (background illustration )
     this.borderY = 530;   // "canvas" (background illustration )
 
@@ -38,7 +38,7 @@ class Obstacle{
   crash(jeep){
     // Check if Obstacles crashe against Jeep
     let d1 = dist(this.x, this.y, jeep.x, jeep.y);
-    if (d1 < this.width/4 + jeep.width/4){
+    if (d1 < this.width/5 + jeep.width/5){
       setTimeout(this.switchBadEnding01, 1000);  // wait 1 sec before switching state
     }
   }

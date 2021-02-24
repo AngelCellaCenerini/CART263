@@ -14,7 +14,8 @@ let canvaHeight = 530;
 
 // Timers - Certain levels are timed
 let timerCutScene = 9;
-let timerChase = 35;
+let timerChase = 27;
+let timerJurassicMoment = 32;
 
 // Title
 // Fading Effect
@@ -25,7 +26,7 @@ let fadingEffect = {
   height: 1000,
   vx: 0,
   vy: 0,
-  speed: 0.7,
+  speed: 1,
   opacity: 255,
 }
 // Logo
@@ -259,6 +260,13 @@ function draw() {
   }
   else if ( state === `jurassicParkMoment` ){
 
+    timingJurassicMoment();
+    image(jungleImage, width/2, height/2);  // background image
+    // Display Dino based on Responsive Voice
+    displayDino();
+    scrollUpwards();  // "Scrolling Upwards" effect
+    jurassicParkMomentText();
+
   }
   else if ( state === `callDino` ){
 
@@ -402,9 +410,9 @@ function timingChase(){
         state = `jurassicParkMoment`;
         chaseSoundtrack.stop();
         if ( state === `jurassicParkMoment` ){  // check if the state is the correct one
-          jurassicTheme.play();
+          jurassicTheme.play(1);
         }
-        // setTimeout(readDinoCall, 10000);
+        setTimeout(readDinoCall, 20000);
      }
 }
 function chaseText(){
@@ -414,6 +422,56 @@ function chaseText(){
   text(`Watch out for unexpected obstacles!`, width/2, 6*height/7);
   pop();
 }
+
+// Jurassic Park Moment
+function timingJurassicMoment(){
+  if (frameCount % 60 == 0 && timerJurassicMoment > 0) {
+        timerJurassicMoment --;
+      }
+  if (timerJurassicMoment == 0) {
+        state = `callDino`;
+     }
+}
+function readDinoCall(){
+  // Read Dino Call previously typed by User
+  responsiveVoice.speak(dinoCall);
+}
+function displayDino(){
+  // Dino
+  if(responsiveVoice.isPlaying()) {
+    // Open mouth when making noise - Dino Call
+    image(roaringDinoImage, width/2, height/2 + canvaHeight/22);
+  }
+  else{
+    // Close mouth if silent
+    image(stillDinoImage, width/2, height/2 + canvaHeight/22);
+  }
+}
+function scrollUpwards(){
+  // "Scroll Upwards" effect - black rectangle reveals background image slowly
+  // Center
+  fadingEffect.x = width/2;
+
+  // Move
+  fadingEffect.y -= fadingEffect.vy;
+  fadingEffect.vy = fadingEffect.speed;
+
+  // Display "Effect"
+  push();
+  fill(0);
+  rect(fadingEffect.x, fadingEffect.y, fadingEffect.width, fadingEffect.height);
+  pop();
+
+}
+function jurassicParkMomentText(){
+  push();
+  fill(255);
+  text(`Your heart is booming in your chest! Could this be it?`, width/2, height/7);
+  text(`Is this...the legendary jUraSsIc PaRK mOmENt?!`, width/2, 6*height/7);
+  pop();
+
+}
+//
 
 // p5 events
 function keyPressed(){
