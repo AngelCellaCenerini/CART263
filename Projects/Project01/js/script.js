@@ -52,7 +52,7 @@ let dinoCall = ``;
 // JSON file - Radio Stations
 let dinosaursFacts = undefined;
 let specificFact = undefined;
-let index = 0;
+let index = 3;
 let radioStation = undefined;
 // Car Ride Soundtrack
 let carRideSoundtrack = undefined;
@@ -129,7 +129,7 @@ let creditsSoundtrack = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `callDino`; // Title, Intro, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, CallDino, Selfie, Credits
+let state = `title`; // Title, Intro, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, CallDino, Selfie, Credits
 
 
 /**
@@ -447,7 +447,7 @@ function timingChase(){
         state = `jurassicParkMoment`;
         chaseSoundtrack.stop();
         if ( state === `jurassicParkMoment` ){  // check if the state is the correct one
-          jurassicTheme.play(1);
+          jurassicTheme.play();
         }
         setTimeout(readDinoCall, 20000);
      }
