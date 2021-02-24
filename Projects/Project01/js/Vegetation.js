@@ -6,8 +6,8 @@ class Vegetation{
     this.vx = 0;
     this.vy = 0;
     this.speed = 2;
-    this.borderX = 1000;  // To respect "canvas" (background illustration )
-    this.borderY = 480;   // To respect "canvas" (background illustration )
+    this.borderX = 1000;  // "canvas" (background illustration )
+    this.borderY = 480;   // "canvas" (background illustration )
     this.change = change;
 
   }

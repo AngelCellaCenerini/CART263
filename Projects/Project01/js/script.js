@@ -14,6 +14,7 @@ let canvaHeight = 530;
 
 // Timers - Certain levels are timed
 let timerCutScene = 9;
+let timerChase = 35;
 
 // Title
 // Fading Effect
@@ -81,8 +82,10 @@ let dinosaurMouth = {
 // Chase
 // Chase Soundtrack
 let chaseSoundtrack = undefined;
+// Chase Background Image
+let chaseBackground = undefined;
 // Obstacles
-const NUM_OBSTACLES = 4;
+const NUM_OBSTACLES = 3;
 const NUM_OBSTACLE_IMAGES = 3;
 let obstacles = [];
 let obstacleImages = [];
@@ -167,6 +170,20 @@ function setup() {
     plants.push(plant);
   }
 
+  // Jeep
+  let x = width/2;
+  let y = height/2;
+  jeep = new Jeep(x, y, jeepImage);
+
+  // Obstacles
+  for(let i = 0; i < NUM_OBSTACLES; i++){
+    let x = random(width/2 + canvaWidth/3, width/2 + canvaWidth/2);
+    let y = random(height/2 - canvaHeight/2, height/2 + canvaHeight/3);
+    let obstacleImage = random(obstacleImages);
+    let obstacle = new Obstacle(x, y, obstacleImage);
+    obstacles.push(obstacle);
+  }
+
 }
 
 
@@ -210,14 +227,10 @@ function draw() {
   else if ( state === `cutScene` ){
 
     timingCutScene();
-
     backgroundColor();  // necessary for mirror
-
     approachingDinosaur();  // display "Approaching" Dinosaur Mouth - expanding image
-    defineBorders();  // define "canva"'s borders bt drawing black rectangles
-
+    defineBorders();
     cutSceneText();
-
     image(carInteriorImage, width/2, height/2); // Car Interior Background Image
 
   }
@@ -228,6 +241,20 @@ function draw() {
 
   }
   else if ( state === `chase` ){
+
+    timingChase();
+    image(chaseBackground, width/2, height/2);  // background image
+
+    // Jeep
+    jeep.update();
+
+    // Obstacles
+    for (let i = 0; i < obstacles.length; i++) {
+      obstacles[i].update(jeep);
+    }
+
+    defineBorders();
+    chaseText();
 
   }
   else if ( state === `jurassicParkMoment` ){
@@ -301,7 +328,7 @@ function introTextBox(){
 function carRideText(){
   push();
   fill(255);
-  text(`You keep the radio on while travelling. Press the arrow key > to skip channel frequencies. Press ENTER to skip this level.`, width/2, height/7);
+  text(`You keep the radio on while travelling. Press the left/right arrow keys to skip frequencies. Press ENTER to skip this level.`, width/2, height/7);
   textStyle(ITALIC);
   text(`<<Country roads, take me home...>>`, width/2, 6*height/7);
   pop();
@@ -361,9 +388,31 @@ function approachingDinosaur(){
 function badEnding01Text(){
   push();
   fill(255);
-  text(`You weren't quick enough and got just too close to the dinosaur :/`, width/2, height/2);
+  text(`You weren't quick enough and got just a tad too close to the dinosaur :/`, width/2, height/2);
   pop();
 
+}
+
+// Chase
+function timingChase(){
+  if (frameCount % 60 == 0 && timerChase > 0) {
+        timerChase --;
+      }
+  if (timerChase == 0) {
+        state = `jurassicParkMoment`;
+        chaseSoundtrack.stop();
+        if ( state === `jurassicParkMoment` ){  // check if the state is the correct one
+          jurassicTheme.play();
+        }
+        // setTimeout(readDinoCall, 10000);
+     }
+}
+function chaseText(){
+  push();
+  fill(255);
+  text(`RUN! Use the arrow keys to escape!`, width/2, height/7);
+  text(`Watch out for unexpected obstacles!`, width/2, 6*height/7);
+  pop();
 }
 
 // p5 events
@@ -469,6 +518,9 @@ function loadImageFiles(){
 
   // Blood Splatter
   bloodSplatterImage = loadImage(`assets/images/splatter.png`);
+
+  // Chase Background
+  chaseBackground = loadImage(`assets/images/chaseBackground.jpg`);
 
   // Obstacles
   for(let i = 0; i < NUM_OBSTACLE_IMAGES; i++){
