@@ -44,6 +44,9 @@ let dinoCall = ``;
 // Car Ride
 // JSON file - Radio Stations
 let dinosaursFacts = undefined;
+let specificFact = undefined;
+let index = 0;
+let radioStation = undefined;
 // Car Ride Soundtrack
 let carRideSoundtrack = undefined;
 // Grass Background Image
@@ -144,6 +147,23 @@ function setup() {
   noStroke();
   userStartAudio();
 
+
+  // Vegetation
+  for(let i = 0; i < NUM_PLANTS; i++){
+    let x = random(width/2 - canvaWidth/2, width/2 + canvaWidth/2);
+    let y = random(height/2 - canvaHeight/2, height/2 + canvaHeight/2);
+    let change = random(0, 1);
+    if (change < 0.5){
+        y = random(height/2 - 2*canvaHeight/5, height/2 - canvaHeight/2);
+      }
+    else{
+        y = random(height/2 + canvaHeight/5, height/2 + canvaHeight/2);
+      }
+    let plantImage = random(plantImages);
+    let plant = new Vegetation (x, y, plantImage, change);
+    plants.push(plant);
+  }
+
 }
 
 
@@ -169,6 +189,19 @@ function draw() {
 
   }
   else if ( state === `carRide` ){
+
+
+    image(pathImage, width/2, height/2);  // Background Image
+    image(jeepImage, width/2, height/2);  // display Jeep
+
+    // Vegetation
+    for (let i = 0; i < plants.length; i++) {
+      plants[i].update();
+    }
+
+    defineBorders();  // define "canva"'s borders bt drawing black rectangles
+
+    carRideText();
 
   }
   else if ( state === `cutScene` ){
@@ -226,7 +259,6 @@ function fadeIn(){
 }
 
 // Intro
-// Intro
 function introText(){
   push();
   fill(255);
@@ -248,6 +280,29 @@ function introTextBox(){
   pop();
 }
 
+// Car Ride
+function carRideText(){
+  push();
+  fill(255);
+  text(`You keep the radio on while travelling. Press the arrow key > to skip channel frequencies. Press ENTER to skip this level.`, width/2, height/7);
+  textStyle(ITALIC);
+  text(`<<Country roads, take me home...>>`, width/2, 6*height/7);
+  pop();
+
+}
+function defineBorders(){
+  // Black Borders
+  push();
+  fill(0);
+  let borderWidth = 440;
+  let borderHeight = 145;
+  rect(7*width/8, height/2, borderWidth, height);
+  rect(width/8, height/2, borderWidth, height);
+  rect(width/2, height/8, width, borderHeight);
+  rect(width/2, 7*height/8, width, borderHeight);
+  pop();
+}
+
 // p5 events
 function keyPressed(){
 
@@ -255,13 +310,20 @@ function keyPressed(){
   if(keyCode === 13){
     if(state === `title`){
       state = `intro`;
-      jungleSounds.play();
+      jungleSounds.loop();
     }
     else if(state === `intro`){
       state = `carRide`;
+      jungleSounds.stop();
+      carRideSoundtrack.loop();
     }
     else if(state === `carRide`){
       state = `cutScene`;
+      carRideSoundtrack.stop();
+      // Turn off "Radio" if on
+      if(responsiveVoice.isPlaying()) {
+          responsiveVoice.cancel();
+      }
     }
     else if(state === `selfie`){
       state = `credits`;
@@ -272,6 +334,32 @@ function keyPressed(){
   if (keyCode === 8 && state === `intro`) {
     dinoCall = ``;
   }
+
+  // User presses Right/Left Arrow
+  if (state === `carRide`){
+    if( keyCode === RIGHT_ARROW ){
+        index ++;
+        assignStation();
+
+        if(index > specificFact.length){
+           index = 0;
+        }
+    }
+    else if (keyCode === LEFT_ARROW){
+        index --;
+        assignStation();
+        if(index < 0){
+           index = specificFact.length;
+        }
+    }
+    responsiveVoice.speak(radioStation, "UK English Male", {rate: 1}, {volume: 1});
+  }
+}
+function assignStation(){
+  // Assign object properties to index/radioStation
+  specificFact = dinosaursFacts.facts[index];
+  radioStation = specificFact.fun_fact;
+
 }
 
 function keyTyped(){
