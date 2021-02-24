@@ -30,6 +30,16 @@ let logoImage = undefined;
 // Intro
 // JungleSounds
 let jungleSounds = undefined;
+// TextBox
+let textBox = {
+  x: 0,
+  y: 0,
+  width: 700,
+  height: 100,
+  radius: 15
+}
+// User Input - Dino Call
+let dinoCall = ``;
 
 // Car Ride
 // JSON file - Radio Stations
@@ -146,12 +156,16 @@ function draw() {
 
   if ( state === `title`){
 
-    titleText(); // Display white Text
-    image(logoImage, width/2, 2*height/5); // display Logo
-    fadeIn(); // "Fade-In" Effect
+    image(logoImage, width/2, 2*height/5);  // display Logo
+    titleText();  // display white Text
+    fadeIn();  // "Fade-In" Effect
 
   }
   else if ( state === `intro` ){
+
+    image(jungleImage, width/2, height/2);
+    introText();
+    introTextBox();
 
   }
   else if ( state === `carRide` ){
@@ -211,13 +225,37 @@ function fadeIn(){
   fadingEffect.opacity -= fading;
 }
 
+// Intro
+// Intro
+function introText(){
+  push();
+  fill(255);
+  text(`You embark on your journey in search of the Jurassic Park Moment.`, width/2, height/7);
+  text(`Among the lush vegetation, you hear a sound...Type it down as to document it. Press ENTER to confirm.`, width/2, 6*height/7);
+  pop();
 
+}
+function introTextBox(){
+  push();
+  // White Textbox
+  fill(255, 200);
+  textBox.x = width/2;
+  textBox.y = 3*height/5;
+  rect(textBox.x, textBox.y, textBox.width, textBox.height, textBox.radius);
+  // Display User Input
+  fill(0);
+  text(dinoCall, width/2, 3*height/5);
+  pop();
+}
+
+// p5 events
 function keyPressed(){
 
   // User presses ENTER
   if(keyCode === 13){
     if(state === `title`){
       state = `intro`;
+      jungleSounds.play();
     }
     else if(state === `intro`){
       state = `carRide`;
@@ -229,7 +267,20 @@ function keyPressed(){
       state = `credits`;
     }
   }
+
+  // User presses BACKSPACE to reset Dino Call Input
+  if (keyCode === 8 && state === `intro`) {
+    dinoCall = ``;
+  }
 }
+
+function keyTyped(){
+  // User types Dino Sound
+  if (keyCode !== 13 && state === `intro`){
+          dinoCall += key;
+  }
+}
+//
 
 // Load Files
 function loadImageFiles(){
