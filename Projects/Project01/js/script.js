@@ -85,6 +85,7 @@ let bobbleHeadDollImage = undefined;
 // Credits Soundtrack
 let creditsSoundtrack = undefined;
 
+let state = `title`; // Title, Intro, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, CallDino, Selfie, Credits
 
 
 /**
@@ -126,6 +127,61 @@ States
 */
 function draw() {
 
+  if ( state === `title`){
+
+  }
+  else if ( state === `intro` ){
+
+  }
+  else if ( state === `carRide` ){
+
+  }
+  else if ( state === `cutScene` ){
+
+  }
+  else if ( state === `chase` ){
+
+  }
+  else if ( state === `badEnding01` ){
+
+  }
+  else if ( state === `jurassicParkMoment` ){
+
+  }
+  else if ( state === `callDino` ){
+
+  }
+  else if ( state === `badEnding02` ){
+
+  }
+  else if ( state === `selfie` ){
+
+  }
+  else if ( state === `credits` ){
+
+  }
+
+
+}
+
+function keyPressed(){
+
+  // User presses ENTER
+  if(keyCode === 13){
+    if(state === `title`){
+      state = `intro`;
+    }
+    else if(state === `intro`){
+      state = `carRide`;
+    }
+    else if(state === `carRide`){
+      state = `cutScene`;
+      }
+    }
+    else if(state === `selfie`){
+      state = `credits`;
+    }
+  }
 }
 
 // Load Files
