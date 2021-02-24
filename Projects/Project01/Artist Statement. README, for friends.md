@@ -7,7 +7,7 @@ In fact, ‘Jurassic Park Moment’ is not an officially recognized terminology 
 To best explain -or better yet demonstrate- what a ‘Jurassic Park Moment’ consists of, a homonym .mp4 file has been uploaded to the GitHub folder.
 Enjoy!
 
-IMPORTANT: for some reason GitHub and Atom don't see eye to eye and the program will be disproportionate in the GitHub pages. Please set the webpage zoom to 80%.
+IMPORTANT: for some reason GitHub and Atom don't see eye to eye and the program will be disproportionate in the GitHub pages. Please set the webpage zoom to 80% and then refresh the page.
 PS. Small tip: do not hesitate to suggest ridiculous input to the program.
 
 
