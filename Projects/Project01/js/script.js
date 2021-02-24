@@ -252,7 +252,7 @@ function draw() {
   }
   else if ( state === `badEnding01` ){
 
-    image(bloodSplatterImage, 2*width/3, 2*height/3); //  background image (Blood Splatter - not as graphic as it sounds)
+    image(bloodSplatterImage, 2*width/3, 2*height/3);  // background image (Blood Splatter - not as graphic as it sounds)
     badEnding01Text();
 
   }
@@ -293,6 +293,9 @@ function draw() {
 
   }
   else if ( state === `badEnding02` ){
+
+    image(bloodSplatterImage, 2*width/3, 2*height/3);  // background image (Blood Splatter - not as graphic as it sounds)
+    badEnding02Text();
 
   }
   else if ( state === `selfie` ){
@@ -521,6 +524,15 @@ function checkMicInput(){
     state = `badEnding02`;
     crunchingSFX.play();
   }
+}
+
+// Bad Ending 02
+function badEnding02Text(){
+  push();
+  fill(255);
+  text(`You...really thought calling over a dinosaur would be a good idea?`, width/2, height/2);
+  pop();
+
 }
 
 // Credits
