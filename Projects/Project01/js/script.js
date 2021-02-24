@@ -16,7 +16,7 @@ let canvaHeight = 530;
 let timerCutScene = 9;
 let timerChase = 27;
 let timerJurassicMoment = 32;
-let timerCallDino = 18;
+let timerCallDino = 12;
 let timerCredits = 53;
 
 // Title
@@ -115,6 +115,9 @@ let dinoBreathingSFX = undefined;
 let dinoCloseUpImage = undefined;
 
 // Selfie
+let capture = undefined;
+let captureWidth = 1000;
+let captureHeight = 630;
 // Bobble Head Doll
 let bobbleHeadDollImage = undefined;
 // Mic Input
@@ -194,6 +197,10 @@ function setup() {
   // Mic Input
   mic = new p5.AudioIn();
   mic.start();
+
+  // Capture User's Webcam
+  capture = createCapture(VIDEO);
+  capture.hide();
 
   // Create Credits String
   x = width/2;
@@ -299,6 +306,9 @@ function draw() {
 
   }
   else if ( state === `selfie` ){
+
+    selfieText();
+    cameraFrame();
 
   }
   else if ( state === `credits` ){
@@ -457,7 +467,7 @@ function timingJurassicMoment(){
       }
   if (timerJurassicMoment == 0) {
         state = `callDino`;
-        dinoBreathingSFX.play(1);
+        dinoBreathingSFX.play(2);
      }
 }
 function readDinoCall(){
@@ -533,6 +543,21 @@ function badEnding02Text(){
   text(`You...really thought calling over a dinosaur would be a good idea?`, width/2, height/2);
   pop();
 
+}
+
+// Selfie
+function selfieText(){
+  push();
+  fill(255);
+  text(`Wise choice! Why not take a picture to commemorate your accomplished mission?`, width/2, height/9);
+  text(`Press ENTER when you're done taking your screenshot.`, width/2, 8*height/9);
+  pop();
+
+}
+function cameraFrame(){
+  image(capture, width/2, height/2, captureWidth, captureHeight);
+  image(dinoCloseUpImage, width/2 - canvaWidth/6, height/2 + canvaHeight/6);
+  image(bobbleHeadDollImage, width/2 + canvaWidth/4, 2*height/3 + canvaHeight/13); // ugly to look at, I know, but it's math! I  s w e a r
 }
 
 // Credits
