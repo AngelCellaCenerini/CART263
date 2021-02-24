@@ -16,6 +16,7 @@ let canvaHeight = 530;
 let timerCutScene = 9;
 let timerChase = 27;
 let timerJurassicMoment = 32;
+let timerCallDino = 18;
 let timerCredits = 53;
 
 // Title
@@ -116,6 +117,8 @@ let dinoCloseUpImage = undefined;
 // Selfie
 // Bobble Head Doll
 let bobbleHeadDollImage = undefined;
+// Mic Input
+let mic = undefined;
 
 // Credits
 // Credits Soundtrack
@@ -123,7 +126,7 @@ let creditsSoundtrack = undefined;
 // Credits String
 let credits = undefined;
 
-let state = `title`; // Title, Intro, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, CallDino, Selfie, Credits
+let state = `callDino`; // Title, Intro, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, CallDino, Selfie, Credits
 
 
 /**
@@ -187,6 +190,10 @@ function setup() {
     let obstacle = new Obstacle(x, y, obstacleImage);
     obstacles.push(obstacle);
   }
+
+  // Mic Input
+  mic = new p5.AudioIn();
+  mic.start();
 
   // Create Credits String
   x = width/2;
@@ -277,6 +284,12 @@ function draw() {
 
   }
   else if ( state === `callDino` ){
+
+    callDinoText();
+    timingCallDino();
+    image(jungleImage, width/2, height/2);  // background image
+    image(dinoCloseUpImage, width/2, height/2 + canvaHeight/16);  // display Dino's close-up
+    checkMicInput();   // checl Mic Level to catch Dino's attention
 
   }
   else if ( state === `badEnding02` ){
@@ -441,6 +454,7 @@ function timingJurassicMoment(){
       }
   if (timerJurassicMoment == 0) {
         state = `callDino`;
+        dinoBreathingSFX.play(1);
      }
 }
 function readDinoCall(){
@@ -481,6 +495,32 @@ function jurassicParkMomentText(){
   text(`Is this...the legendary jUraSsIc PaRK mOmENt?!`, width/2, 6*height/7);
   pop();
 
+}
+
+// Call Dino
+function timingCallDino(){
+  if (frameCount % 60 == 0 && timerCallDino > 0) {
+        timerCallDino --;
+      }
+  if (timerCallDino == 0) {
+        state = `selfie`;
+     }
+}
+function callDinoText(){
+  push();
+  fill(255);
+  text(`Wow, it's gotten really close! It's as if you could speak aloud and catch its attention...`, width/2, height/7);
+  text(`...Unless that might not be the brightest idea? You could also wait for it to pass...`, width/2, 6*height/7);
+  pop();
+
+}
+function checkMicInput(){
+  // Mic Input Catching Dino's Attention
+  let level = mic.getLevel();
+  if (level > 0.1){
+    state = `badEnding02`;
+    crunchingSFX.play();
+  }
 }
 
 // Credits
