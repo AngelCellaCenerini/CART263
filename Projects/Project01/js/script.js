@@ -17,6 +17,8 @@ let logoImage = undefined;
 let jungleSounds = undefined;
 
 // Car Ride
+// JSON file - Radio Stations
+let dinosaursFacts = undefined;
 // Car Ride Soundtrack
 let carRideSoundtrack = undefined;
 // Grass Background Image
@@ -50,7 +52,7 @@ let dinosaurMouth = {
 let chaseSoundtrack = undefined;
 // Obstacles
 const NUM_OBSTACLES = 4;
-const NUM_OBSTACLE_IMAGES = 10;
+const NUM_OBSTACLE_IMAGES = 3;
 let obstacles = [];
 let obstacleImages = [];
 
@@ -91,7 +93,7 @@ Preloading assets - JSON file, Image files, Sound Files
 function preload() {
 
    // Fun Facts - Radio Stations
-   dinosaurusFacts =  loadJSON(`assets/data/dinosaurs_facts.json`);
+   dinosaursFacts =  loadJSON(`assets/data/dinosaurs_facts.json`);
 
    loadImageFiles();
 
@@ -105,6 +107,16 @@ function preload() {
 General Settings, Creating Objects
 */
 function setup() {
+
+  // General Settings
+  createCanvas(windowWidth, windowHeight);
+  textFont(`Courier`);
+  textAlign(CENTER, CENTER);
+  textSize(20);
+  rectMode(CENTER);
+  imageMode(CENTER);
+  noStroke();
+  userStartAudio();
 
 }
 
@@ -147,7 +159,7 @@ function loadImageFiles(){
 
   // Obstacles
   for(let i = 0; i < NUM_OBSTACLE_IMAGES; i++){
-   let obstacleImage = loadImage(`assets/images/aobstacle${i}.png`);
+   let obstacleImage = loadImage(`assets/images/obstacle${i}.png`);
    obstacleImages.push(obstacleImage);
   }
 
@@ -164,10 +176,10 @@ function loadImageFiles(){
 
 function loadSoundFiles(){
   // Jungle Sounds
-  jungleSounds = loadSound(`assets/sounds/jungleSounds.wav`);
+  jungleSounds = loadSound(`assets/sounds/jungleSounds.mp3`);
 
   // Car Ride Soundtrack
-  carRideSoundtrack = loadSound(`assets/sounds/carRide.mp3`);
+  carRideSoundtrack = loadSound(`assets/sounds/carRideS.mp3`);
 
   // Dinosaur Approach
   dinosaurApproachSFX = loadSound(`assets/sounds/dinosaurApproachingS.mp3`);
