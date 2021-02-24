@@ -16,6 +16,7 @@ let canvaHeight = 530;
 let timerCutScene = 9;
 let timerChase = 27;
 let timerJurassicMoment = 32;
+let timerCredits = 53;
 
 // Title
 // Fading Effect
@@ -119,6 +120,8 @@ let bobbleHeadDollImage = undefined;
 // Credits
 // Credits Soundtrack
 let creditsSoundtrack = undefined;
+// Credits String
+let credits = undefined;
 
 let state = `title`; // Title, Intro, CarRide, CutScene, Chase, BadEnding(01, 02), JurassicParkMoment, CallDino, Selfie, Credits
 
@@ -184,6 +187,11 @@ function setup() {
     let obstacle = new Obstacle(x, y, obstacleImage);
     obstacles.push(obstacle);
   }
+
+  // Create Credits String
+  x = width/2;
+  y = 3*height/2;
+  credits = new Credits(x, y);
 
 }
 
@@ -278,6 +286,9 @@ function draw() {
 
   }
   else if ( state === `credits` ){
+
+    credits.update();
+    timingCredits();
 
   }
 
@@ -471,6 +482,17 @@ function jurassicParkMomentText(){
   pop();
 
 }
+
+// Credits
+function timingCredits(){
+  if (frameCount % 60 == 0 && timerCredits > 0) {
+        timerCredits --;
+      }
+  if (timerCredits == 0) {
+        state = `title`;
+        fadingEffect.opacity = 255;  // Reset Fading Effect
+     }
+}
 //
 
 // p5 events
@@ -498,6 +520,7 @@ function keyPressed(){
     }
     else if(state === `selfie`){
       state = `credits`;
+      creditsSoundtrack.play();
     }
   }
 
