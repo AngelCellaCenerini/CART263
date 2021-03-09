@@ -33,6 +33,14 @@ let line1 = random(fiveSyllableLines);
 let line2 = random(sevenSyllableLines);
 let line3 = random(fiveSyllableLines);
 
+let line1P = document.getElementById(`line-1`);
+let line2P = document.getElementById(`line-2`);
+let line3P = document.getElementById(`line-3`);
+
+line1P.innerText = line1;
+line2P.innerText = line2;
+line3P.innerText = line3;
+
 
 function random(array){
   let index = Math.floor(Math.random() * array.length);
