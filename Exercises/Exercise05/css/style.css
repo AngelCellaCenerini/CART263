@@ -1,8 +1,76 @@
+
 body {
 background-color: ;
+font-family: monospace;
+}
+
+
+#title {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  margin-top: 8%;
+  margin-left: 3%;
+  font-size: 1.7rem;
 }
 
 #haiku {
-  font-family: monospace;
-  font-size: 2rem;
+  font-size: 1.6rem;
+  margin-top: -26%;
+  margin-left: 17%;
+}
+
+
+#direction-1 {
+  font-size: 1rem;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  margin-left: 80%;
+  margin-top: 100px;
+}
+#direction-2 {
+  font-size: 1rem;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  margin-left: 84%;
+  margin-top: 100px;
+}
+
+
+#vertical-line-1 {
+  transform: rotate(90deg);
+  margin-left: 61.2%;
+  margin-top: -40%;
+  margin-bottom: 21%;
+}
+#vertical-line-2 {
+  transform: rotate(90deg);
+  margin-left: 69%;
+  margin-top: -55%;
+  margin-bottom: 16%;
+}
+
+
+.sliding-element {
+  position: relative;
+  animation-name: slide-down;
+  animation-duration: 5s;
+}
+@keyframes slide-down {
+  from {top: -500px;}
+  to {top: 0px;}
+}
+
+
+img{
+  position: relative;
+  margin-top: -17%;
+  margin-left: 45%;
+  width: 350px;
+  height: 300px;
+  animation-name: slide-up;
+  animation-duration: 8s;
+}
+@keyframes slide-up {
+  from {top: 500px;}
+  to {top: 0px;}
 }
