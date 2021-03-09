@@ -28,3 +28,13 @@ let sevenSyllableLines = [
   `The flower seeking judgment`,
   `Fear not the approaching duck`
 ];
+
+let line1 = random(fiveSyllableLines);
+let line2 = random(sevenSyllableLines);
+let line3 = random(fiveSyllableLines);
+
+
+function random(array){
+  let index = Math.floor(Math.random() * array.length);
+  return array[index];
+}
