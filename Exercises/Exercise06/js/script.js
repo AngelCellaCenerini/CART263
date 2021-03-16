@@ -8,7 +8,14 @@ author, and this description to match your project!
 
 "use strict";
 
+$(`.top-secret`).on(`click`, redact);
+
 setInterval(revelation, 500);
+
+function redact(event){
+  $(this).removeClass(`revealed`);
+  $(this).addClass(`redacted`);
+}
 
 function revelation(){
   $(`.redacted`).each(attemptReveal);
