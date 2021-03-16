@@ -1,9 +1,32 @@
-#secret-document{
+body{
+  background-color: #CAD7DF;
+}
+
+#fork{
+  position: absolute;
+  margin-top: 6vw;
+  margin-bottom: 0px;
+  margin-left: 2vw;
+}
+
+h2{
+  background-color: #F6F2EB;
+  padding: 30px;
   font-family: monospace;
-  font-size: 1.2rem;
-  width: 60vw;
-  margin-left: 10vw;
-  margin-top: 5vw;
+  font-size: 1.4rem;
+  width: 51vw;
+  margin-left: 11vw;
+  margin-top: 2vw;
+}
+
+#secret-document{
+  background-color: #F6F2EB;
+  padding: 35px;
+  font-family: monospace;
+  font-size: 1rem;
+  width: 50vw;
+  margin-left: 11vw;
+  margin-top: 2vw;
 }
 
 .redacted{
@@ -14,4 +37,33 @@
 .revealed{
   color: #FF0000;
   text-decoration: underline;
+}
+
+.highlighted{
+  background-color: #FFD700;
+}
+
+#text-input{
+  position: absolute;
+  margin-left: 78vw;
+  margin-top: -41vw;
+  text-align: right;
+  width: 300px;
+  font-family: monospace;
+}
+
+#button{
+  position: absolute;
+  margin-left: 73vw;
+  margin-top: -41vw;
+  width: 80px;
+  font-family: monospace;
+}
+
+#mario{
+  position: absolute;
+  width: 23%;
+  margin-top: -24vw;
+  margin-left: 73vw;
+  visibility: hidden;    /* appears only if User guesses Encoded Message */
 }

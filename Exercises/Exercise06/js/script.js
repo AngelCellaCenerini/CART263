@@ -2,29 +2,89 @@
 Exercise 06: Raving Redactionist++
 Angel Cella Cenerini
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+No! Nonna's secret recipe! They're trying to steal it!
+...Or maybe they're trying to grab your attention and send a message?
 */
 
 "use strict";
 
-$(`.top-secret`).on(`click`, redact);
+// How frequently function is called
+const FREQUENCY = 700;
+// Set Probability value
+const PROBABILITY = 0.05;
+// SFX
+const mammaMiaSFX = new Audio("assets/sounds/mammaMia.mp3");
 
-setInterval(revelation, 500);
+// Set Up
+setUp();
+
+function setUp(){
+  // Highlight Information via User Input
+  $(`#secret-passage`).on(`mouseenter`, highlight);  // the `hover` event doesn't seem to work :/, that's why I used mouseenter/leave
+  // Stop Highlighting Information via User Input
+  $(`#secret-passage`).on(`mouseleave`, stopHighlight);  // The word "help" is the secret passage; it makes perfect sense with the message, hence why the word is not highlighted in any way
+
+  // Censor Information via User Input
+  $(`.top-secret`).on(`click`, redact);
+
+  // Insert Guess for Encoded Message
+  $(`#button`).on(`click`, guessSecretMessage);
+
+  // Attempt Reavealing Cesonred Information periodically
+  setInterval(revelation, FREQUENCY);
+
+}
+//
+
+
+// Functions
+function highlight(){
+  // Highlight Encoded Message
+  $(`.encoded-message`).addClass(`highlighted`);
+}
+
+function stopHighlight(){
+  // De-highlight Encoded Message
+  $(`.encoded-message`).removeClass(`highlighted`);
+}
 
 function redact(event){
+  // Censor Recipe Sections
   $(this).removeClass(`revealed`);
   $(this).addClass(`redacted`);
 }
 
 function revelation(){
+  // Reveal Censored Sections
   $(`.redacted`).each(attemptReveal);
 }
 
 function attemptReveal(){
+  // Attemp Reavealing Censored Sectios
   let r = Math.random();
-  if( r < 0.1){
+  if( r < PROBABILITY){
     $(this).removeClass(`redacted`);
     $(this).addClass(`revealed`);
   }
 }
+
+function guessSecretMessage(){
+  // Check if User decoded Secret Message
+  let input = $(`#text-input`).val();
+  if (input === `I'm imprisoned in the kitchen send help`){
+    // Display Nonna Mario Reaction
+    $(`#mario`).css(`visibility`, `visible`);
+    mammaMiaSFX.play();
+  }
+  else {
+    if (input === `i'm imprisoned in the kitchen send help`){
+      // Remind User that grammar is a thing
+      window.alert("This program is grammar sensitive");
+    }
+    else{
+      // Inform User of Wrong Guess
+      window.alert("Nope");
+    }
+  }
+}
+//
