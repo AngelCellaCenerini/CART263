@@ -1,6 +1,17 @@
-/*********************************************
+#secret-document{
+  font-family: monospace;
+  font-size: 1.2rem;
+  width: 60vw;
+  margin-left: 10vw;
+  margin-top: 5vw;
+}
 
-Here is a description of any special CSS used.
-By default that's nothing.
+.redacted{
+  background-color: #000000;
+  user-select: none;
+}
 
-**********************************************/
+.revealed{
+  color: #FF0000;
+  text-decoration: underline;
+}
