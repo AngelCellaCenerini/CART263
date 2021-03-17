@@ -44,9 +44,8 @@ h2{
 }
 
 #text-input{
-  position: absolute;
-  margin-left: 78vw;
-  margin-top: -20vw;
+  margin-left: 45vw;
+  margin-top: 20px;
   text-align: right;
   width: 300px;
   font-family: monospace;
@@ -54,8 +53,8 @@ h2{
 
 #button{
   position: absolute;
-  margin-left: 73vw;
-  margin-top: -20vw;
+  margin-top: 20px;
+  margin-left: -25.5vw;
   width: 80px;
   font-family: monospace;
 }
@@ -64,6 +63,6 @@ h2{
   position: absolute;
   width: 23%;
   margin-top: -24vw;
-  margin-left: 73vw;
+  margin-left: 5vw;
   visibility: hidden;    /* appears only if User guesses Encoded Message */
 }

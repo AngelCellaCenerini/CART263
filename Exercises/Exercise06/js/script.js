@@ -20,7 +20,7 @@ setUp();
 
 function setUp(){
   // Highlight Information via User Input
-  $(`#secret-passage`).on(`mouseenter`, highlight);  // the `hover` event doesn't seem to work :/, that's why I used mouseenter/leave
+  $(`#secret-passage`).on(`mouseenter`, highlight); 
 
   // Censor Information via User Input
   $(`.top-secret`).on(`click`, redact);
@@ -37,6 +37,9 @@ function setUp(){
 
 // Functions
 function highlight(){
+  // Emphasize Special Word ("help")
+  $(`#secret-passage`).css('font-weight', `bold`);
+  $(`#secret-passage`).css('font-style', `italic`);
   // Highlight Encoded Message
   $(`.encoded-message`).addClass(`highlighted`);
 }
