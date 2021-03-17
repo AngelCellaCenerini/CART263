@@ -21,8 +21,6 @@ setUp();
 function setUp(){
   // Highlight Information via User Input
   $(`#secret-passage`).on(`mouseenter`, highlight);  // the `hover` event doesn't seem to work :/, that's why I used mouseenter/leave
-  // // Stop Highlighting Information via User Input
-  // $(`#secret-passage`).on(`mouseleave`, stopHighlight);  // The word "help" is the secret passage; it makes perfect sense with the message, hence why the word is not highlighted in any way
 
   // Censor Information via User Input
   $(`.top-secret`).on(`click`, redact);
@@ -42,11 +40,6 @@ function highlight(){
   // Highlight Encoded Message
   $(`.encoded-message`).addClass(`highlighted`);
 }
-
-// function stopHighlight(){
-//   // De-highlight Encoded Message
-//   $(`.encoded-message`).removeClass(`highlighted`);
-// }
 
 function redact(event){
   // Censor Recipe Sections

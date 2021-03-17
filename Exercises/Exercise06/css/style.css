@@ -46,7 +46,7 @@ h2{
 #text-input{
   position: absolute;
   margin-left: 78vw;
-  margin-top: 0px;
+  margin-top: -20vw;
   text-align: right;
   width: 300px;
   font-family: monospace;
@@ -55,7 +55,7 @@ h2{
 #button{
   position: absolute;
   margin-left: 73vw;
-  margin-top:  0px;
+  margin-top: -20vw;
   width: 80px;
   font-family: monospace;
 }
