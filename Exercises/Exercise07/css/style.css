@@ -1,6 +1,5 @@
-/*********************************************
-
-Here is a description of any special CSS used.
-By default that's nothing.
-
-**********************************************/
+#answer {
+  height: 2rem;
+  width: 10rem;
+  border: 1px dashed black;
+}
