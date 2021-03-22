@@ -21,5 +21,18 @@ $(`#answer`).droppable({
     $(this).append(letter);
     ui.draggable.draggable(`disable`);
     ui.draggable.removeClass(`found`);
+    // Check
+    if( $(this).text() === `Theremin`){
+      $(`#solved-dialog`).dialog(`open`);
+    }
+  }
+});
+
+$(`#solved-dialog`).dialog({
+  autoOpen: false,
+  buttons: {
+    "I know": function(){
+      $(this).dialog(`close`);
+    }
   }
 });
