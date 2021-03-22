@@ -8,4 +8,6 @@ author, and this description to match your project!
 
 "use strict";
 
-// Code goes here
+$(`.secret`).on(`mouseover`, function(event) {
+  $(this).addClass(`found`, 500);
+});
