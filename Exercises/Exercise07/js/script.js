@@ -8,6 +8,11 @@ author, and this description to match your project!
 
 "use strict";
 
-$(`.secret`).on(`mouseover`, function(event) {
+$(`.secret`).one(`mouseover`, function(event) {
   $(this).addClass(`found`, 500);
+  $(this).draggable({
+    helper: `clone`
+  });
 });
+
+$(`#answer`).droppable();
