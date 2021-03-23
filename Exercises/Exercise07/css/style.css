@@ -3,7 +3,6 @@ h2{
   position: relative;
   margin-top: 2vw;
   margin-bottom: -46px;
-  margin-left: 4%;
   font-family: serif;
   font-size: 4rem;
   text-align: center;
@@ -11,17 +10,18 @@ h2{
 
 #poem{
   font-family: monospace;
-  margin-left: 40%;
+  margin:auto;
   text-align: center;
   font-size: 1.05rem;
   background-color: #EDFFB6;
   width: 320px;
-  height: 520px;
+  height: 500px;
   padding: 20px;
 }
 
 hr {
-  margin-left: -25%;
+  margin-left: -80px;
+  margin-top: 18px;
   background-color: black;
   border: 1.5px solid black;
   width: 32vw;
@@ -34,7 +34,7 @@ h4 {
 #answer {
   font-family: monospace;
   margin-top: 50px;
-  margin-left: 45%;
+  margin-left: 43%;
   padding-left: 10px;
   height: 2rem;
   width: 13rem;
