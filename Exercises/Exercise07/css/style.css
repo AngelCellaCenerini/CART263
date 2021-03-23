@@ -1,9 +1,67 @@
+
+h2{
+  position: relative;
+  margin-top: 2vw;
+  margin-bottom: -46px;
+  font-family: serif;
+  font-size: 4rem;
+  text-align: center;
+}
+
+#poem{
+  font-family: monospace;
+  margin:auto;
+  text-align: center;
+  font-size: 1.05rem;
+  background-color: #EDFFB6;
+  width: 320px;
+  height: 500px;
+  padding: 20px;
+}
+
+hr {
+  margin-left: -80px;
+  margin-top: 18px;
+  background-color: black;
+  border: 1.5px solid black;
+  width: 32vw;
+}
+
+h4 {
+  margin-top: 25px;
+}
+
 #answer {
+  font-family: monospace;
+  margin-top: 50px;
+  margin-left: 43%;
+  padding-left: 10px;
   height: 2rem;
-  width: 10rem;
-  border: 1px dashed black;
+  width: 13rem;
+  background-color: #EDEDED;
+  border-left: 5px solid black;
 }
 
 .found {
-  color: #FF0000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#exercise-instructions {
+  font-family: monospace;
+  font-size: 1.2rem;
+}
+
+#solved-dialog {
+  font-family: monospace;
+  font-size: 1.2rem;
+}
+
+img {
+  position: absolute;
+  margin-top: -50px;
+  margin-left: -50px;
+  width: 104%;
+  height: 105%;
+  visibility: hidden;
 }

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
 
-    <title>CHANGE THIS TITLE IN INDEX.HTML!</title>
+    <title>All is Tired, All is Okay</title>
 
     <!-- CSS stylesheet(s) -->
     <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -16,39 +16,66 @@
   </head>
 
   <body>
-    <!-- HTML would go here if needed. -->
+
+    <!-- The background image, revealed only after User guesses Secret Message -->
+    <img id="background-image" src="assets/images/stars.gif" alt="stars">
     <!-- The poem, secret letters are in spans with class "secret" -->
+    <!-- Title -->
+    <h2>"</h2>
+    <!-- Poem -->
     <section id="poem">
-      <h2><span class="secret">T</span>his Is Just To Say</h2>
+
       <p>
-        I <span class="secret">h</span>ave eaten<br />
-        the plums<br />
-        that wer<span class="secret">e</span> in<br />
-        the icebox
+      Lethargically, they open <br>
+      O, how bitter the call of newborn ray<span class="secret">s</span> <br>
+      Shi<span class="secret">l</span>y mocking th<span class="secret">e</span> end of darkn<span class="secret">e</span>ss
       </p>
+      <br>
       <p>
-        and which<br />
-        you we<span class="secret">r</span>e probably<br />
-        saving<br />
-        for br<span class="secret">e</span>akfast
+        Lethargically, they close <br>
+        Avidly chasing the <span class="secret">p</span>illow’s reassurance <br>
+        Rejecting the song of sunrise
       </p>
+      <br>
       <p>
-        Forgive <span class="secret">m</span>e<br />
-        they were del<span class="secret">i</span>cious<br />
-        so sweet<br />
-        a<span class="secret">n</span>d so cold
+        <span class="secret">D</span><span class="secret">e</span>s<span class="secret">p</span>erate, they stay closed<br>
+        An old negotiation <span class="secret">r</span>everbs<br>
+        <em>‘F<span class="secret">i</span><span class="secret">v</span>e more minutes’</em>
       </p>
-      <h4>William Carlos Williams</h4>
+      <br>
+      <p>
+        Lethargic<span class="secret">a</span>lly, <span class="secret">t</span>hey open<br>
+        Perpetually dra<span class="secret">i</span>ned <span class="secret">o</span>rbs
+      </p>
+      <br>
+      <p>
+        Shit; <span class="secret">n</span>ow you’re late for class.
+      </p>
+      <br>
+      <hr>
+      <h4>A WISE CAT <br><em>(jk, it was me ಠ益ಠ )</em></h4>
     </section>
 
     <!-- The secret answer area-->
     <section id="answer"></section>
 
-    <div id="solved-dialog" title="Congrats!">
+    <!-- Dialogs -->
+    <!-- Instructions-->
+    <div id="exercise-instructions" title="Instructions (kind of)">
       <p>
-        You did it.
+        Are you too tired to comprehend the real meaning of the poem?<br>
+        <br>
+        What's that grey bar for? Maybe there's some sort of input to insert?
       </p>
     </div>
+    <!-- Final Message-->
+    <div id="solved-dialog">
+      <p>
+        Indeed! Good ol'sleep deprivation!<br> You get to take a nap as a reward!
+      </p>
+    </div>
+
+
 
     <!-- My script(s) -->
     <script src="js/script.js"></script>
