@@ -6,10 +6,15 @@ class Play extends Phaser.Scene {
   }
 
   create(){
-    // Create avatar
+    // Create Avatar
     this.avatar = this.physics.add.image(400, 300, `avatar`);
-    // COnstrain Avatar to Canvas
+    // Constrain Avatar to Canvas
     this.avatar.setCollideWorldBounds(true);
+
+    // Create Thumbs Down Emoji
+    let x = Math.random()*this.sys.canvas.width;
+    let y = Math.random()*this.sys.canvas.height;
+    this.sadness = this.physics.add.image(x, y, `thumbs-down`);
 
     // Access User's Keys
     this.cursors = this.input.keyboard.createCursorKeys();
