@@ -23,7 +23,7 @@ class Play extends Phaser.Scene {
     // Create Thumbs Up Emojis (Group)
     this.happiness = this.physics.add.group({
       key: `thumbs-up`,
-      quantity: 60,
+      quantity: 100,
       bounceX: 0.5,
       bounceY: 0.5,
       collideWorldBounds: true,
@@ -37,6 +37,8 @@ class Play extends Phaser.Scene {
     this.physics.add.collider(this.avatar, this.happiness);
     // Collide Sprites within Happiness Group
     this.physics.add.collider(this.happiness, this.happiness);
+    // Collide Sadness Sprite Happiness Group
+    this.physics.add.collider(this.sadness, this.happiness);
 
 
 
