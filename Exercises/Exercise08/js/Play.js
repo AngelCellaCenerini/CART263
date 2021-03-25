@@ -6,10 +6,11 @@ class Play extends Phaser.Scene {
   }
 
   create(){
-
+    // Create avatar
+    this.avatar = this.physics.add.image(400, 300, `avatar`);
   }
 
   upload(){
-    
+
   }
 }
