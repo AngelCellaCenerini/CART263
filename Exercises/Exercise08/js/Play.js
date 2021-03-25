@@ -19,6 +19,27 @@ class Play extends Phaser.Scene {
     // Overlap Avatar and Sadness Sprite
     this.physics.add.overlap(this.avatar, this.sadness, this.getSad, null, this);
 
+
+    // Create Thumbs Up Emojis (Group)
+    this.happiness = this.physics.add.group({
+      key: `thumbs-up`,
+      quantity: 60,
+      bounceX: 0.5,
+      bounceY: 0.5,
+      collideWorldBounds: true,
+      dragX: 50,
+      dragY: 50
+    });
+    // Position Thumbs Up Emojis within Canvas
+    Phaser.Actions.RandomRectangle(this.happiness.getChildren(), this.physics.world.bounds);
+
+    // Collide Avatar and Happiness Group
+    this.physics.add.collider(this.avatar, this.happiness);
+    // Collide Sprites within Happiness Group
+    this.physics.add.collider(this.happiness, this.happiness);
+
+
+
     // Access User's Keys
     this.cursors = this.input.keyboard.createCursorKeys();
   }
