@@ -17,6 +17,8 @@ let achievedSenses = [];
 // Rooms
 // Started Room
 let starterRoom = undefined;
+// Blinking Light
+let blinkingLightImage = undefined;
 // Main Room
 let mainRoom = undefined;
 
@@ -29,6 +31,7 @@ Description of preload
 */
 function preload() {
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
+  blinkingLightImage = loadImage(`assets/images/light.png`);
 }
 
 
@@ -76,8 +79,14 @@ function draw() {
     // First Avatar
     firstAvatar.update(image);
 
-    // Diplay Light
-    starterRoom.displayLight();
+    // Blinking Light - only called in Starter Room
+    push();
+    // Create Blinking Effect
+    let opacity = random(70, 180);
+    tint(255, opacity);
+    // Display Light
+    image(blinkingLightImage, width/2, height/2);
+    pop();
 
   }
   else if( state === `mainRoom` ){

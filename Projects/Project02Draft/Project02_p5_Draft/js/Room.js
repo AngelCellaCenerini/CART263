@@ -14,7 +14,6 @@ class Room{
     this.roomDownBorder = 495;
     this.doorWidth = 55;
     this.doorHeight = 25;
-    this.radius = 2;
     this.opacity = 2;
     this.state = `mainRoom`;
     this.secondState = ``;
@@ -37,17 +36,6 @@ class Room{
     this.displaySecondDoor();
     this.switchSecondState(avatar);
   }
-
-  displayLight(){
-    // Display centering light - only called in Starter Room
-    push();
-    noStroke();
-    let r = random(40, 130);
-    fill(255, r);
-    ellipse(this.roomX, this.roomY, 3*this.doorWidth);
-    pop();
-  }
-
 
 
   constrain(avatar){
