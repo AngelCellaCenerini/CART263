@@ -7,16 +7,12 @@ class FirstAvatar {
     this.vx = 0;
     this.vy = 0;
     this.speed = 4;
-    this.roomLeftBorder = 225;
-    this.roomRightBorder = 575;
-    this.roomUpBorder = 210;
-    this.roomDownBorder = 495;
+
   }
 
   update(){
     this.move();
     this.direct();
-    this.constrain();
     this.display();
   }
 
@@ -49,12 +45,6 @@ class FirstAvatar {
           this.vy = 0;
         }
 
-  }
-
-  constrain(){
-    // Constrain Avatar to Room
-      this.x = constrain(this.x, this.roomLeftBorder, this.roomRightBorder);
-      this.y = constrain(this.y, this.roomUpBorder, this.roomDownBorder);
   }
 
   display(){

@@ -11,9 +11,14 @@ Project02 Draft
 let crosshairCursorImage = undefined;
 let firstAvatar = undefined;
 
+// Store Achieved Senses
+let achievedSenses = [];
+
 // Rooms
 // Started Room
 let starterRoom = undefined;
+// Main Room
+let mainRoom = undefined;
 
 // States
 let state = `starterRoom` // Title, Instrucitons, Starter Room, Main Room, (to be continued)
@@ -42,8 +47,11 @@ function setup() {
   let image = crosshairCursorImage;
   firstAvatar = new FirstAvatar(image);
 
-  // Create Starter Room
+  // Create Rooms
+  // Starter Room
   starterRoom = new Room();
+  // Main Room
+  mainRoom = new MainRoom();
 }
 
 
@@ -69,6 +77,22 @@ function draw() {
 
   }
   else if( state === `mainRoom` ){
+
+    // Check User's Progress before Diplaying Avatar
+    // if ( achievedSenses.length < 0){
+    //   console.log(`called`);
+      // Starter Room
+      mainRoom.update(firstAvatar);
+      mainRoom.addSecondDoor(firstAvatar);
+      // First Avatar
+      firstAvatar.update(image);
+    // }
+    // else{
+    //   // Switch to Actual, Embodied Avatar
+    //   // Main Room
+    //   // mainRoom.update(avatar);
+    // }
+
 
   }
 
