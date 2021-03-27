@@ -72,8 +72,12 @@ function draw() {
 
     // Starter Room
     starterRoom.update(firstAvatar);
+
     // First Avatar
     firstAvatar.update(image);
+
+    // Diplay Light
+    starterRoom.displayLight();
 
   }
   else if( state === `mainRoom` ){

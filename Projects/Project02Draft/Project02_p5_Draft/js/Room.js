@@ -15,13 +15,14 @@ class Room{
     this.doorWidth = 55;
     this.doorHeight = 25;
     this.radius = 2;
-    this.opacity = 255;
+    this.opacity = 2;
+    this.lightOpacity = 100;
     this.state = `mainRoom`;
     this.secondState = ``;
-    this.enteringX = 180;
-    this.enteringY = 310;
-    this.secondEnteringX = 0;
-    this.secondEnteringY = 0;
+    this.enteringX = 180;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
+    this.enteringY = 310;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
+    this.secondEnteringX = 0;  // Same principles, but applied to Second Door
+    this.secondEnteringY = 0;  // Same principles, but applied to Second Door
 
   }
 
@@ -38,11 +39,40 @@ class Room{
     this.switchSecondState(avatar);
   }
 
+  displayLight(){
+    // Display centering light - only called in Starter Room
+    push();
+    noStroke();
+    fill(255, this.lightOpacity);
+    ellipse(this.roomX, this.roomY, 3*this.doorWidth);
+    pop();
+  }
+
+
 
   constrain(avatar){
     // Constrain Avatar to Room
     avatar.x = constrain(avatar.x, this.roomLeftBorder, this.roomRightBorder);
     avatar.y = constrain(avatar.y, this.roomUpBorder, this.roomDownBorder);
+  }
+
+  switchState(avatar){
+    let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
+    if (d1 < (this.doorWidth/6 + avatar.size/7)){
+      state = this.state;
+      avatar.x = this.enteringX;
+      avatar.y = this.enteringY;
+    }
+  }
+
+  switchSecondState(avatar){
+    let d2 = dist(this.secondDoorX, this.secondDoorY, avatar.x, avatar.y);
+    if (d2 < (this.doorWidth/6 + avatar.size/7)){
+      state = this.secondState;
+      avatar.x = this.secondEnteringX;
+      avatar.y = this.secondEnteringY;
+
+    }
   }
 
   displayWalls(){
@@ -75,22 +105,4 @@ class Room{
     pop();
   }
 
-  switchState(avatar){
-    let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
-    if (d1 < (this.doorWidth/6 + avatar.size/7)){
-      state = this.state;
-      avatar.x = this.enteringX;
-      avatar.y = this.enteringY;
-    }
-  }
-
-  switchSecondState(avatar){
-    let d2 = dist(this.secondDoorX, this.secondDoorY, avatar.x, avatar.y);
-    if (d2 < (this.doorWidth/6 + avatar.size/7)){
-      state = this.secondState;
-      avatar.x = this.secondEnteringX;
-      avatar.y = this.secondEnteringY;
-
-    }
-  }
 }

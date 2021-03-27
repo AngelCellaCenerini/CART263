@@ -1,7 +1,7 @@
 class FirstAvatar {
   constructor(image){
-    this.x = 375;
-    this.y = 300;
+    this.x = 400;
+    this.y = 350;
     this.image = image;
     this.size = 32;
     this.vx = 0;
