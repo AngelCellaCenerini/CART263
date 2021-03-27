@@ -16,7 +16,6 @@ class Room{
     this.doorHeight = 25;
     this.radius = 2;
     this.opacity = 2;
-    this.lightOpacity = 100;
     this.state = `mainRoom`;
     this.secondState = ``;
     this.enteringX = 180;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
@@ -43,7 +42,8 @@ class Room{
     // Display centering light - only called in Starter Room
     push();
     noStroke();
-    fill(255, this.lightOpacity);
+    let r = random(40, 130);
+    fill(255, r);
     ellipse(this.roomX, this.roomY, 3*this.doorWidth);
     pop();
   }
