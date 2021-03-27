@@ -3,11 +3,14 @@ class FirstAvatar {
     this.x = 375;
     this.y = 300;
     this.image = image;
+    this.size = 32;
     this.vx = 0;
     this.vy = 0;
     this.speed = 4;
-    this.canvaWidth = 734;
-    this.canvaHeight = 584;
+    this.roomLeftBorder = 225;
+    this.roomRightBorder = 575;
+    this.roomUpBorder = 210;
+    this.roomDownBorder = 495;
   }
 
   update(){
@@ -50,11 +53,11 @@ class FirstAvatar {
 
   constrain(){
     // Constrain Avatar to Room
-      this.x = constrain(this.x, 0, this.canvaWidth);
-      this.y = constrain(this.y, 0, this.canvaHeight);
+      this.x = constrain(this.x, this.roomLeftBorder, this.roomRightBorder);
+      this.y = constrain(this.y, this.roomUpBorder, this.roomDownBorder);
   }
 
   display(){
-    image(this.image, this.x, this.y);
+    image(this.image, this.x, this.y, this.size);
   }
 }

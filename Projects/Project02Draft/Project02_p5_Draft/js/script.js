@@ -11,6 +11,10 @@ Project02 Draft
 let crosshairCursorImage = undefined;
 let firstAvatar = undefined;
 
+// Rooms
+// Started Room
+let starterRoom = undefined;
+
 // States
 let state = `starterRoom` // Title, Instrucitons, Starter Room, Main Room, (to be continued)
 
@@ -28,13 +32,18 @@ Description of setup
 */
 function setup() {
   // Canvas
-  createCanvas(750, 600);
+  createCanvas(800, 600);
   // General Settings
+  noCursor();
   imageMode(CENTER);
+  rectMode(CENTER);
 
   // Create First Avatar
   let image = crosshairCursorImage;
   firstAvatar = new FirstAvatar(image);
+
+  // Create Starter Room
+  starterRoom = new Room();
 }
 
 
@@ -53,6 +62,8 @@ function draw() {
   }
   else if( state === `starterRoom` ){
 
+    // Starter Room
+    starterRoom.update(firstAvatar);
     // First Avatar
     firstAvatar.update(image);
 
