@@ -23,7 +23,7 @@ let blinkingLightImage = undefined;
 let mainRoom = undefined;
 
 // States
-let state = `starterRoom` // Title, Instrucitons, Starter Room, Main Room, (to be continued)
+let state = `title` // Title, Instrucitons, Starter Room, Main Room, (to be continued)
 
 
 /**
@@ -43,8 +43,11 @@ function setup() {
   createCanvas(800, 600);
   // General Settings
   noCursor();
+  noStroke();
   imageMode(CENTER);
   rectMode(CENTER);
+  textFont(`Courier`);
+  textAlign(RIGHT, LEFT);
 
   // Create First Avatar
   let image = crosshairCursorImage;
@@ -66,10 +69,10 @@ function draw() {
   background(20);
 
   if ( state === `title`){
-
+    titleText();
   }
   else if( state === `instructions` ){
-
+    instructionsText();
   }
   else if( state === `starterRoom` ){
 
@@ -109,4 +112,42 @@ function draw() {
 
   }
 
+}
+
+// Functions
+// Title
+function titleText(){
+  push();
+  fill(255);
+  textSize(25);
+  text(`CART263 - Project 02: Prototype`, 2*width/3, height/2);
+  textSize(16);
+  text(`Press ENTER to continue >`, 9*width/10, 9*height/10);
+  pop();
+}
+// Instructions
+function instructionsText(){
+  push();
+  fill(255);
+  textSize(22);
+  text(`Instrucitons (Rough Draft): Move with arrow keys. `, 7*width/8, height/2);
+  textSize(16);
+  text(`Press ENTER to continue >`, 9*width/10, 9*height/10);
+  pop();
+}
+
+// p5 Events
+function keyPressed(){
+  // User presses ENTER
+  if (keyCode === 13){
+
+    // In Title State
+    if( state === `title`){
+      state = `instructions`;
+    }
+    // In Instrucitons State
+    else if( state === `instructions`){
+      state = `starterRoom`;
+    }
+  }
 }
