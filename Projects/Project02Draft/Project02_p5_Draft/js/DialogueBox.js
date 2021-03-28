@@ -7,50 +7,72 @@ class DialogueBox {
     this.fullText = ``;
     this.displayText = ``;
     this.nextChar = 0;
-    this.speed = 50;
+    this.speed = 70;
     this.interval = undefined;
+    this.timeout1 = undefined;
+    this.timeout2 = undefined;
+    this.active = true;
+    this.keyCode = 32;                // SPACEBAR
 
   }
 
-  typewriter(message, x, y){
-    this.reset();
-    this.fullText = message;
-    this.x = x;
-    this.y = y;
-    this.interval = setInterval(this.addNextCharacter.bind(this), this.speed);
-  }
-
-  reset() {
-    this.fullText = ``;
-    this.displayText = ``;
-    this.nextChar = 0;
-    clearInterval(this.interval);
-  }
-
-  addNextCharacter() {
-    // Adds Next Character
-    if (this.nextChar >= this.fullText.length) {
-      return;
-    }
-    this.displayText += this.fullText.charAt(this.nextChar);
-    this.nextChar = this.nextChar + 1;
+  type(message, x, y){
+    this.timeout1 = setTimeout(this.typewriter.bind(this, message, x, y), 1000);
   }
 
   display(){
-    // Dialogue Box
-    push();
-    stroke(255);
-    strokeWeight(5);
-    fill(255, 200);
-    rect(this.x, this.y, this.boxWidth, this.boxHeight);
-    pop();
+    if (this.active){
+      // Dialogue Box
+      push();
+      stroke(255);
+      strokeWeight(5);
+      fill(255, 200);
+      rect(this.x, this.y, this.boxWidth, this.boxHeight);
+      pop();
 
-    // Text
-    push();
-    fill(20);
-    textSize(18);
-    textAlign(CENTER, CENTER);
-    text(this.displayText, this.x, this.y);
-    pop();
+      // Text
+      push();
+      fill(20);
+      textSize(18);
+      textAlign(CENTER, CENTER);
+      text(this.displayText, this.x, this.y);
+      pop();
+    }
+  }
+
+  typewriter(message, x, y){
+    if (this.active){
+      this.reset();
+      this.fullText = message;
+      this.x = x;
+      this.y = y;
+      this.interval = setInterval(this.addNextCharacter.bind(this), this.speed);
+    }
+  }
+
+  reset() {
+    if (this.active){
+      this.fullText = ``;
+      this.displayText = ``;
+      this.nextChar = 0;
+      clearInterval(this.interval);
+    }
+  }
+
+  addNextCharacter() {
+    if (this.active){
+      // Adds Next Character
+      if (this.nextChar >= this.fullText.length) {
+        return;
+      }
+      this.displayText += this.fullText.charAt(this.nextChar);
+      this.nextChar = this.nextChar + 1;
+    }
+  }
+
+  close(){
+    if (this.keyCode && this.active){
+      this.active = false;
+    }
   }
 }

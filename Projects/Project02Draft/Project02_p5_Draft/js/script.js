@@ -8,8 +8,9 @@ Project02 Draft
 */
 
 // Dialogue Box
-let dialogueBoxImage = undefined;
 let dialogueBox = undefined;
+let dialogues = undefined;
+let index = 0;
 
 // User Initial Avatar
 let crosshairCursorImage = undefined;
@@ -34,8 +35,13 @@ let state = `title` // Title, Instrucitons, Starter Room, Main Room, (to be cont
 Description of preload
 */
 function preload() {
+
+  // JSON File
+  // Dialogues
+  dialogues =  loadJSON(`assets/data/dialogues.json`);
+
+  // Image Files
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
-  dialogueBoxImage = loadImage(`assets/images/dialogueB.png`);
   blinkingLightImage = loadImage(`assets/images/light.png`);
 }
 
@@ -52,7 +58,7 @@ function setup() {
   imageMode(CENTER);
   rectMode(CENTER);
   textFont(`Courier`);
-  textAlign(RIGHT, LEFT);
+  textAlign(LEFT, RIGHT);
 
   // Create First Avatar
   let image = crosshairCursorImage;
@@ -131,9 +137,9 @@ function titleText(){
   push();
   fill(255);
   textSize(25);
-  text(`CART263 - Project 02: Prototype`, 2*width/3, height/2);
+  text(`CART263 - Project 02: Prototype`, width/8, height/2);
   textSize(16);
-  text(`Press ENTER to continue >`, 9*width/10, 9*height/10);
+  text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
   pop();
 }
 // Instructions
@@ -141,9 +147,12 @@ function instructionsText(){
   push();
   fill(255);
   textSize(22);
-  text(`Instrucitons (Rough Draft): Move with arrow keys. `, 7*width/8, height/2);
+  text(`Instrucitons (Rough Draft):
+   - move with arrow keys;
+   - press ENTER to scroll dialogues;
+   - press SPACEBAR to close dialogue box. `, width/8, height/2);
   textSize(16);
-  text(`Press ENTER to continue >`, 9*width/10, 9*height/10);
+  text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
   pop();
 }
 
@@ -163,7 +172,20 @@ function keyPressed(){
 
     // Typewriter
     if ( state === `starterRoom`){
-      dialogueBox.typewriter(`Friends, Romans, Countryfolk...`, 400, 60);
+      let message = dialogues.starterRoom[index];
+      dialogueBox.type(message, 400, 60);
+    }
+
+  }
+
+  // User press SPACEBAR
+  if ( keyCode === 32 ){
+
+    // Typewriter
+    if ( state === `starterRoom`){
+      if (dialogueBox.active){
+        dialogueBox.close();
+      }
     }
 
   }
