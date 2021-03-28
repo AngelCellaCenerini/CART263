@@ -7,6 +7,10 @@ Angel Cella Cenerini
 Project02 Draft
 */
 
+// Dialogue Box
+let dialogueBoxImage = undefined;
+let dialogueBox = undefined;
+
 // User Initial Avatar
 let crosshairCursorImage = undefined;
 let firstAvatar = undefined;
@@ -31,6 +35,7 @@ Description of preload
 */
 function preload() {
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
+  dialogueBoxImage = loadImage(`assets/images/dialogueB.png`);
   blinkingLightImage = loadImage(`assets/images/light.png`);
 }
 
@@ -52,6 +57,9 @@ function setup() {
   // Create First Avatar
   let image = crosshairCursorImage;
   firstAvatar = new FirstAvatar(image);
+
+  // Create Dialogue Box(es)
+  dialogueBox = new DialogueBox();
 
   // Create Rooms
   // Starter Room
@@ -75,6 +83,9 @@ function draw() {
     instructionsText();
   }
   else if( state === `starterRoom` ){
+
+    // Dialogue Box
+     dialogueBox.display();
 
     // Starter Room
     starterRoom.update(firstAvatar);
@@ -149,5 +160,12 @@ function keyPressed(){
     else if( state === `instructions`){
       state = `starterRoom`;
     }
+
+    // Typewriter
+    if ( state === `starterRoom`){
+      dialogueBox.typewriter(`Friends, Romans, Countryfolk...`, 400, 60);
+    }
+
   }
+
 }
