@@ -10,6 +10,8 @@ Project02 Draft
 // Dialogue Box
 let dialogueBox = undefined;
 let dialogues = undefined;
+let roomDialogues = undefined;
+let roomDialogue = undefined;
 let index = 0;
 
 // User Initial Avatar
@@ -111,6 +113,10 @@ function draw() {
   }
   else if( state === `mainRoom` ){
 
+    // Dialogue Box
+    // dialogueBox.reset();
+    dialogueBox.display();
+
     // Check User's Progress before Diplaying Avatar
     // if ( achievedSenses.length < 0){
     //   console.log(`called`);
@@ -155,6 +161,7 @@ function instructionsText(){
   text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
   pop();
 }
+//
 
 // p5 Events
 function keyPressed(){
@@ -169,11 +176,20 @@ function keyPressed(){
     else if( state === `instructions`){
       state = `starterRoom`;
     }
-
     // Typewriter
+    // Starter Room
     if ( state === `starterRoom`){
-      let message = dialogues.starterRoom[index];
-      dialogueBox.type(message, 400, 60);
+      selectDialogue();
+      let index = 0;
+      dialogueBox.type(roomDialogue);
+      console.log(index);
+    }
+    // Main Room
+    else if ( state === `mainRoom`){
+      index = 1;
+      selectDialogue();
+      dialogueBox.type(roomDialogue);
+      console.log(index);
     }
 
   }
@@ -184,10 +200,19 @@ function keyPressed(){
     // Typewriter
     if ( state === `starterRoom`){
       if (dialogueBox.active){
-        dialogueBox.close();
+        dialogueBox.reset();
       }
     }
 
   }
 
 }
+//
+
+//
+function selectDialogue(){
+  // Starter Room
+  roomDialogues = dialogues.dialogues[index];
+  roomDialogue = roomDialogues.dialogue;
+}
+//

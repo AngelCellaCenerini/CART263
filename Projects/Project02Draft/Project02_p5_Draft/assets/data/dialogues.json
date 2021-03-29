@@ -2,15 +2,14 @@
 {
  "description": "All Dialogues for Project 02",
  "sources": [ "my sleep-deprived mind"],
- "dialogue": [
+ "dialogues": [
     {
       "room": "Starter Room",
-      "starterRoomD": "@i**043_!$%&(@_)#+_)@)(#TYU__pm5v___/.<<M ~"
+      "dialogue": "@i**043_!$%&(@_)#+_)@)(#TYU__pm5v___/.<<M ~"
     },
     {
       "room": "Main Room",
-      "mainRoomD": ["0a!$%&(@yipi&^54_?jzgmom%1$8qpmva%*8181,",
-                    "#*!&309vnpwow$7%@2!5@513%2,61*&dhl"]
+      "dialogue": "0a!$%&(@yipi&^54_?jzgmom%1$8qpmva%*8181, #*!&309vnpwow$7%@2!5@513%2,61*&dhl"
     }
  ]
 }

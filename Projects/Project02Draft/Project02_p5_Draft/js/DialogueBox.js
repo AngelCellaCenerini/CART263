@@ -9,15 +9,14 @@ class DialogueBox {
     this.nextChar = 0;
     this.speed = 70;
     this.interval = undefined;
-    this.timeout1 = undefined;
-    this.timeout2 = undefined;
+    this.timeout = undefined;
     this.active = true;
     this.keyCode = 32;                // SPACEBAR
 
   }
 
-  type(message, x, y){
-    this.timeout1 = setTimeout(this.typewriter.bind(this, message, x, y), 1000);
+  type(message){
+    this.timeout = setTimeout(this.typewriter.bind(this, message, this.x, this.y), 1000);
   }
 
   display(){
@@ -40,12 +39,12 @@ class DialogueBox {
     }
   }
 
-  typewriter(message, x, y){
+  typewriter(message){
     if (this.active){
       this.reset();
       this.fullText = message;
-      this.x = x;
-      this.y = y;
+      // this.x = x;
+      // this.y = y;
       this.interval = setInterval(this.addNextCharacter.bind(this), this.speed);
     }
   }
