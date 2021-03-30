@@ -181,52 +181,19 @@ function keyPressed(){
   // User presses ENTER
   if (keyCode === 13){
 
-    // In Title State
     if( state === `title`){
       state = `instructions`;
     }
     // In Instrucitons State
     else if( state === `instructions`){
       state = `starterRoom`;
-    }
-    // Typewriter
-    // Starter Room
-    if ( state === `starterRoom`){
-      index = 0;
+      // Trigger Dialogue Box - Typewriter Effect
       selectDialogue();
-      // dialogueBox.type(roomDialogue);
-      setTimeout(function() {
-        dialogueBox.typewriter(roomDialogue)
-      }, 1000);
     }
-    // Main Room
-    else if ( state === `mainRoom`){
-      index = 1;
+    else {
+      // Call each State/Room
+      // Trigger Dialogue Box - Typewriter Effect
       selectDialogue();
-      // dialogueBox.type(roomDialogue);
-      setTimeout(function() {
-        dialogueBox.typewriter(roomDialogue)
-      }, 1000);
-    }
-    else if ( state === `firstRoom` ){
-      index = 2;
-      selectDialogue();
-      // dialogueBox.type(roomDialogue);
-      setTimeout(function() {
-        dialogueBox.typewriter(roomDialogue)
-      }, 1000);
-    }
-
-  }
-
-  // User press SPACEBAR
-  if ( keyCode === 32 ){
-
-    // Typewriter
-    if ( state === `starterRoom`){
-      if (dialogueBox.active){
-        dialogueBox.reset();
-      }
     }
 
   }
@@ -237,7 +204,9 @@ function keyPressed(){
 //
 function selectDialogue(){
   // Starter Room
-  roomDialogues = dialogues.simulation_dialogues[index];
-  roomDialogue = roomDialogues.dialogue;
+  dialogueBox.reset();
+  setTimeout(function() {
+    dialogueBox.typewriter(dialogues.simulation_dialogues[state]);
+  }, 1000);
 }
 //

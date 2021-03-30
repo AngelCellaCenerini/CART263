@@ -51,9 +51,9 @@ class Room{
     let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
     if (d1 < (this.doorWidth/6 + avatar.size/7)){
       state = this.state;
+      this.displayDialogueBox(dialogueBox);
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
-      // this.resetDialogueBox(dialogueBox);
     }
   }
 
@@ -61,9 +61,10 @@ class Room{
     let d2 = dist(this.secondDoorX, this.secondDoorY, avatar.x, avatar.y);
     if (d2 < (this.doorWidth/6 + avatar.size/7)){
       state = this.secondState;
+      this.displayDialogueBox(dialogueBox);
       avatar.x = this.secondEnteringX;
       avatar.y = this.secondEnteringY;
-      // this.resetDialogueBox(dialogueBox);
+
 
     }
   }
@@ -98,8 +99,11 @@ class Room{
     pop();
   }
 
-  resetDialogueBox(dialogueBox){
+  displayDialogueBox(dialogueBox){
     dialogueBox.reset();
+    setTimeout(function() {
+      dialogueBox.typewriter(dialogues.simulation_dialogues[state]);
+    }, 1000);
   }
 
 }
