@@ -10,7 +10,40 @@ class Play extends Phaser.Scene {
     // Create SFX
     this.setUpSFX();
 
+    // Create Background - Animated Noise
+    this.setBackgroundImage();
 
+    // Create Avatar
+    this.setAvatar();
+
+    // Create Island Emoji
+    this.setIslandEmoji();
+
+    // Create Animated Crowd Group
+    this.setCrowd();
+
+    // Create Collisions and Overlap between Sprites
+    this.setSpritesInteractions();
+
+    // Access User's Keys
+    this.cursors = this.input.keyboard.createCursorKeys();
+  }
+
+  update(){
+    // Control Avatar Via Keys
+    this.move();
+  }
+
+  // Functions called in Create()
+  setUpSFX(){
+    // Create SFX
+    // Crowd Noise
+    this.crowdDistortion = this.sound.add('crowd-noise');
+    // Beach Waves
+    this.wavesSFX = this.sound.add('ocean-waves');
+  }
+
+  setBackgroundImage(){
     // Create Background - Animated Noise
     this.noise = this.add.sprite(400, 300, `background-image`);
     this.anims.create({
@@ -23,22 +56,24 @@ class Play extends Phaser.Scene {
       repeat: -1
     });
     this.noise.play(`noise`);
+  }
 
+  setAvatar(){
     // Create Avatar
     this.avatar = this.physics.add.image(400, 300, `avatar`);
     // Constrain Avatar to Canvas
     this.avatar.setCollideWorldBounds(true);
+  }
 
-    // Create Thumbs Down Emoji
+  setIslandEmoji(){
+    // Create Island Emoji
     let x = Math.random()*this.sys.canvas.width;
     let y = Math.random()*this.sys.canvas.height;
     this.peacefulness = this.physics.add.image(x, y, `quietness`);
+  }
 
-    // Overlap Avatar and Sadness Sprite
-    this.physics.add.overlap(this.avatar, this.peacefulness, this.getSad, null, this);
-
-
-    // Create Thumbs Up Emojis (Group)
+  setCrowd(){
+    // Create People Emojis (Group)
     this.crowd = this.physics.add.group({
       key: `people`,
       quantity: 100,
@@ -48,58 +83,53 @@ class Play extends Phaser.Scene {
       dragX: 50,
       dragY: 50
     });
-    // // Animate People Emojis
-    // this.anims.create({
-    //   key: `people`,
-    //   frames: this.anims.generateFrameNumbers(`crowd`,{
-    //     start: 0,
-    //     end: 3
-    //   }),
-    //   frameRate: 30,
-    //   repeat: -1
-    // });
-    // this.crowd.play(`people`);
+    // Animate People Emojis
+    this.anims.create({
+      key: `rainbow`,
+      frames: this.anims.generateFrameNumbers(`people`,{
+        start: 0,
+        end: 3
+      }),
+      frameRate: 10,
+      repeat: -1
+    });
+    this.crowd.playAnimation(`rainbow`);
     // Position Thumbs Up Emojis within Canvas
     Phaser.Actions.RandomRectangle(this.crowd.getChildren(), this.physics.world.bounds);
+  }
 
-
-    // Collide Avatar and Happiness Group
+  setSpritesInteractions(){
+    // Overlap Avatar and Island/Peacefulness Sprite
+    this.physics.add.overlap(this.avatar, this.peacefulness, this.findPeace, null, this);
+    // Collide Avatar and Crowd Group
     this.physics.add.collider(this.avatar, this.crowd, this.playCrowdSFX, null, this);
-    // Collide Sprites within Happiness Group
+    // Collide Sprites within Crowd Group
     this.physics.add.collider(this.crowd, this.crowd);
-    // Collide Sadness Sprite Happiness Group
+    // Collide Island Sprite Crowd Group
     this.physics.add.collider(this.peacefulness, this.crowd);
-
-
-
-    // Access User's Keys
-    this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   playCrowdSFX(){
+    // Play when Avatar collides with Crowd Group Sprite
     this.crowdDistortion.play();
   }
 
-  getSad(avatar){
+  findPeace(avatar){
+    // Avatar has overlapped with Island Sprite
+    // Remove Background Sprite
     this.noise.destroy();
-    this.crowd.remove();
-    // this.avatar.image(`serene-avatar`);
+    // Remove Crowd Group
+    this.crowd.clear(true);
+    // Remove Crowd Noise SFX
+    this.crowdDistortion.destroy();
+    // Switch Avatar Sprite
+    this.avatar.setTexture(`serene-avatar`);
+    // PLay WavesSFX
     this.wavesSFX.play();
   }
+  //
 
-  update(){
-    // Control Avatar Via Keys
-    this.move();
-  }
-
-  setUpSFX(){
-    // Create SFX
-    // Crowd Noise
-    this.crowdDistortion = this.sound.add('crowd-noise');
-    // Beach Waves
-    this.wavesSFX = this.sound.add('ocean-waves');
-  }
-
+  // Function called in Update()
   move(){
     // Move Avatar via Keys Input
     // Left/Right Keys
