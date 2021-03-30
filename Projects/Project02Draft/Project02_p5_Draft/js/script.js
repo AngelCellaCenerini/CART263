@@ -28,9 +28,11 @@ let starterRoom = undefined;
 let blinkingLightImage = undefined;
 // Main Room
 let mainRoom = undefined;
+// First Room
+let firstRoom = undefined;
 
 // States
-let state = `title` // Title, Instrucitons, Starter Room, Main Room, (to be continued)
+let state = `firstRoom` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
@@ -74,6 +76,8 @@ function setup() {
   starterRoom = new Room();
   // Main Room
   mainRoom = new MainRoom();
+  // First Room
+  firstRoom = new FirstRoom();
 }
 
 
@@ -101,38 +105,30 @@ function draw() {
     // First Avatar
     firstAvatar.update(image);
 
-    // Blinking Light - only called in Starter Room
-    push();
-    // Create Blinking Effect
-    let opacity = random(70, 180);
-    tint(255, opacity);
-    // Display Light
-    image(blinkingLightImage, width/2, height/2);
-    pop();
+    // Blinking Light
+    blinkingLight();
 
   }
   else if( state === `mainRoom` ){
 
     // Dialogue Box
-    // dialogueBox.reset();
     dialogueBox.display();
 
-    // Check User's Progress before Diplaying Avatar
-    // if ( achievedSenses.length < 0){
-    //   console.log(`called`);
-      // Starter Room
-      mainRoom.update(firstAvatar, dialogueBox);
-      mainRoom.addSecondDoor(firstAvatar, dialogueBox);
-      // First Avatar
-      firstAvatar.update(image);
-    // }
-    // else{
-    //   // Switch to Actual, Embodied Avatar
-    //   // Main Room
-    //   // mainRoom.update(avatar);
-    // }
+    // Main Room
+    mainRoom.update(firstAvatar, dialogueBox);
+    mainRoom.addSecondDoor(firstAvatar, dialogueBox);
+    // First Avatar
+    firstAvatar.update(image);
 
+  }
+  else if ( state === `firstRoom` ){
+    // Dialogue Box
+    dialogueBox.display();
 
+    // First Room
+    firstRoom.update(firstAvatar, dialogueBox);
+    // First Avatar
+    firstAvatar.update(image);
   }
 
 }
@@ -161,7 +157,19 @@ function instructionsText(){
   text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
   pop();
 }
+// Starter Room
+function blinkingLight(){
+  // Blinking Light - only called in Starter Room
+  push();
+  // Create Blinking Effect
+  let opacity = random(70, 180);
+  tint(255, opacity);
+  // Display Light
+  image(blinkingLightImage, width/2, height/2);
+  pop();
+}
 //
+
 
 // p5 Events
 function keyPressed(){
@@ -188,6 +196,14 @@ function keyPressed(){
     }
     // Main Room
     else if ( state === `mainRoom`){
+      index = 1;
+      selectDialogue();
+      // dialogueBox.type(roomDialogue);
+      setTimeout(function() {
+        dialogueBox.typewriter(roomDialogue)
+      }, 1000);
+    }
+    else if ( state === `firstRoom` ){
       index = 1;
       selectDialogue();
       // dialogueBox.type(roomDialogue);

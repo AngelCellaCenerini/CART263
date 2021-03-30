@@ -13,7 +13,9 @@ class MainRoom extends Room {
     this.roomRightBorder = 675;
     this.roomUpBorder = 110;
     this.roomDownBorder = 495;
-    this.state = `title`;
+    this.state = `firstRoom`;
+    this.enteringX = 480;
+    this.enteringY = 345;
     this.secondState = `starterRoom`;
     this.secondEnteringX = 500;
     this.secondEnteringY = 430;

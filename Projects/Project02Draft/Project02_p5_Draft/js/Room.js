@@ -14,7 +14,7 @@ class Room{
     this.roomDownBorder = 495;
     this.doorWidth = 55;
     this.doorHeight = 25;
-    this.opacity = 2;
+    this.opacity = 255;
     this.state = `mainRoom`;
     this.secondState = ``;
     this.enteringX = 180;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
