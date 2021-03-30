@@ -11,6 +11,9 @@ class FirstRoom extends Room {
     this.roomRightBorder = 520;
     this.roomUpBorder = 205;
     this.roomDownBorder = 395;
+    this.red = 150;
+    this.green = 34;
+    this.blue = 118;          
     this.enteringX = 580;
     this.enteringY = 430;
     this.state = `mainRoom`;

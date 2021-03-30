@@ -1,7 +1,7 @@
 class DialogueBox {
   constructor(){
     this.x = 400;
-    this.y = 60;
+    this.y = 50;
     this.boxWidth = 700;
     this.boxHeight = 80;
     this.fullText = ``;

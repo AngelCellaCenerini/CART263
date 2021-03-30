@@ -32,7 +32,7 @@ let mainRoom = undefined;
 let firstRoom = undefined;
 
 // States
-let state = `firstRoom` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
@@ -129,6 +129,11 @@ function draw() {
     firstRoom.update(firstAvatar, dialogueBox);
     // First Avatar
     firstAvatar.update(image);
+
+    // Button
+    let firstRoomButton = document.getElementById(`first-room-button`);
+    firstRoomButton.style.visibility = `visible`; // to be "destroyed" once user has surpassed/solved specific "webpage"
+
   }
 
 }
@@ -204,7 +209,7 @@ function keyPressed(){
       }, 1000);
     }
     else if ( state === `firstRoom` ){
-      index = 1;
+      index = 2;
       selectDialogue();
       // dialogueBox.type(roomDialogue);
       setTimeout(function() {

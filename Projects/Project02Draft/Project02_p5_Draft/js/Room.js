@@ -14,11 +14,14 @@ class Room{
     this.roomDownBorder = 495;
     this.doorWidth = 55;
     this.doorHeight = 25;
-    this.opacity = 255;
+    this.red = 255;           // Some Rooms vary in colors
+    this.green = 255;         // Some Rooms vary in colors
+    this.blue = 255;          // Some Rooms vary in colors
+    this.opacity = 2;
     this.state = `mainRoom`;
     this.secondState = ``;
     this.enteringX = 180;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
-    this.enteringY = 310;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
+    this.enteringY = 350;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
     this.secondEnteringX = 0;  // Same principles, but applied to Second Door
     this.secondEnteringY = 0;  // Same principles, but applied to Second Door
 
@@ -69,7 +72,7 @@ class Room{
     // Room Walls
     push();
     noFill();
-    stroke(255, this.opacity);
+    stroke(this.red, this.green, this.blue, this.opacity);
     strokeWeight(8);
     rect(this.roomX, this.roomY, this.roomWidth, this.roomHeight);
     pop();

@@ -19,3 +19,12 @@ body {
   overflow: hidden; /* Hide anything that goes off the window size */
   background-color: #000000;
 }
+
+#first-room-button{
+  position: absolute;
+  width: 50px;
+  padding: 2px;
+  margin-left: 48%;
+  margin-top: 17%;
+  visibility: hidden;
+}
