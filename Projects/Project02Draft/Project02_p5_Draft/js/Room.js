@@ -24,17 +24,17 @@ class Room{
 
   }
 
-  update(avatar){
+  update(avatar, dialogueBox){
     // Default Behavior
     this.constrain(avatar);
     this.displayWalls();
     this.displayDoor();
-    this.switchState(avatar);
+    this.switchState(avatar, dialogueBox);
   }
-  addSecondDoor(avatar){
+  addSecondDoor(avatar, dialogueBox){
     // Add Second Door Mechanics
     this.displaySecondDoor();
-    this.switchSecondState(avatar);
+    this.switchSecondState(avatar, dialogueBox);
   }
 
 
@@ -44,21 +44,23 @@ class Room{
     avatar.y = constrain(avatar.y, this.roomUpBorder, this.roomDownBorder);
   }
 
-  switchState(avatar){
+  switchState(avatar, dialogueBox){
     let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
     if (d1 < (this.doorWidth/6 + avatar.size/7)){
       state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
+      // this.resetDialogueBox(dialogueBox);
     }
   }
 
-  switchSecondState(avatar){
+  switchSecondState(avatar, dialogueBox){
     let d2 = dist(this.secondDoorX, this.secondDoorY, avatar.x, avatar.y);
     if (d2 < (this.doorWidth/6 + avatar.size/7)){
       state = this.secondState;
       avatar.x = this.secondEnteringX;
       avatar.y = this.secondEnteringY;
+      // this.resetDialogueBox(dialogueBox);
 
     }
   }
@@ -91,6 +93,10 @@ class Room{
     fill(255, this.opacity);
     rect(this.secondDoorX, this.secondDoorY, this.doorHeight, this.doorWidth, this.radius);
     pop();
+  }
+
+  resetDialogueBox(dialogueBox){
+    dialogueBox.reset();
   }
 
 }

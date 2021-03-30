@@ -11,16 +11,15 @@ class DialogueBox {
     this.interval = undefined;
     this.timeout = undefined;
     this.active = true;
-    this.keyCode = 32;                // SPACEBAR
 
   }
 
   type(message){
-    this.timeout = setTimeout(this.typewriter.bind(this, message, this.x, this.y), 1000);
+    // this.timeout = setTimeout(this.typewriter.bind(this, message, this.x, this.y), 1000);
+    this.typewriter.bind(this, message, this.x, this.y);
   }
 
   display(){
-    if (this.active){
       // Dialogue Box
       push();
       stroke(255);
@@ -36,15 +35,12 @@ class DialogueBox {
       textAlign(CENTER, CENTER);
       text(this.displayText, this.x, this.y);
       pop();
-    }
   }
 
   typewriter(message){
     if (this.active){
       this.reset();
       this.fullText = message;
-      // this.x = x;
-      // this.y = y;
       this.interval = setInterval(this.addNextCharacter.bind(this), this.speed);
     }
   }
@@ -69,9 +65,4 @@ class DialogueBox {
     }
   }
 
-  close(){
-    if (this.keyCode && this.active){
-      this.active = false;
-    }
-  }
 }

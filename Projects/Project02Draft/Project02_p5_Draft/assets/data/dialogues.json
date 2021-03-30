@@ -2,7 +2,7 @@
 {
  "description": "All Dialogues for Project 02",
  "sources": [ "my sleep-deprived mind"],
- "dialogues": [
+ "simulation_dialogues": [
     {
       "room": "Starter Room",
       "dialogue": "@i**043_!$%&(@_)#+_)@)(#TYU__pm5v___/.<<M ~"

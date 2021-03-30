@@ -96,7 +96,7 @@ function draw() {
      dialogueBox.display();
 
     // Starter Room
-    starterRoom.update(firstAvatar);
+    starterRoom.update(firstAvatar, dialogueBox);
 
     // First Avatar
     firstAvatar.update(image);
@@ -121,8 +121,8 @@ function draw() {
     // if ( achievedSenses.length < 0){
     //   console.log(`called`);
       // Starter Room
-      mainRoom.update(firstAvatar);
-      mainRoom.addSecondDoor(firstAvatar);
+      mainRoom.update(firstAvatar, dialogueBox);
+      mainRoom.addSecondDoor(firstAvatar, dialogueBox);
       // First Avatar
       firstAvatar.update(image);
     // }
@@ -179,17 +179,21 @@ function keyPressed(){
     // Typewriter
     // Starter Room
     if ( state === `starterRoom`){
+      index = 0;
       selectDialogue();
-      let index = 0;
-      dialogueBox.type(roomDialogue);
-      console.log(index);
+      // dialogueBox.type(roomDialogue);
+      setTimeout(function() {
+        dialogueBox.typewriter(roomDialogue)
+      }, 1000);
     }
     // Main Room
     else if ( state === `mainRoom`){
       index = 1;
       selectDialogue();
-      dialogueBox.type(roomDialogue);
-      console.log(index);
+      // dialogueBox.type(roomDialogue);
+      setTimeout(function() {
+        dialogueBox.typewriter(roomDialogue)
+      }, 1000);
     }
 
   }
@@ -212,7 +216,7 @@ function keyPressed(){
 //
 function selectDialogue(){
   // Starter Room
-  roomDialogues = dialogues.dialogues[index];
+  roomDialogues = dialogues.simulation_dialogues[index];
   roomDialogue = roomDialogues.dialogue;
 }
 //
