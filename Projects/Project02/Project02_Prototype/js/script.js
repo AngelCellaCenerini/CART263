@@ -167,8 +167,7 @@ function instructionsText(){
   textSize(22);
   text(`Instrucitons (Rough Draft):
    - move with arrow keys;
-   - press ENTER to scroll dialogues;
-   - press SPACEBAR to close dialogue box. `, width/8, height/2);
+   - press ENTER to repeat dialogues;`, width/8, height/2);
   textSize(16);
   text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
   pop();
