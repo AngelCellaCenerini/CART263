@@ -1,4 +1,5 @@
 class DialogueBox {
+  // Dialogue Box containing specific Text string from JSON file
   constructor(){
     this.x = 400;
     this.y = 50;

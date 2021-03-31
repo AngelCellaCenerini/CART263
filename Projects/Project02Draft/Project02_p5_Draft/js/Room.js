@@ -1,4 +1,7 @@
 class Room{
+  // Main Structure for all Rooms within program
+  // Outlined Rectangle as Walls constraining User
+  // Switching States happens when User overlaps "Doors"
   constructor(){
     this.roomX = 400;          // Distinguishing Room vs "Doors" properties
     this.roomY = 350;          // Distinguishing Room vs "Doors" properties
@@ -17,7 +20,7 @@ class Room{
     this.red = 255;           // Some Rooms vary in colors
     this.green = 255;         // Some Rooms vary in colors
     this.blue = 255;          // Some Rooms vary in colors
-    this.opacity = 2;
+    this.opacity = 255;
     this.state = `mainRoom`;
     this.secondState = ``;
     this.enteringX = 180;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly

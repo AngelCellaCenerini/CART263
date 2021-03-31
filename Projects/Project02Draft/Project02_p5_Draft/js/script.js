@@ -4,7 +4,9 @@
 Project02 Draft
 Angel Cella Cenerini
 
-Project02 Draft
+Tested Rooms Structure;
+Tested Dialogus Strucutre;
+Tested linking p5.js program with jQuery(UI).js webpage
 */
 
 // Dialogue Box
@@ -28,6 +30,10 @@ let starterRoom = undefined;
 let blinkingLightImage = undefined;
 // Main Room
 let mainRoom = undefined;
+// Blinking Teal Light
+let tealLightX = 400;
+let tealLightY = 222;
+let blinkingTealLightImage = undefined;
 // First Room
 let firstRoom = undefined;
 
@@ -47,6 +53,7 @@ function preload() {
   // Image Files
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
   blinkingLightImage = loadImage(`assets/images/light.png`);
+  blinkingTealLightImage = loadImage(`assets/images/tealLight.png`);
 }
 
 
@@ -117,8 +124,12 @@ function draw() {
     // Main Room
     mainRoom.update(firstAvatar, dialogueBox);
     mainRoom.addSecondDoor(firstAvatar, dialogueBox);
+
     // First Avatar
     firstAvatar.update(image);
+
+    // Blinking Teal Light
+    blinkingTealLight();
 
   }
   else if ( state === `firstRoom` ){
@@ -171,6 +182,17 @@ function blinkingLight(){
   tint(255, opacity);
   // Display Light
   image(blinkingLightImage, width/2, height/2);
+  pop();
+}
+// Main Room
+function blinkingTealLight(){
+  // Blinking Light - only called in Main Room
+  push();
+  // Create Blinking Effect
+  let opacity = random(180, 250);
+  tint(255, opacity);
+  // Display Light
+  image(blinkingTealLightImage, tealLightX, tealLightY);
   pop();
 }
 //

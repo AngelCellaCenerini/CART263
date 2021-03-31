@@ -1,4 +1,5 @@
 class FirstAvatar {
+  // Disembodied Avatar, controlled by Arrow Keys
   constructor(image){
     this.x = 400;
     this.y = 300;

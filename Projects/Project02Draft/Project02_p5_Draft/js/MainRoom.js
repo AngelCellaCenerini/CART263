@@ -1,4 +1,5 @@
 class MainRoom extends Room {
+  // Description and Comments explained in main class Room
   constructor(){
     super();
     this.roomX = 400;

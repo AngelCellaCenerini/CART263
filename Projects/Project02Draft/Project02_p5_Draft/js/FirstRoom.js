@@ -1,4 +1,5 @@
 class FirstRoom extends Room {
+  // Description and Comments explained in main class Room
   constructor(){
     super();
     this.roomX = 400;
@@ -13,7 +14,7 @@ class FirstRoom extends Room {
     this.roomDownBorder = 395;
     this.red = 150;
     this.green = 34;
-    this.blue = 118;          
+    this.blue = 118;
     this.enteringX = 580;
     this.enteringY = 430;
     this.state = `mainRoom`;
