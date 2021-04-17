@@ -15,5 +15,6 @@ class EmptyRoom extends Room {
     this.enteringX = 580;
     this.enteringY = 430;
     this.state = `mainRoom`;
+    this.active = false;
   }
 }

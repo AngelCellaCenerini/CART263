@@ -2,7 +2,7 @@ class Room{
   // Main Structure for all Rooms within program
   // Outlined Rectangle as Walls constraining User
   // Switching States happens when User overlaps "Doors"
-  constructor(){
+  constructor(image){
     this.roomX = 400;          // Distinguishing Room vs "Doors" properties
     this.roomY = 350;          // Distinguishing Room vs "Doors" properties
     this.doorX = 490;          // Distinguishing Room vs "Doors" properties
@@ -17,16 +17,22 @@ class Room{
     this.roomDownBorder = 495;
     this.doorWidth = 55;
     this.doorHeight = 25;
-    this.red = 255;           // Some Rooms vary in colors
-    this.green = 255;         // Some Rooms vary in colors
-    this.blue = 255;          // Some Rooms vary in colors
+    this.red = 255;             // Some Rooms vary in colors
+    this.green = 255;           // Some Rooms vary in colors
+    this.blue = 255;            // Some Rooms vary in colors
     this.opacity = 255;
     this.state = `mainRoom`;
     this.secondState = ``;
-    this.enteringX = 180;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
-    this.enteringY = 350;      // To spawn avatar exactly in fron of linking door of next roon rather than randomly
-    this.secondEnteringX = 0;  // Same principles, but applied to Second Door
-    this.secondEnteringY = 0;  // Same principles, but applied to Second Door
+    this.enteringX = 180;       // To spawn avatar exactly in fron of linking door of next roon rather than randomly
+    this.enteringY = 350;       // To spawn avatar exactly in fron of linking door of next roon rather than randomly
+    this.secondEnteringX = 0;   // Same principles, but applied to Second Door
+    this.secondEnteringY = 0;   // Same principles, but applied to Second Door
+    this.active = true;         // Display Lights if Active (only active in Starter Room and Main Room)
+    this.image = image;
+    this.imageX = 400;
+    this.imageY = 300;
+    this.opacityValue1 = 70;    // Blinking Effect Intensity Varies depending on Lights
+    this.opacityValue2 = 180;   // Blinking Effect Intensity Varies depending on Lights
 
   }
 
@@ -35,6 +41,7 @@ class Room{
     this.constrain(avatar);
     this.displayWalls();
     this.displayDoor();
+    this.displayLights();
     this.switchState(avatar, dialogueBox);
   }
   addSecondDoor(avatar, dialogueBox){
@@ -107,6 +114,19 @@ class Room{
     setTimeout(function() {
       dialogueBox.typewriter(dialogues.simulation_dialogues[state]);
     }, 1000);
+  }
+
+  displayLights(){
+    // Blinking Light - only called in Starter and Main Room
+    if (this.active){
+      push();
+      // Create Blinking Effect
+      let opacity = random(this.opacityValue1, this.opacityValue2);
+      tint(255, opacity);
+      // Display Light
+      image(this.image, this.imageX, this.imageY);
+      pop();
+    }
   }
 
 }

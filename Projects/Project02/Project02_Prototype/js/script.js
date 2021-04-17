@@ -31,10 +31,7 @@ let blinkingLightImage = undefined;
 // Main Room
 let mainRoom = undefined;
 // Blinking Teal Light
-let tealLightX = 400;
-let tealLightY = 222;
 let blinkingTealLightImage = undefined;
-
 // Relevant Rooms
 // First Room
 let firstRoom = undefined;
@@ -87,9 +84,9 @@ function setup() {
 
   // Create Rooms
   // Starter Room
-  starterRoom = new Room();
+  starterRoom = new Room(blinkingLightImage);
   // Main Room
-  mainRoom = new MainRoom();
+  mainRoom = new MainRoom(blinkingTealLightImage);
   // First Room
   firstRoom = new FirstRoom();
   // Second Room
@@ -123,9 +120,6 @@ function draw() {
     // First Avatar
     firstAvatar.update(image);
 
-    // Blinking Light
-    blinkingLight();
-
   }
   else if( state === `mainRoom` ){
 
@@ -138,9 +132,6 @@ function draw() {
 
     // First Avatar
     firstAvatar.update(image);
-
-    // Blinking Teal Light
-    blinkingTealLight();
 
   }
   else if ( state === `firstRoom` ){
@@ -200,28 +191,6 @@ function instructionsText(){
    - press ENTER to repeat dialogues;`, width/8, height/2);
   textSize(16);
   text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
-  pop();
-}
-// Starter Room
-function blinkingLight(){
-  // Blinking Light - only called in Starter Room
-  push();
-  // Create Blinking Effect
-  let opacity = random(70, 180);
-  tint(255, opacity);
-  // Display Light
-  image(blinkingLightImage, width/2, height/2);
-  pop();
-}
-// Main Room
-function blinkingTealLight(){
-  // Blinking Light - only called in Main Room
-  push();
-  // Create Blinking Effect
-  let opacity = random(180, 250);
-  tint(255, opacity);
-  // Display Light
-  image(blinkingTealLightImage, tealLightX, tealLightY);
   pop();
 }
 //

@@ -1,6 +1,6 @@
 class MainRoom extends Room {
   // Description and Comments explained in main class Room
-  constructor(){
+  constructor(image){
     super();
     this.roomX = 400;
     this.roomY = 340;
@@ -24,6 +24,11 @@ class MainRoom extends Room {
     this.secondOption = `emptyRoom`;
     // this.thirdOption = `thirdRoom`;
     // this.fouthOption = `emptyRoom`;
+    this.image = image;
+    this.imageX = 400;
+    this.imageY = 222;
+    this.opacityValue1 = 180;
+    this.opacityValue2 = 250;
   }
 
   switchState(avatar, dialogueBox){
