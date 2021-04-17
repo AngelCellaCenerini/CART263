@@ -2,7 +2,7 @@ class Room{
   // Main Structure for all Rooms within program
   // Outlined Rectangle as Walls constraining User
   // Switching States happens when User overlaps "Doors"
-  constructor(image){
+  constructor(avatarImage, lightImage){
     this.roomX = 400;          // Distinguishing Room vs "Doors" properties
     this.roomY = 350;          // Distinguishing Room vs "Doors" properties
     this.doorX = 490;          // Distinguishing Room vs "Doors" properties
@@ -26,19 +26,23 @@ class Room{
     this.enteringX = 180;       // To spawn avatar exactly in fron of linking door of next roon rather than randomly
     this.enteringY = 350;       // To spawn avatar exactly in fron of linking door of next roon rather than randomly
     this.secondEnteringX = 0;   // Same principles, but applied to Second Door
-    this.secondEnteringY = 0;   // Same principles, but applied to Second Door
+    this.secondEnteringY = 0;   // Same principles, but applied to Second
+    // Include Avatar in Rooms
+    this.avatarImage = avatarImage;
+    // Display Lights (Starter + Main Rooms)
     this.active = true;         // Display Lights if Active (only active in Starter Room and Main Room)
-    this.image = image;
-    this.imageX = 400;
-    this.imageY = 300;
+    this.lightImage = lightImage;
+    this.lightX = 400;
+    this.lightY = 300;
     this.opacityValue1 = 70;    // Blinking Effect Intensity Varies depending on Lights
     this.opacityValue2 = 180;   // Blinking Effect Intensity Varies depending on Lights
 
   }
 
-  update(avatar, dialogueBox){
+  update(avatar, avatarImage, dialogueBox){
     // Default Behavior
     this.constrain(avatar);
+    avatar.update(avatarImage);
     this.displayWalls();
     this.displayDoor();
     this.displayLights();
@@ -72,8 +76,9 @@ class Room{
     if (d2 < (this.doorWidth/6 + avatar.size/7)){
       state = this.secondState;
       this.displayDialogueBox(dialogueBox);
-      avatar.x = this.secondEnteringX;
-      avatar.y = this.secondEnteringY;
+        avatar.x = this.secondEnteringX;
+        avatar.y = this.secondEnteringY;
+
 
 
     }
@@ -124,7 +129,7 @@ class Room{
       let opacity = random(this.opacityValue1, this.opacityValue2);
       tint(255, opacity);
       // Display Light
-      image(this.image, this.imageX, this.imageY);
+      image(this.lightImage, this.lightX, this.lightY);
       pop();
     }
   }

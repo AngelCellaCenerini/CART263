@@ -12,6 +12,7 @@ Tested linking p5.js program with jQuery(UI).js webpage
 // Dialogue Box
 let dialogueBox = undefined;
 let dialogues = undefined;
+let comprehensibleDialogues = undefined;
 let roomDialogues = undefined;
 let roomDialogue = undefined;
 let index = 0;
@@ -37,12 +38,18 @@ let blinkingTealLightImage = undefined;
 let firstRoom = undefined;
 // Second Room
 let secondRoom = undefined;
+// Third Room
+let thirdRoom = undefined;
+// Fourth Room
+let fourthRoom = undefined;
+// Fifth Room
+let fifthRoom = undefined;
 
 // Empty Room
 let emptyRoom = undefined;
 
 // States
-let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `fifthRoom` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
@@ -53,6 +60,7 @@ function preload() {
   // JSON File
   // Dialogues
   dialogues =  loadJSON(`assets/data/dialogues.json`);
+  comprehensibleDialogues =  loadJSON(`assets/data/dialogues.json`);
 
   // Image Files
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
@@ -76,23 +84,28 @@ function setup() {
   textAlign(LEFT, RIGHT);
 
   // Create First Avatar
-  let image = crosshairCursorImage;
-  firstAvatar = new FirstAvatar(image);
+  firstAvatar = new FirstAvatar(crosshairCursorImage);
 
   // Create Dialogue Box(es)
   dialogueBox = new DialogueBox();
 
   // Create Rooms
   // Starter Room
-  starterRoom = new Room(blinkingLightImage);
+  starterRoom = new Room(crosshairCursorImage, blinkingLightImage);
   // Main Room
-  mainRoom = new MainRoom(blinkingTealLightImage);
+  mainRoom = new MainRoom(crosshairCursorImage, blinkingTealLightImage);
   // First Room
-  firstRoom = new FirstRoom();
+  firstRoom = new FirstRoom(crosshairCursorImage);
   // Second Room
-  secondRoom = new SecondRoom();
+  secondRoom = new SecondRoom(crosshairCursorImage);
+  // Third Room
+  thirdRoom = new ThirdRoom(crosshairCursorImage);
+  // Fourth Room
+  fourthRoom = new FourthRoom(crosshairCursorImage);
+  // Fifth Room
+  fifthRoom = new FifthRoom(crosshairCursorImage);
   // Empty Room
-  emptyRoom = new EmptyRoom();
+  emptyRoom = new EmptyRoom(crosshairCursorImage);
 }
 
 
@@ -115,10 +128,8 @@ function draw() {
      dialogueBox.display();
 
     // Starter Room
-    starterRoom.update(firstAvatar, dialogueBox);
+    starterRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
 
-    // First Avatar
-    firstAvatar.update(image);
 
   }
   else if( state === `mainRoom` ){
@@ -127,11 +138,9 @@ function draw() {
     dialogueBox.display();
 
     // Main Room
-    mainRoom.update(firstAvatar, dialogueBox);
+    mainRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     mainRoom.addSecondDoor(firstAvatar, dialogueBox);
 
-    // First Avatar
-    firstAvatar.update(image);
 
   }
   else if ( state === `firstRoom` ){
@@ -139,21 +148,49 @@ function draw() {
     dialogueBox.display();
 
     // First Room
-    firstRoom.update(firstAvatar, dialogueBox);
+    firstRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     firstRoom.displayButton();
-    // First Avatar
-    firstAvatar.update(image);
 
-    // Button
-     // to be "destroyed" once user has surpassed/solved specific "webpage"
 
   }
   else if (state === `secondRoom`){
 
-    // First Room
-    secondRoom.update(firstAvatar, dialogueBox);
+    // Dialogue Box
+     dialogueBox.display();
+
+    // Second Room
+    secondRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     secondRoom.displayButton();
-    firstAvatar.update(image);
+
+  }
+  else if (state === `thirdRoom`){
+
+    // Dialogue Box
+     dialogueBox.display();
+
+    // Third Room
+    thirdRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    thirdRoom.displayButton();
+
+  }
+  else if (state === `fourthRoom`){
+
+    // Dialogue Box
+     dialogueBox.display();
+
+    // Fourth Room
+    fourthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    fourthRoom.displayButton();
+
+  }
+  else if (state === `fifthRoom`){
+
+    // Dialogue Box
+     dialogueBox.display();
+
+    // Fifth Room
+    fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    fifthRoom.displayPreviousAchievements();
 
   }
   else if ( state === `emptyRoom` ){
@@ -162,10 +199,8 @@ function draw() {
     dialogueBox.display();
 
     // Empty Room
-    emptyRoom.update(firstAvatar, dialogueBox);
+    emptyRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
 
-    // First Avatar
-    firstAvatar.update(image);
   }
 
 }

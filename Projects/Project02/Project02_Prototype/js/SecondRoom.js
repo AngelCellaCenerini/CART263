@@ -6,7 +6,6 @@ class SecondRoom extends FirstRoom {
     this.red = 255;
     this.green = 105;
     this.blue = 132;
-    this.state = `mainRoom`;
     this.buttonId = `second-room-button`;
 
   }

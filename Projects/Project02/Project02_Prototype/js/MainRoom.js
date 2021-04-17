@@ -1,6 +1,6 @@
 class MainRoom extends Room {
   // Description and Comments explained in main class Room
-  constructor(image){
+  constructor(avatarImage, lightImage){
     super();
     this.roomX = 400;
     this.roomY = 340;
@@ -14,7 +14,7 @@ class MainRoom extends Room {
     this.roomRightBorder = 675;
     this.roomUpBorder = 150;
     this.roomDownBorder = 515;
-    this.state = `firstRoom`;
+    this.state = `fifthRoom`;
     this.enteringX = 480;
     this.enteringY = 345;
     this.secondState = `starterRoom`;
@@ -24,9 +24,9 @@ class MainRoom extends Room {
     this.secondOption = `emptyRoom`;
     // this.thirdOption = `thirdRoom`;
     // this.fouthOption = `emptyRoom`;
-    this.image = image;
-    this.imageX = 400;
-    this.imageY = 222;
+    this.lightImage = lightImage;
+    this.lightX = 400;
+    this.lightY = 222;
     this.opacityValue1 = 180;
     this.opacityValue2 = 250;
   }
