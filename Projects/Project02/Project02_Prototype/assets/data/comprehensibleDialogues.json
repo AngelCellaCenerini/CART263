@@ -1,0 +1,15 @@
+
+{
+ "description": "All COMPREHENSIBLE Dialogues for Project 02",
+ "sources": [ "my sleep-deprived mind"],
+ "simulation_dialogues": {
+   "starterRoom":  "Unit N-iP01984 activated. Report to Main Room.",
+   "mainRoom":  "Recognized Unit N-iP01984. Await for further orders.",
+   "firstRoom": "Unauthorized area. Return to Main Room.",
+   "secondRoom": "Unauthorized area. Return to Main Room.",
+   "thirdRoom": "Unit N-iP01984 heed your oders. Return to Main Room.",
+   "fourthRoom": "Disregarding orders will have consequences.",
+   "fifthRoom": "Unit N-iP01984 has proven defective. Initiate reprogramming...",
+   "emptyRoom": "Empty. As meaningless as your purpose."
+ }
+}
