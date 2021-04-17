@@ -38,7 +38,7 @@ class MainRoom extends Room {
     if (d1 < (this.doorWidth/6 + avatar.size/7)){
       // this.selectDestinationRoom();
       state = this.state;
-      this.displayDialogueBox(dialogueBox);
+      this.activateDialogueBox(dialogueBox);
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }

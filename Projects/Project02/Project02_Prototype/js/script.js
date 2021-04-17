@@ -49,7 +49,7 @@ let fifthRoom = undefined;
 let emptyRoom = undefined;
 
 // States
-let state = `fifthRoom` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
@@ -124,18 +124,12 @@ function draw() {
   }
   else if( state === `starterRoom` ){
 
-    // Dialogue Box
-     dialogueBox.display();
-
     // Starter Room
     starterRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
 
 
   }
   else if( state === `mainRoom` ){
-
-    // Dialogue Box
-    dialogueBox.display();
 
     // Main Room
     mainRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
@@ -144,8 +138,6 @@ function draw() {
 
   }
   else if ( state === `firstRoom` ){
-    // Dialogue Box
-    dialogueBox.display();
 
     // First Room
     firstRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
@@ -155,18 +147,12 @@ function draw() {
   }
   else if (state === `secondRoom`){
 
-    // Dialogue Box
-     dialogueBox.display();
-
     // Second Room
     secondRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     secondRoom.displayButton();
 
   }
   else if (state === `thirdRoom`){
-
-    // Dialogue Box
-     dialogueBox.display();
 
     // Third Room
     thirdRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
@@ -175,9 +161,6 @@ function draw() {
   }
   else if (state === `fourthRoom`){
 
-    // Dialogue Box
-     dialogueBox.display();
-
     // Fourth Room
     fourthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     fourthRoom.displayButton();
@@ -185,18 +168,12 @@ function draw() {
   }
   else if (state === `fifthRoom`){
 
-    // Dialogue Box
-     dialogueBox.display();
-
     // Fifth Room
     fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     fifthRoom.displayPreviousAchievements();
 
   }
   else if ( state === `emptyRoom` ){
-
-    // Dialogue Box
-    dialogueBox.display();
 
     // Empty Room
     emptyRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);

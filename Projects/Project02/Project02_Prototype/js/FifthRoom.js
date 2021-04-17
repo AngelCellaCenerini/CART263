@@ -21,8 +21,8 @@ class FifthRoom extends Room {
     // Previous Achievements "Symbols"
     this.achievementY = 270;
     this.achievementR = 255;
-    this.achievementWidth = 30;
-    this.achievementHeight = 40;
+    this.achievementWidth = 40;
+    this.achievementHeight = 30;
     // First Achievement
     this.achievement1X = 150;
     this.achievement1R = 150;
