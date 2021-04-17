@@ -36,6 +36,8 @@ let tealLightY = 222;
 let blinkingTealLightImage = undefined;
 // First Room
 let firstRoom = undefined;
+// Empty Room
+let emptyRoom = undefined;
 
 // States
 let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
@@ -85,6 +87,8 @@ function setup() {
   mainRoom = new MainRoom();
   // First Room
   firstRoom = new FirstRoom();
+  // Empty Room
+  emptyRoom = new EmptyRoom();
 }
 
 
@@ -145,6 +149,17 @@ function draw() {
     let firstRoomButton = document.getElementById(`first-room-button`);
     firstRoomButton.style.visibility = `visible`; // to be "destroyed" once user has surpassed/solved specific "webpage"
 
+  }
+  else if ( state === `emptyRoom` ){
+
+    // Dialogue Box
+    dialogueBox.display();
+
+    // Empty Room
+    emptyRoom.update(firstAvatar, dialogueBox);
+
+    // First Avatar
+    firstAvatar.update(image);
   }
 
 }
