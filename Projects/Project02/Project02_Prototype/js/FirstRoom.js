@@ -18,5 +18,12 @@ class FirstRoom extends Room {
     this.enteringX = 580;
     this.enteringY = 430;
     this.state = `mainRoom`;
+    this.buttonId = `first-room-button`;  // Id of Button HTML Element (one button per "relevant" Rooms)
+  }
+
+
+  displayButton(){
+    let roomButton = document.getElementById(this.buttonId);
+    roomButton.style.visibility = `visible`;
   }
 }

@@ -34,8 +34,13 @@ let mainRoom = undefined;
 let tealLightX = 400;
 let tealLightY = 222;
 let blinkingTealLightImage = undefined;
+
+// Relevant Rooms
 // First Room
 let firstRoom = undefined;
+// Second Room
+let secondRoom = undefined;
+
 // Empty Room
 let emptyRoom = undefined;
 
@@ -87,6 +92,8 @@ function setup() {
   mainRoom = new MainRoom();
   // First Room
   firstRoom = new FirstRoom();
+  // Second Room
+  secondRoom = new SecondRoom();
   // Empty Room
   emptyRoom = new EmptyRoom();
 }
@@ -142,12 +149,20 @@ function draw() {
 
     // First Room
     firstRoom.update(firstAvatar, dialogueBox);
+    firstRoom.displayButton();
     // First Avatar
     firstAvatar.update(image);
 
     // Button
-    let firstRoomButton = document.getElementById(`first-room-button`);
-    firstRoomButton.style.visibility = `visible`; // to be "destroyed" once user has surpassed/solved specific "webpage"
+     // to be "destroyed" once user has surpassed/solved specific "webpage"
+
+  }
+  else if (state === `secondRoom`){
+
+    // First Room
+    secondRoom.update(firstAvatar, dialogueBox);
+    secondRoom.displayButton();
+    firstAvatar.update(image);
 
   }
   else if ( state === `emptyRoom` ){

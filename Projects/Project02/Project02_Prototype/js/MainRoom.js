@@ -14,7 +14,7 @@ class MainRoom extends Room {
     this.roomRightBorder = 675;
     this.roomUpBorder = 150;
     this.roomDownBorder = 515;
-    this.state = ``;
+    this.state = `firstRoom`;
     this.enteringX = 480;
     this.enteringY = 345;
     this.secondState = `starterRoom`;
@@ -31,7 +31,7 @@ class MainRoom extends Room {
     // So that 'change' is only calcutlated once
     let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
     if (d1 < (this.doorWidth/6 + avatar.size/7)){
-      this.selectDestinationRoom();
+      // this.selectDestinationRoom();
       state = this.state;
       this.displayDialogueBox(dialogueBox);
       avatar.x = this.enteringX;
