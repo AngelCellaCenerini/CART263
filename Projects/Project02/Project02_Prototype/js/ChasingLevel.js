@@ -3,28 +3,30 @@ class ChasingLevel{
   // Level increases difficulty each time
   // Last Chasing Level brings User to victory
   constructor(avatarImage){
-    this.roomX = 400;             // Distinguishing Room vs "Doors" properties
-    this.roomY = 300;             // Distinguishing Room vs "Doors" properties
+    this.roomX = 400;              // Distinguishing Room vs "Doors" properties
+    this.roomY = 300;              // Distinguishing Room vs "Doors" properties
     this.roomWidth = 250;
     this.roomHeight = 700;
     this.roomLeftBorder = 300;
     this.roomRightBorder = 500;
     this.roomUpBorder = 120;
     this.roomDownBorder = 650;
-    this.doorX = 400;             // Distinguishing Room vs "Doors" properties
-    this.doorY = -40;             // Distinguishing Room vs "Doors" properties
+    this.doorX = 400;              // Distinguishing Room vs "Doors" properties
+    this.doorY = -40;              // Distinguishing Room vs "Doors" properties
     this.doorWidth = 55;
     this.doorHeight = 25;
-    this.doorVX = 0;              // Door moves downwards
-    this.doorVY = 0;              // Door moves downwards
-    this.doorSpeed = 1;        // Door moves downwards
-    this.opacity = 255;
-    this.state = `mainRoom`;
+    this.doorVX = 0;               // Door moves downwards
+    this.doorVY = 0;               // Door moves downwards
+    this.doorSpeed = 0.5;          // Door moves downwards
+    this.activeDoor = false;       // To reset Door
+    this.doorTimer = 0;            // To activate Door
+    this.levelDuration = 5;        // How long Level lasts
+    this.opacity = 255;            // Elements' oOpacity
+    this.state = `mainRoom`;       // State level switches to (if User doesn't lose, obv)
     this.enteringX = 395;          // Spawn avatar in middle of Main Room
     this.enteringY = 305;          // Spawn avatar in middle of Main Room
     this.limit = 430;              // Line User has to surpass to lose level
     this.active = true;            // Turns false when User loses
-    this.levelDuration = 2000;    // Time amount User has to survive level
     this.dotsNumber = 20;          // Static Effect
     this.numericStrings = 3;       // "Lines of code" Effect (intended as "reprogramming" of Avatar/User)
 
@@ -36,6 +38,8 @@ class ChasingLevel{
     this.switchState(avatar, dialogueBox);
     this.capture(avatar);
     this.activateDoor();
+    this.moveDoor();
+    this.resetLevel(avatar);
     this.displayWalls();
     this.displayDoor();
     this.displayCodeLines();
@@ -72,32 +76,83 @@ class ChasingLevel{
       avatar.chasingLevelSpeed = 0;
       // Freeze Level
       this.active = false;
+      // Freeze Door
+      this.doorVY = 0;
+      this.doorSpeed = 0;
+
+      // Display Instructions to reset Level
+      this.resetLevelInstructions();
     }
 
+  }
+
+  resetLevelInstructions(){
+    // Display Instructions
+    push();
+    let opacity = random(10, 220);
+    fill(255, opacity);
+    textSize(20);
+    text(`
+    P
+    r
+    e
+    s
+    s
+
+    R
+
+    t
+    o
+
+    r
+    e
+    t
+    r
+    y`, 500, 150);
+    pop();
   }
 
   activateDoor(){
-    // Display only if User survives level for certain amount of time
-    if ( this.active ){
-      setTimeout( ()=>{
-        this.moveDoor();
-        // this.displayDoor();
-      }, this.levelDuration);
-    }
-
+    // Active only if User survives level for certain amount of time
+    if (!this.activeDoor){
+        this.doorTimer++;
+        if (this.doorTimer > this.levelDuration*60){
+          this.activeDoor = true;
+        }
   }
+}
 
   moveDoor(){
     // Move Door Downwards
-    if (this.active){
+    if (this.activeDoor){
       // Move only if User hasn't lost
       this.doorX += this.doorVX;
       this.doorY += this.doorVY;
 
       this.doorVY = this.doorSpeed;
     }
-
   }
+
+  resetLevel(avatar){
+    // Reset Level if User fails
+    // Press R to Reset
+    if ( this.active === false && keyIsDown(82) ){
+
+      // Reset Level Status
+      this.active = true;
+
+      // Reset Avatar
+      avatar.x = 400;
+      avatar.y = 300;
+      avatar.chasingLevelSpeed = 1;
+      // Reset Door
+      this.doorX = 400;
+      this.doorY = -40;
+      this.doorSpeed = 0.5;
+      this.doorTimer = 0;
+      this.activeDoor = false;
+  }
+}
 
   displayWalls(){
     // Room Walls
