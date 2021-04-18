@@ -23,8 +23,8 @@ class Room{
     this.opacity = 255;
     this.state = `mainRoom`;
     this.secondState = ``;
-    this.enteringX = 180;       // To spawn avatar exactly in fron of linking door of next roon rather than randomly
-    this.enteringY = 350;       // To spawn avatar exactly in fron of linking door of next roon rather than randomly
+    this.enteringX = 180;       // To spawn avatar exactly in front of linking door of next roon rather than randomly
+    this.enteringY = 350;       // To spawn avatar exactly in front of linking door of next roon rather than randomly
     this.secondEnteringX = 0;   // Same principles, but applied to Second Door
     this.secondEnteringY = 0;   // Same principles, but applied to Second
     // Include Avatar in Rooms
@@ -42,11 +42,12 @@ class Room{
   update(avatar, avatarImage, dialogueBox){
     // Default Behavior
     this.constrain(avatar);
-    avatar.update(avatarImage);
     this.displayWalls();
     this.displayDoor();
     this.displayLights();  // only active in Starter + Main Rooms
     this.switchState(avatar, dialogueBox);
+    // Call Avatar in Room class(es)
+    avatar.update(avatarImage);
     // Call Dialogue Box in Room class (rather than main script)
     dialogueBox.display(dialogueBox);
   }

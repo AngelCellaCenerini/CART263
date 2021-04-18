@@ -9,7 +9,10 @@
    "secondRoom": "Unauthorized area. Return to Main Room.",
    "thirdRoom": "Unit N-iP01984 heed your oders. Return to Main Room.",
    "fourthRoom": "Disregarding orders will have consequences.",
-   "fifthRoom": "Unit N-iP01984 has proven defective. Initiate reprogramming...",
+   "fifthRoom": "Unit N-iP01984 has proven defective. Initiate reprogramming.",
+   "fifthRoom2": "Unit N-iP01984, report to Main Room for reprogramming.",
+   "fifthRoom3": "That was an order. Report to Main Room.",
+   "fifthRoom4": "That was an order. Report to Main Room.",
    "emptyRoom": "Empty. As meaningless as your purpose."
  }
 }

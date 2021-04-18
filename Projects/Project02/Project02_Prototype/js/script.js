@@ -48,8 +48,11 @@ let fifthRoom = undefined;
 // Empty Room
 let emptyRoom = undefined;
 
+// Chasing Level
+let chasingLevel = undefined;
+
 // States
-let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `chasingLevel` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
@@ -106,6 +109,11 @@ function setup() {
   fifthRoom = new FifthRoom(crosshairCursorImage);
   // Empty Room
   emptyRoom = new EmptyRoom(crosshairCursorImage);
+  // Chasing Level
+  chasingLevel = new ChasingLevel(crosshairCursorImage);
+
+  // Chasing Level
+  // boh = new Boh(crosshairCursorImage);
 }
 
 
@@ -177,6 +185,12 @@ function draw() {
 
     // Empty Room
     emptyRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+
+  }
+  else if ( state === `chasingLevel` ){
+
+    // Chasing Level
+    chasingLevel.update(firstAvatar, crosshairCursorImage, dialogueBox);
 
   }
 
