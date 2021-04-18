@@ -3,26 +3,30 @@ class ChasingLevel{
   // Level increases difficulty each time
   // Last Chasing Level brings User to victory
   constructor(avatarImage){
-    this.roomX = 400;          // Distinguishing Room vs "Doors" properties
-    this.roomY = 300;          // Distinguishing Room vs "Doors" properties
-    this.doorX = 400;          // Distinguishing Room vs "Doors" properties
-    this.doorY = -40;          // Distinguishing Room vs "Doors" properties
+    this.roomX = 400;             // Distinguishing Room vs "Doors" properties
+    this.roomY = 300;             // Distinguishing Room vs "Doors" properties
     this.roomWidth = 250;
     this.roomHeight = 700;
     this.roomLeftBorder = 300;
     this.roomRightBorder = 500;
     this.roomUpBorder = 120;
     this.roomDownBorder = 650;
+    this.doorX = 400;             // Distinguishing Room vs "Doors" properties
+    this.doorY = -40;             // Distinguishing Room vs "Doors" properties
     this.doorWidth = 55;
     this.doorHeight = 25;
+    this.doorVX = 0;              // Door moves downwards
+    this.doorVY = 0;              // Door moves downwards
+    this.doorSpeed = 1;        // Door moves downwards
     this.opacity = 255;
     this.state = `mainRoom`;
-    this.enteringX = 395;       // Spawn avatar in middle of Main Room
-    this.enteringY = 305;       // Spawn avatar in middle of Main Room
-    this.limit = 430;           // Line User has to surpass to lose level
-    this.active = true;         // Turns false when User loses
-    this.dotsNumber = 20;       // Static Effect
-    this.numericStrings = 3;    // "Lines of code" Effect (intended as "reprogramming" of Avatar/User)
+    this.enteringX = 395;          // Spawn avatar in middle of Main Room
+    this.enteringY = 305;          // Spawn avatar in middle of Main Room
+    this.limit = 430;              // Line User has to surpass to lose level
+    this.active = true;            // Turns false when User loses
+    this.levelDuration = 2000;    // Time amount User has to survive level
+    this.dotsNumber = 20;          // Static Effect
+    this.numericStrings = 3;       // "Lines of code" Effect (intended as "reprogramming" of Avatar/User)
 
   }
 
@@ -31,6 +35,7 @@ class ChasingLevel{
     this.constrain(avatar);
     this.switchState(avatar, dialogueBox);
     this.capture(avatar);
+    this.activateDoor();
     this.displayWalls();
     this.displayDoor();
     this.displayCodeLines();
@@ -71,6 +76,29 @@ class ChasingLevel{
 
   }
 
+  activateDoor(){
+    // Display only if User survives level for certain amount of time
+    if ( this.active ){
+      setTimeout( ()=>{
+        this.moveDoor();
+        // this.displayDoor();
+      }, this.levelDuration);
+    }
+
+  }
+
+  moveDoor(){
+    // Move Door Downwards
+    if (this.active){
+      // Move only if User hasn't lost
+      this.doorX += this.doorVX;
+      this.doorY += this.doorVY;
+
+      this.doorVY = this.doorSpeed;
+    }
+
+  }
+
   displayWalls(){
     // Room Walls
     push();
@@ -84,15 +112,14 @@ class ChasingLevel{
 
   displayDoor(){
     // Door
-    // (Not really, more like a shape through which the User navigates the rooms)
     push();
     noStroke();
     fill(255, this.opacity);
-    rect(this.doorX, this.doorY, this.doorWidth, this.doorHeight, this.radius);
+    rect(this.doorX, this.doorY, this.doorWidth, this.doorHeight);
     pop();
   }
 
-  displayStatics(){  // Array?
+  displayStatics(){
     // Statics
     push();
     stroke(255);
