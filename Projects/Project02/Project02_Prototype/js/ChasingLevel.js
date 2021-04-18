@@ -21,6 +21,8 @@ class ChasingLevel{
     this.enteringY = 305;       // Spawn avatar in middle of Main Room
     this.limit = 430;           // Line User has to surpass to lose level
     this.active = true;         // Turns false when User loses
+    this.dotsNumber = 20;       // Static Effect
+    this.numericStrings = 3;    // "Lines of code" Effect (intended as "reprogramming" of Avatar/User)
 
   }
 
@@ -31,10 +33,9 @@ class ChasingLevel{
     this.capture(avatar);
     this.displayWalls();
     this.displayDoor();
-    this.displayFloorCracks();
+    this.displayCodeLines();
     this.displayStatics();
     // Call Avatar in Room class(es)
-    // avatar.update(avatarImage);
     avatar.escape(avatarImage);
     // Call Dialogue Box in Room class (rather than main script)
     dialogueBox.display(dialogueBox);
@@ -94,35 +95,46 @@ class ChasingLevel{
   displayStatics(){  // Array?
     // Statics
     push();
-    let randomX = random(0, 800);
-    let randomY = random(0, 600);
     stroke(255);
-    strokeWeight(3);
-    point(randomX, randomY, randomX, randomY);
-    point(randomX, randomY, randomX, randomY);
-    point(randomX, randomY, randomX, randomY);
-    point(randomX, randomY, randomX, randomY);
-    point(randomX, randomY, randomX, randomY);
-    point(randomX, randomY, randomX, randomY);
-    point(randomX, randomY, randomX, randomY);
-    point(randomX, randomY, randomX, randomY);
+    let randomStroke = random(0.5, 2.5);
+    strokeWeight(randomStroke);
+    for(let i = 0; i < this.dotsNumber; i ++){
+       let randomX = random(0, 800);
+       let randomY = random(0, 600);
+       point(randomX, randomY, randomX, randomY);
+    }
     pop();
   }
 
-  displayFloorCracks(){
-    // Cracking Floor (kinda)
+  displayCodeLines(){
+    // Lines of Code - "Their" attempt to reprogram User/AVatar
     push();
-    let randomX1 = random(270, 530);
-    let randomY1 = random(400, 600);
-    let randomX2 = random(270, 530);
-    let randomY2 = random(400, 600);
-    stroke(255, 255);
-    let randomStroke = random(2, 6);
-    strokeWeight(randomStroke);
-    line(randomX1, randomY1, randomX2, randomY2);
-    line(randomX2, randomY2, randomX1, randomY1);
-    line(randomX1, randomY1, randomX2, randomY2);
-    line(randomX2, randomY2, randomX1, randomY1);
+    textAlign(CENTER, CENTER);
+    textSize(20);
+    let red = random(40, 255);
+    let green = random(40, 255);
+    let blue = random(40, 255);
+    fill(red, green, blue);
+    for(let i = 0; i < this.numericStrings; i ++){
+       let r = random(0, 1);
+       let stringX = random(380, 400);
+       let stringY = random(420, 600);
+       let stringWidth = random(100, 700);
+       let stringHeigth = random(200, 600);
+       text(r, stringX, stringY, stringWidth, stringHeigth);
+    }
+
+    if(!this.active){
+      textSize(47);
+      for(let i = 0; i < this.numericStrings; i ++){
+         let r = random(0, 1);
+         let stringX = random(300, 500);
+         let stringY = random(100, 600);
+         let stringWidth = random(500, 800);
+         let stringHeigth = random(100, 700);
+         text(r, stringX, stringY, stringWidth, stringHeigth);
+      }
+    }
     pop();
   }
 
