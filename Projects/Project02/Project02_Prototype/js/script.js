@@ -52,7 +52,7 @@ let emptyRoom = undefined;
 let chasingLevel = undefined;
 
 // States
-let state = `chasingLevel` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
