@@ -22,7 +22,7 @@ let crosshairCursorImage = undefined;
 let firstAvatar = undefined;
 
 // Store Achieved Senses
-let achievedSenses = [];
+let achievedSenses = [0, 1, 2, 3, 4, 5];
 
 // Rooms
 // Started Room
@@ -58,7 +58,7 @@ let numberObstacles = 3;
 let obstacleImage = undefined;
 
 // States
-let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `mainRoom` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
@@ -123,7 +123,7 @@ function setup() {
 
   // Obstacle(s) - Within Chasing Levels
   obstacle = new Obstacle(obstacleImage, obstacle);
-  obstacle.create();
+  // obstacle.create();
   // Create and Display Array of Obstacles
   // for(let i = 0; i < obstacle.numberObstacles; i ++){
   //    let obstacleX = random(obstacle.x1, obstacle.x2);
@@ -164,8 +164,10 @@ function draw() {
   else if( state === `mainRoom` ){
 
     // Main Room
+    mainRoom.roomSystem(firstAvatar, dialogueBox);
     mainRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     mainRoom.addSecondDoor(firstAvatar, dialogueBox);
+
 
 
   }

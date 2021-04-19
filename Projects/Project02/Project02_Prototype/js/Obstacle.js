@@ -29,11 +29,11 @@ class Obstacle{
   update(){
     // Default Behaviour
     // Obstacles
-    for (let i = 0; i < this.obstacles.length; i ++){
-      this = this.obstacles[i];   // !!!!!!!!!!!!!!
-      this.move();
-      this.display();
-    }
+    // for (let i = 0; i < this.obstacles.length; i ++){
+    //   this = this.obstacles[i];   // !!!!!!!!!!!!!!
+    //   this.move();
+    //   this.display();
+    // }
   }
 
   move(){
