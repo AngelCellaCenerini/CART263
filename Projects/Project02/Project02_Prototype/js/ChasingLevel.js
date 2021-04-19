@@ -2,7 +2,7 @@ class ChasingLevel{
   // User reaches Vhasing Level each time they achieve a "sense"; losing means having to retry the level
   // Level increases difficulty each time
   // Last Chasing Level brings User to victory
-  constructor(avatarImage){
+  constructor(){
     this.roomX = 400;              // Distinguishing Room vs "Doors" properties
     this.roomY = 300;              // Distinguishing Room vs "Doors" properties
     this.roomWidth = 250;
@@ -20,7 +20,7 @@ class ChasingLevel{
     this.doorSpeed = 0.5;          // Door moves downwards
     this.activeDoor = false;       // To reset Door
     this.doorTimer = 0;            // To activate Door
-    this.levelDuration = 5;        // How long Level lasts
+    this.levelDuration = 8;        // How long User has to last before Door activates
     this.opacity = 255;            // Elements' oOpacity
     this.state = `mainRoom`;       // State level switches to (if User doesn't lose, obv)
     this.enteringX = 395;          // Spawn avatar in middle of Main Room
@@ -29,10 +29,17 @@ class ChasingLevel{
     this.active = true;            // Turns false when User loses
     this.dotsNumber = 20;          // Static Effect
     this.numericStrings = 3;       // "Lines of code" Effect (intended as "reprogramming" of Avatar/User)
-
+    this.stringX1 = 380;           // String values (vary in different Chasing Levels)
+    this.stringX2 = 400;
+    this.stringY1 = 420;
+    this.stringY2 = 600;
+    this.stringWidth1 = 100;
+    this.stringWidth2 = 700;
+    this.stringHeight1 = 200;
+    this.stringHeight2 = 600;
   }
 
-  update(avatar, avatarImage, dialogueBox){
+  update(avatar, avatarImage, dialogueBox, obstacle){
     // Default Behavior
     this.constrain(avatar);
     this.switchState(avatar, dialogueBox);
@@ -44,10 +51,12 @@ class ChasingLevel{
     this.displayDoor();
     this.displayCodeLines();
     this.displayStatics();
-    // Call Avatar in Room class(es)
+    // Call Avatar in Chasing Level class(es)
     avatar.escape(avatarImage);
-    // Call Dialogue Box in Room class (rather than main script)
+    // Call Dialogue Box in Chasing Level class (rather than main script)
     dialogueBox.display(dialogueBox);
+    // Call Obstacle(s)
+    // obstacle.update();
   }
 
   constrain(avatar){
@@ -83,8 +92,13 @@ class ChasingLevel{
       // Display Instructions to reset Level
       this.resetLevelInstructions();
     }
-
   }
+
+  // hit(){
+  //   if( obstacle ){
+  //
+  //   }
+  // }
 
   resetLevelInstructions(){
     // Display Instructions
@@ -199,10 +213,10 @@ class ChasingLevel{
     fill(red, green, blue);
     for(let i = 0; i < this.numericStrings; i ++){
        let r = random(0, 1);
-       let stringX = random(380, 400);
-       let stringY = random(420, 600);
-       let stringWidth = random(100, 700);
-       let stringHeigth = random(200, 600);
+       let stringX = random(this.stringX1, this.stringX2);
+       let stringY = random(this.stringY1, this.stringY2);
+       let stringWidth = random(this.stringWidth1, this.stringWidth2);
+       let stringHeigth = random(this.stringHeight1, this.stringHeight2);
        text(r, stringX, stringY, stringWidth, stringHeigth);
     }
 

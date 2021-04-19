@@ -48,8 +48,14 @@ let fifthRoom = undefined;
 // Empty Room
 let emptyRoom = undefined;
 
-// Chasing Level
+// Chasing Levels
 let chasingLevel = undefined;
+let chasingLevel2 = undefined;
+// Obstacles (Chasing Levels)
+let obstacle = undefined;
+let obstacles = [];
+let numberObstacles = 3;
+let obstacleImage = undefined;
 
 // States
 let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
@@ -69,6 +75,7 @@ function preload() {
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
   blinkingLightImage = loadImage(`assets/images/light.png`);
   blinkingTealLightImage = loadImage(`assets/images/tealLight.png`);
+  obstacleImage = loadImage(`assets/images/crosshair-cursor.png`);
 }
 
 
@@ -109,11 +116,28 @@ function setup() {
   fifthRoom = new FifthRoom(crosshairCursorImage);
   // Empty Room
   emptyRoom = new EmptyRoom(crosshairCursorImage);
-  // Chasing Level
-  chasingLevel = new ChasingLevel(crosshairCursorImage);
 
-  // Chasing Level
-  // boh = new Boh(crosshairCursorImage);
+  // Chasing Levels
+  chasingLevel = new ChasingLevel();
+  chasingLevel2 = new ChasingLevel2();
+
+  // Obstacle(s) - Within Chasing Levels
+  obstacle = new Obstacle(obstacleImage, obstacle);
+  obstacle.create();
+  // Create and Display Array of Obstacles
+  // for(let i = 0; i < obstacle.numberObstacles; i ++){
+  //    let obstacleX = random(obstacle.x1, obstacle.x2);
+  //    let obstacleY = random(obstacle.y1, obstacle.y2);
+  //    let obstacle = image(obstacleImage, obstacleX, obstacleY);
+  //    obstacle.obstacles.push(obstacle);
+  // }
+  // for(let i = 0; i < numberObstacles; i ++){
+  //    let x = random(200, 400);
+  //    let y = random(-20, 0);
+  //    let obstacle = new Obstacle(x, y, obstacleImage);
+  //    obstacles.push(obstacle);
+  // }
+
 }
 
 
@@ -190,7 +214,18 @@ function draw() {
   else if ( state === `chasingLevel` ){
 
     // Chasing Level
-    chasingLevel.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    chasingLevel.update(firstAvatar, crosshairCursorImage, dialogueBox, obstacle);
+    for (let i = 0; i < obstacles.length; i ++){
+      let obstacle = obstacles[i];
+      obstacle.move();
+      obstacle.display();
+    }
+
+  }
+  else if ( state === `chasingLevel2` ){
+
+    // Chasing Level
+    chasingLevel2.update(firstAvatar, crosshairCursorImage, dialogueBox, obstacle);
 
   }
 
