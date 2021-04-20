@@ -9,16 +9,13 @@ body{
   background-color: #191919;
 }
 
-#constrain{
-  position: fixed;
-  top: 27%;
+#eye-constrainer{
+  /* position: fixed; */
+  /* top: 10%; */
   right: 41%;
-  text-align: center;
-  background-color: #191919;
-  padding: 100px;
-  width: 80px;
-  height: 60px;
-  border-radius: 500px;
+  width: 200px;
+  height: 400px;
+  border-color: #FFFFFF;
 }
 
 #eye{
@@ -38,7 +35,7 @@ body{
   top: 29%;
   right: 41%;
   text-align: center;
-  background-color: #191919;
+  background-color: #201919;
   padding: 100px;
   width: 80px;
   height: 60px;
