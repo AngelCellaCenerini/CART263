@@ -14,16 +14,14 @@ class MainRoom extends Room {
     this.roomRightBorder = 675;
     this.roomUpBorder = 150;
     this.roomDownBorder = 515;
-    this.state = `firstRoom`;
+    this.state = ``;
     this.enteringX = 480;
     this.enteringY = 345;
     this.secondState = `starterRoom`;
     this.secondEnteringX = 500;
     this.secondEnteringY = 430;
-    this.firstOption = `firstRoom`;      // Possible Room User could reach from Main Room
-    this.secondOption = `emptyRoom`;
-    // this.thirdOption = `thirdRoom`;
-    // this.fouthOption = `emptyRoom`;
+    this.firstOption = `firstRoom`;      // Possible "relevamt" Room User could reach from Main Room
+    this.secondOption = `emptyRoom`;     // Possible "empty" Room User could reach from Main Room
     this.lightImage = lightImage;
     this.lightX = 400;
     this.lightY = 222;
@@ -62,8 +60,7 @@ class MainRoom extends Room {
   }
 
   roomSystem(avatar, dialogueBox){
-    // this.switchState();
-    // this.selectDestinationRoom();
+    // Once Room system is no longer Random, User can select specific Rooms
     this.switchRelevantRooms(avatar, dialogueBox);
     this.displayAchievementsDoors();
   }
@@ -71,10 +68,10 @@ class MainRoom extends Room {
   switchState(avatar, dialogueBox){
     if(this.randomness){
       // Rewrite Function from Main Room
-      // So that 'change' is only calcutlated once
+      // Consider Randomness in switching Room/State
       let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
       if (d1 < (this.doorWidth/6 + avatar.size/7)){
-        // this.selectDestinationRoom();
+        this.selectDestinationRoom();
         state = this.state;
         this.activateDialogueBox(dialogueBox);
         avatar.x = this.enteringX;
@@ -88,18 +85,18 @@ class MainRoom extends Room {
     if(this.randomness){
       // Randomize Room User Reaches from Main Room
       // Check User Progress
-      if (achievedSenses.length < 0){
+      if (achievedSenses.length === 0){
         this.firstOption = `firstRoom`;
       }
-      else if(achievedSenses.length < 1 && achievedSenses.length > 0){ // this necessary?
+      else if(achievedSenses.length === 1 ){ // this necessary?
         this.firstOption = `secondRoom`;
       }
-      else if(achievedSenses.length < 2 && achievedSenses.length > 1){
+      else if(achievedSenses.length === 2){
         this.firstOption = `thirdRoom`;
       }
 
       // Calculate Probability
-       if (change < 0.3){
+       if (random(0, 1) < 0.3){
          // 30% Chance to reach relevant Room
          this.state = this.firstOption;
        }
@@ -111,6 +108,7 @@ class MainRoom extends Room {
   }
 
   switchRelevantRooms(avatar, dialogueBox){
+    if(!this.randomness){
     // Swith To Relevant Rooms
     // Body Room
     let d2 = dist(this.achievement1X, this.achievementY, avatar.x, avatar.y);
@@ -160,6 +158,7 @@ class MainRoom extends Room {
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
+  }
   }
 
   displayDoor(){

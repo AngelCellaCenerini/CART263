@@ -58,7 +58,7 @@ let numberObstacles = 3;
 let obstacleImage = undefined;
 
 // States
-let state = `mainRoom` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
@@ -131,12 +131,12 @@ function setup() {
   //    let obstacle = image(obstacleImage, obstacleX, obstacleY);
   //    obstacle.obstacles.push(obstacle);
   // }
-  // for(let i = 0; i < numberObstacles; i ++){
-  //    let x = random(200, 400);
-  //    let y = random(-20, 0);
-  //    let obstacle = new Obstacle(x, y, obstacleImage);
-  //    obstacles.push(obstacle);
-  // }
+  for(let i = 0; i < numberObstacles; i ++){
+     let x = random(200, 400);
+     let y = random(-20, 0);
+     let obstacle = new Obstacle(x, y, obstacleImage);
+     obstacles.push(obstacle);
+  }
 
 }
 
@@ -165,6 +165,7 @@ function draw() {
 
     // Main Room
     mainRoom.roomSystem(firstAvatar, dialogueBox);
+    // mainRoom.selectDestinationRoom(firstAvatar, dialogueBox);
     mainRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     mainRoom.addSecondDoor(firstAvatar, dialogueBox);
 
