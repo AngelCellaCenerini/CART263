@@ -22,7 +22,7 @@ let crosshairCursorImage = undefined;
 let firstAvatar = undefined;
 
 // Store Achieved Senses
-let achievedSenses = [0, 1, 2, 3, 4, 5];
+let achievedSenses = [];
 
 // Rooms
 // Started Room

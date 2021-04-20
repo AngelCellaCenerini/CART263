@@ -14,7 +14,7 @@ class MainRoom extends Room {
     this.roomRightBorder = 675;
     this.roomUpBorder = 150;
     this.roomDownBorder = 515;
-    this.state = `chasingLevel`;
+    this.state = `firstRoom`;
     this.enteringX = 480;
     this.enteringY = 345;
     this.secondState = `starterRoom`;
@@ -44,12 +44,12 @@ class MainRoom extends Room {
     this.achievement1B = 118;
     // Second Achievement
     this.achievement2X = 300;
-    this.achievement2G = 168;
-    this.achievement2B = 215;
+    this.achievement2G = 105;
+    this.achievement2B = 132;
     // Third Achievement
     this.achievement3X = 400;
-    this.achievement3G = 105;
-    this.achievement3B = 132;
+    this.achievement3G = 168;
+    this.achievement3B = 215;
     // Fourth Achievement
     this.achievement4X = 500;
     this.achievement4G = 32;
@@ -117,6 +117,8 @@ class MainRoom extends Room {
     if (d2 < (this.achievementWidth/6 + avatar.size/7)){
       this.activateDialogueBox(dialogueBox);
       this.state = `firstRoom`;
+
+      state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
@@ -125,6 +127,7 @@ class MainRoom extends Room {
     if (d3 < (this.achievementWidth/6 + avatar.size/7)){
       this.activateDialogueBox(dialogueBox);
       this.state = `secondRoom`;
+      state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
@@ -133,6 +136,8 @@ class MainRoom extends Room {
     if (d4 < (this.achievementWidth/6 + avatar.size/7)){
       this.activateDialogueBox(dialogueBox);
       this.state = `thirdRoom`;
+
+      state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
@@ -141,6 +146,8 @@ class MainRoom extends Room {
     if (d5 < (this.achievementWidth/6 + avatar.size/7)){
       this.activateDialogueBox(dialogueBox);
       this.state = `fourthRoom`;
+
+      state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
@@ -149,6 +156,7 @@ class MainRoom extends Room {
     if (d6 < (this.achievementWidth/6 + avatar.size/7)){
       this.activateDialogueBox(dialogueBox);
       this.state = `fifthRoom`;
+      state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
