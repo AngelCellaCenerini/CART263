@@ -10,8 +10,6 @@ body{
 }
 
 #eye-constrainer{
-  /* position: fixed; */
-  /* top: 10%; */
   right: 41%;
   width: 200px;
   height: 400px;
@@ -44,4 +42,62 @@ body{
 
 .found{
   border-bottom: double white;
+}
+
+.pentagram{
+  border-top: 1px solid;
+  margin-top: -2px;
+}
+
+.notes{
+  position: absolute;
+  background-color: #FFFFFF;
+  padding: 2px;
+  border-radius: 500px;
+  width: 6px;
+  height: 5px;
+  margin-top: -30px;
+  visibility: hidden;
+}
+
+#sol{
+  margin-top: -20px;
+  margin-left: 30%;
+}
+
+#mi{
+  margin-top: -41px;
+  margin-left: 70%;
+}
+
+#si{
+  margin-top: -30px;
+  margin-left: 80%;
+}
+
+#do{
+  margin-top: -33px;
+  margin-left: 10%;
+}
+
+#la{
+  margin-top: -25px;
+  margin-left: 89%;
+}
+
+#fa{
+  margin-top: -17px;
+  margin-left: 86%;
+}
+
+#re{
+  margin-top: -37px;
+  margin-left: 21%;
+}
+
+.played-notes{
+  background-color: #FF0000;
+  padding: 10px;
+  border-radius: 6px;
+  visibility: hidden;
 }

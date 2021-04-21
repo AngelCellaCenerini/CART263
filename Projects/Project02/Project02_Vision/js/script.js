@@ -19,10 +19,16 @@ $(`#eyelid`).on(`mouseenter`, function(event) {
   });
   });
 
-
+// Drag Eyelid Upwards
 $(`#eyelid`).draggable({
   axis: `y`,
   revert: true,
   containment: `#eye-constrainer`,
   scroll: false
+});
+
+
+// PLay notes
+$(`#pentagram`).keydown(function(event) {
+  $(`#do`).show();
 });
