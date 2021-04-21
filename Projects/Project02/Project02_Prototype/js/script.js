@@ -57,7 +57,14 @@ let obstacles = [];
 let numberObstacles = 3;
 
 // States
-let state = `chasingLevel2` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let gameData = JSON.parse(localStorage.getItem(`gameData`));
+if (!gameData) {
+  gameData = {
+    state: `title`,
+    achievedSenses: []
+  }
+}
 
 
 /**
@@ -159,11 +166,18 @@ function draw() {
 
 
   }
-  else if ( state === `firstRoom` ){
+  // else if ( state === `firstRoom` ){
+  else if ( gameData.state === `firstRoom` ){
 
     // First Room
     firstRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     firstRoom.displayButton();
+
+    // Keep track of progress
+    // document.getElementById(`first-room-button`).style.visibility = `hidden`;
+    // $(`#do-task`).on(`click`, function() {
+    //   window.location = `task.html`
+    // });
 
 
   }
