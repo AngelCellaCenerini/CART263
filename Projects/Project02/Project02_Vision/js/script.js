@@ -9,17 +9,17 @@ author, and this description to match your project!
 "use strict";
 
 // Discover Eyelid
-// $(`#eyelid`).on(`mouseenter`, function(event) {
-//   // Display Eyelid Borders via Mouse Input
-//   $(this).addClass(`found`, 2000);
-//   // Make Eyelid draggable
-//   // $(this).draggable({
-//   //   revert: "invalid", // when not dropped, the item will revert back to its initial position
-//   //   containment: "document",
-//
-//     // Clone dragged letters
-//     // helper: `clone`
-//   });
+$(`#eyelid`).on(`mouseenter`, function(event) {
+  // Display Eyelid Borders via Mouse Input
+  $(this).addClass(`found`, 2000);
+  // Make Eyelid draggable
+  // $(this).draggable({
+  //   revert: "invalid", // when not dropped, the item will revert back to its initial position
+  //   containment: "document",
+
+    // Clone dragged letters
+    // helper: `clone`
+  });
 
 
 $(`#eyelid`).draggable({
@@ -32,10 +32,10 @@ $(`#eyelid`).draggable({
 // $( "#eyelid" ).draggable( "revert", "revertDuration", 200 );
 
 // Hide Eyelid
-// $(`#eyelid`).on(`mouseleave`, function(event) {
-//   // Display Eyelid Borders via Mouse Input
-//   $(this).removeClass(`found`, 2000);
-// });
+$(`#eyelid`).on(`mouseleave`, function(event) {
+  // Display Eyelid Borders via Mouse Input
+  $(this).removeClass(`found`, 2000);
+});
 
 // Set Up Droppable Element
 // $( "#eyelid" ).draggable({ revert: "invalid" });
