@@ -44,9 +44,11 @@ class ChasingLevel{
     this.constrain(avatar);
     this.switchState(avatar, dialogueBox);
     this.capture(avatar);
+    this.fail(avatar);
+    // this.hit(obstacle, avatar);
     this.activateDoor();
     this.moveDoor();
-    this.resetLevel(avatar);
+    this.resetLevel(avatar, obstacle);
     this.displayWalls();
     this.displayDoor();
     this.displayCodeLines();
@@ -55,8 +57,6 @@ class ChasingLevel{
     avatar.escape(avatarImage);
     // Call Dialogue Box in Chasing Level class (rather than main script)
     dialogueBox.display(dialogueBox);
-    // Call Obstacle(s)
-    // obstacle.update();
   }
 
   constrain(avatar){
@@ -80,6 +80,12 @@ class ChasingLevel{
   capture(avatar){
     // Level "captures" Avatar
     if( avatar.y > this.limit){
+      this.active = false;
+    }
+  }
+
+  fail(avatar){
+    if(!this.active){
       // Freeze Avatar
       avatar.vy = 0;
       avatar.chasingLevelSpeed = 0;
@@ -93,12 +99,6 @@ class ChasingLevel{
       this.resetLevelInstructions();
     }
   }
-
-  // hit(){
-  //   if( obstacle ){
-  //
-  //   }
-  // }
 
   resetLevelInstructions(){
     // Display Instructions
@@ -147,7 +147,7 @@ class ChasingLevel{
     }
   }
 
-  resetLevel(avatar){
+  resetLevel(avatar, obstacle){
     // Reset Level if User fails
     // Press R to Reset
     if ( this.active === false && keyIsDown(82) ){
@@ -165,6 +165,12 @@ class ChasingLevel{
       this.doorSpeed = 0.5;
       this.doorTimer = 0;
       this.activeDoor = false;
+
+      // Reset Obstacles
+      for (let i = 0; i < obstacles.length; i ++){
+        let obstacle = obstacles[i];
+          obstacle.y = random(-150, -10);
+      }
   }
 }
 

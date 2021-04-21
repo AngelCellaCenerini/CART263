@@ -55,10 +55,9 @@ let chasingLevel2 = undefined;
 let obstacle = undefined;
 let obstacles = [];
 let numberObstacles = 3;
-let obstacleImage = undefined;
 
 // States
-let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+let state = `chasingLevel2` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 
 
 /**
@@ -75,7 +74,6 @@ function preload() {
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
   blinkingLightImage = loadImage(`assets/images/light.png`);
   blinkingTealLightImage = loadImage(`assets/images/tealLight.png`);
-  obstacleImage = loadImage(`assets/images/crosshair-cursor.png`);
 }
 
 
@@ -122,21 +120,10 @@ function setup() {
   chasingLevel2 = new ChasingLevel2();
 
   // Obstacle(s) - Within Chasing Levels
-  obstacle = new Obstacle(obstacleImage, obstacle);
-  // obstacle.create();
-  // Create and Display Array of Obstacles
-  // for(let i = 0; i < obstacle.numberObstacles; i ++){
-  //    let obstacleX = random(obstacle.x1, obstacle.x2);
-  //    let obstacleY = random(obstacle.y1, obstacle.y2);
-  //    let obstacle = image(obstacleImage, obstacleX, obstacleY);
-  //    obstacle.obstacles.push(obstacle);
-  // }
-  for(let i = 0; i < numberObstacles; i ++){
-     let x = random(200, 400);
-     let y = random(-20, 0);
-     let obstacle = new Obstacle(x, y, obstacleImage);
-     obstacles.push(obstacle);
-  }
+  obstacle = new Obstacle(obstacle);
+  // Create Obstacles array
+  createObstacles();
+
 
 }
 
@@ -218,17 +205,19 @@ function draw() {
 
     // Chasing Level
     chasingLevel.update(firstAvatar, crosshairCursorImage, dialogueBox, obstacle);
-    for (let i = 0; i < obstacles.length; i ++){
-      let obstacle = obstacles[i];
-      obstacle.move();
-      obstacle.display();
-    }
+
+    // Obstacles
+    updateObstacles(firstAvatar, chasingLevel);
+
 
   }
   else if ( state === `chasingLevel2` ){
 
     // Chasing Level
     chasingLevel2.update(firstAvatar, crosshairCursorImage, dialogueBox, obstacle);
+
+    // Obstacles
+    updateObstacles(firstAvatar, chasingLevel2);
 
   }
 
@@ -256,6 +245,29 @@ function instructionsText(){
   textSize(16);
   text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
   pop();
+}
+// Obstacles (called in Chasing Levels)
+function createObstacles(){
+  // Create Obstacles
+  for(let i = 0; i < numberObstacles; i ++){
+     let x = random(300, 510);
+     let y = random(-200, -10);
+     let obstacle = new Obstacle(x, y);
+     obstacles.push(obstacle);
+  }
+}
+function updateObstacles(firstAvatar, chasingLevel){
+  // Update Obstacles Array
+  for (let i = 0; i < obstacles.length; i ++){
+    let obstacle = obstacles[i];
+    if( state === `chasingLevel`){
+      obstacle.update(firstAvatar, chasingLevel);
+    }
+    else if( state === `chasingLevel2`){
+      obstacle.update(firstAvatar, chasingLevel2);
+    }
+
+  }
 }
 //
 
