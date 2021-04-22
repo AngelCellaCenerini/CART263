@@ -44,9 +44,17 @@ body{
   border-bottom: double white;
 }
 
+.visible{
+  visibility: visible;
+}
+
 .pentagram{
   border-top: 1px solid;
   margin-top: -2px;
+  margin-left: 0px;
+  width: 4%;
+  /* visibility: hidden; */
+  opacity: 0;
 }
 
 .notes{

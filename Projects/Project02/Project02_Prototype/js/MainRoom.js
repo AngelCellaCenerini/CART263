@@ -72,7 +72,7 @@ class MainRoom extends Room {
       let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
       if (d1 < (this.doorWidth/6 + avatar.size/7)){
         this.selectDestinationRoom();
-        state = this.state;
+        gameData.state = this.state;
         this.activateDialogueBox(dialogueBox);
         avatar.x = this.enteringX;
         avatar.y = this.enteringY;
@@ -116,7 +116,7 @@ class MainRoom extends Room {
       this.activateDialogueBox(dialogueBox);
       this.state = `firstRoom`;
 
-      state = this.state;
+      gameData.state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
@@ -125,7 +125,7 @@ class MainRoom extends Room {
     if (d3 < (this.achievementWidth/6 + avatar.size/7)){
       this.activateDialogueBox(dialogueBox);
       this.state = `secondRoom`;
-      state = this.state;
+      gameData.state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
@@ -135,7 +135,7 @@ class MainRoom extends Room {
       this.activateDialogueBox(dialogueBox);
       this.state = `thirdRoom`;
 
-      state = this.state;
+      gameData.state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
@@ -145,7 +145,7 @@ class MainRoom extends Room {
       this.activateDialogueBox(dialogueBox);
       this.state = `fourthRoom`;
 
-      state = this.state;
+      gameData.state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
@@ -154,7 +154,7 @@ class MainRoom extends Room {
     if (d6 < (this.achievementWidth/6 + avatar.size/7)){
       this.activateDialogueBox(dialogueBox);
       this.state = `fifthRoom`;
-      state = this.state;
+      gameData.state = this.state;
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }

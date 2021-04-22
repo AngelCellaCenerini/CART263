@@ -70,10 +70,14 @@ class ChasingLevel{
     // Switch State by overlapping displayed "Door"
     let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
     if (d1 < (this.doorWidth/6 + avatar.size/7)){
-      state = this.state;
+      gameData.state = this.state;
       this.activateDialogueBox(dialogueBox);
+      // Establish Avatar position when entering new state
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
+      // Add achievement to User Progress
+      achievedSenses.push(achievedSense);
+      // console.log(achievedSenses.length);
     }
   }
 
@@ -244,7 +248,7 @@ class ChasingLevel{
     // Reset and Activate Dialogue box each time User enters state
     dialogueBox.reset();
     setTimeout(function() {
-      dialogueBox.typewriter(dialogues.simulation_dialogues[state]);
+      dialogueBox.typewriter(dialogues.simulation_dialogues[gameData.state]);
     }, 1000);
   }
 

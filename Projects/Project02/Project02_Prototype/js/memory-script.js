@@ -13,14 +13,14 @@ author, and this description to match your project!
 let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
-    state: `task1`,
-    rubySlippers: false,
-    thatArray: []
+    state: `memoryWebpage`,
+    achievedSenses: [0]
   }
 }
 
-$(`#task`).on(`click`, function() {
-  gameData.state = `task1Complete`;
+$(`#memory-webpage`).on(`click`, function() {
+  gameData.state = `chasingLevel2`;
+  gameData.achievedSenses = [0, 1];
   localStorage.setItem(`gameData`,JSON.stringify(gameData));
   window.location = `index.html`;
 });

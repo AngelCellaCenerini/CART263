@@ -20,11 +20,22 @@ class FirstRoom extends Room {
     this.state = `mainRoom`;
     this.active = false;
     this.buttonId = `first-room-button`;  // Id of Button HTML Element (one button per "relevant" Rooms)
+    this.destinationHTML = `vision.html`;
   }
 
-
-  displayButton(){
+  manageButton(){
+    // Identigy HTML Element
     let roomButton = document.getElementById(this.buttonId);
+
+    roomButton.onclick = function() {
+      // window.location = this.destinationHTML;
+      // achievedSenses.push(achievedSense);
+      let destination = `vision.html`;
+      window.location = destination;
+    };
+
+    // Display Button
     roomButton.style.visibility = `visible`;
+
   }
 }

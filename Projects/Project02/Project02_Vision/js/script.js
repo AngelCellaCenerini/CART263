@@ -8,10 +8,20 @@ author, and this description to match your project!
 
 "use strict";
 
+// $(`.pentagram`).hide();
+
 // Discover Eyelid
 $(`#eyelid`).on(`mouseenter`, function(event) {
   // Display Eyelid Borders via Mouse Input
   $(this).addClass(`found`, 2000);
+  // setTimeout( ()=>{
+    // Display Pentagram
+    // $(`.pentagram`).display(3000);
+    $(`.pentagram`).animate({
+      "opacity": `1`
+    }, 2000);
+  // }, 1000);
+
   // Make Eyelid draggable
   $(`#eyelid`).on(`mouseleave`, function(event) {
     // Display Eyelid Borders via Mouse Input
@@ -29,6 +39,7 @@ $(`#eyelid`).draggable({
 
 
 // PLay notes
-$(`#pentagram`).keydown(function(event) {
-  $(`#do`).show();
+$(`.pentagram`).keydown(function(event) {
+  // $(`#do`).show();
+  $(`#do`).addClass(`visible`, 2000);
 });

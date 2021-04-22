@@ -22,6 +22,7 @@ let crosshairCursorImage = undefined;
 let firstAvatar = undefined;
 
 // Store Achieved Senses
+let achievedSense = undefined;
 let achievedSenses = [];
 
 // Rooms
@@ -57,7 +58,7 @@ let obstacles = [];
 let numberObstacles = 3;
 
 // States
-let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
+// let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
@@ -142,20 +143,20 @@ function draw() {
   // Color Background
   background(20);
 
-  if ( state === `title`){
+  if ( gameData.state === `title`){
     titleText();
   }
-  else if( state === `instructions` ){
+  else if( gameData.state === `instructions` ){
     instructionsText();
   }
-  else if( state === `starterRoom` ){
+  else if( gameData.state === `starterRoom` ){
 
     // Starter Room
     starterRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
 
 
   }
-  else if( state === `mainRoom` ){
+  else if( gameData.state === `mainRoom` ){
 
     // Main Room
     mainRoom.roomSystem(firstAvatar, dialogueBox);
@@ -163,6 +164,9 @@ function draw() {
     mainRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     mainRoom.addSecondDoor(firstAvatar, dialogueBox);
 
+    if(achievedSenses.length !== 0){
+      console.log(achievedSenses.length);
+    }
 
 
   }
@@ -171,51 +175,44 @@ function draw() {
 
     // First Room
     firstRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
-    firstRoom.displayButton();
-
-    // Keep track of progress
-    // document.getElementById(`first-room-button`).style.visibility = `hidden`;
-    // $(`#do-task`).on(`click`, function() {
-    //   window.location = `task.html`
-    // });
-
+    firstRoom.manageButton();
 
   }
-  else if (state === `secondRoom`){
+  else if (gameData.state === `secondRoom`){
 
     // Second Room
     secondRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
-    secondRoom.displayButton();
+    secondRoom.manageButton();
 
   }
-  else if (state === `thirdRoom`){
+  else if (gameData.state === `thirdRoom`){
 
     // Third Room
     thirdRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
-    thirdRoom.displayButton();
+    thirdRoom.manageButton();
 
   }
-  else if (state === `fourthRoom`){
+  else if (gameData.state === `fourthRoom`){
 
     // Fourth Room
     fourthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
-    fourthRoom.displayButton();
+    fourthRoom.manageButton();
 
   }
-  else if (state === `fifthRoom`){
+  else if (gameData.state === `fifthRoom`){
 
     // Fifth Room
     fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     fifthRoom.displayPreviousAchievements();
 
   }
-  else if ( state === `emptyRoom` ){
+  else if ( gameData.state === `emptyRoom` ){
 
     // Empty Room
     emptyRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
 
   }
-  else if ( state === `chasingLevel` ){
+  else if ( gameData.state === `chasingLevel` ){
 
     // Chasing Level
     chasingLevel.update(firstAvatar, crosshairCursorImage, dialogueBox, obstacle);
@@ -225,7 +222,7 @@ function draw() {
 
 
   }
-  else if ( state === `chasingLevel2` ){
+  else if ( gameData.state === `chasingLevel2` ){
 
     // Chasing Level
     chasingLevel2.update(firstAvatar, crosshairCursorImage, dialogueBox, obstacle);
@@ -274,10 +271,10 @@ function updateObstacles(firstAvatar, chasingLevel){
   // Update Obstacles Array
   for (let i = 0; i < obstacles.length; i ++){
     let obstacle = obstacles[i];
-    if( state === `chasingLevel`){
+    if( gameData.state === `chasingLevel`){
       obstacle.update(firstAvatar, chasingLevel);
     }
-    else if( state === `chasingLevel2`){
+    else if( gameData.state === `chasingLevel2`){
       obstacle.update(firstAvatar, chasingLevel2);
     }
 
@@ -291,12 +288,12 @@ function keyPressed(){
   // User presses ENTER
   if (keyCode === 13){
 
-    if( state === `title`){
-      state = `instructions`;
+    if( gameData.state === `title`){
+      gameData.state = `instructions`;
     }
     // In Instrucitons State
-    else if( state === `instructions`){
-      state = `starterRoom`;
+    else if( gameData.state === `instructions`){
+      gameData.state = `starterRoom`;
       // Trigger Dialogue Box - Typewriter Effect
       selectDialogue();
     }
@@ -316,7 +313,7 @@ function selectDialogue(){
   // Starter Room
   dialogueBox.reset();
   setTimeout(function() {
-    dialogueBox.typewriter(dialogues.simulation_dialogues[state]);
+    dialogueBox.typewriter(dialogues.simulation_dialogues[gameData.state]);
   }, 1000);
 }
 //
