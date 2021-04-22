@@ -1,5 +1,6 @@
 class MainRoom extends Room {
   // Description and Comments explained in main class Room
+  // When Main Room becomes "complete" (!this.ongoing), all doors and related systems are nullified
   constructor(avatarImage, lightImage){
     super();
     this.roomX = 400;
@@ -57,15 +58,15 @@ class MainRoom extends Room {
     this.achievement5R = 14;
     this.achievement5G = 114;
     this.achievement5B = 246;
-
-    // Room Status
-    this.active = true;
   }
 
   roomSystem(avatar, dialogueBox){
-    // Once Room system is no longer Random, User can select specific Rooms
-    this.switchRelevantRooms(avatar, dialogueBox);
-    this.displayAchievementsDoors();
+    if (this.ongoing){
+      // Once Room system is no longer Random, User can select specific Rooms
+      this.switchRelevantRooms(avatar, dialogueBox);
+      this.displayAchievementsDoors();
+    }
+
   }
 
   switchState(avatar, dialogueBox){
@@ -165,8 +166,8 @@ class MainRoom extends Room {
   }
 
   displayDoor(){
-    // Only called if Room Status is Random
-    if(this.randomness){
+    // Only called if Room Status is Random and ongoing
+    if(this.randomness === true && this.ongoing === true){
       // Display Door
       push();
       noStroke();

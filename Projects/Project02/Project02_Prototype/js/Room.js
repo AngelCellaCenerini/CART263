@@ -37,6 +37,10 @@ class Room{
     this.opacityValue1 = 70;    // Blinking Effect Intensity Varies depending on Lights
     this.opacityValue2 = 180;   // Blinking Effect Intensity Varies depending on Lights
 
+    // Room Status - Complete only when User finishes program
+    // Will only turn false for Main Room at the end of program (but it saves a lot of code lines to set the mechanism here)
+    this.ongoing = true;
+
   }
 
   update(avatar, avatarImage, dialogueBox){
@@ -65,6 +69,7 @@ class Room{
   }
 
   switchState(avatar, dialogueBox){
+    if (this.ongoing){     // only turns false in Main Room
     // Switch State by overlapping displayed "Door"
     let d1 = dist(this.doorX, this.doorY, avatar.x, avatar.y);
     if (d1 < (this.doorWidth/6 + avatar.size/7)){
@@ -73,9 +78,11 @@ class Room{
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
+   }
   }
 
   switchSecondState(avatar, dialogueBox){
+    if (this.ongoing){     // only turns false in Main Room
     // Switch state by overlapping second displayed "Door"
     let d2 = dist(this.secondDoorX, this.secondDoorY, avatar.x, avatar.y);
     if (d2 < (this.doorWidth/6 + avatar.size/7)){
@@ -85,6 +92,7 @@ class Room{
         avatar.y = this.secondEnteringY;
 
     }
+   }
   }
 
   displayWalls(){
@@ -98,6 +106,7 @@ class Room{
   }
 
   displayDoor(){
+    if (this.ongoing){     // only turns false in Main Room
     // Door
     // (Not really, more like a shape through which the User navigates the rooms)
     push();
@@ -105,9 +114,11 @@ class Room{
     fill(255, this.opacity);
     rect(this.doorX, this.doorY, this.doorWidth, this.doorHeight, this.radius);
     pop();
+    }
   }
 
   displaySecondDoor(){
+    if (this.ongoing){     // only turns false in Main Room
     // Door
     // (Not really, more like a shape through which the User navigates the rooms)
     push();
@@ -115,6 +126,7 @@ class Room{
     fill(255, this.opacity);
     rect(this.secondDoorX, this.secondDoorY, this.doorHeight, this.doorWidth, this.radius);
     pop();
+    }
   }
 
   activateDialogueBox(dialogueBox){
