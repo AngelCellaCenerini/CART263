@@ -113,7 +113,8 @@ class MainRoom extends Room {
 
   switchRelevantRooms(avatar, dialogueBox){
     if(!this.randomness){
-    // Swith To Relevant Rooms
+    // Swith To Relevant Rooms depending on User progress
+    if (achievedSenses.length > 2){
     // Body Room
     let d2 = dist(this.achievement1X, this.achievementY, avatar.x, avatar.y);
     if (d2 < (this.achievementWidth/6 + avatar.size/7)){
@@ -153,6 +154,8 @@ class MainRoom extends Room {
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
     }
+    }
+    if (achievedSenses.length > 3){
     // Will Room
     let d6 = dist(this.achievement5X, this.achievementY, avatar.x, avatar.y);
     if (d6 < (this.achievementWidth/6 + avatar.size/7)){
@@ -164,16 +167,20 @@ class MainRoom extends Room {
     }
   }
   }
+  }
 
   displayDoor(){
     // Only called if Room Status is Random and ongoing
-    if(this.randomness === true && this.ongoing === true){
+    if(this.randomness === true){
       // Display Door
       push();
       noStroke();
       fill(255, this.opacity);
       rect(this.doorX, this.doorY, this.doorWidth, this.doorHeight, this.radius);
       pop();
+    }
+    else{
+      return;
     }
   }
 
@@ -201,14 +208,11 @@ class MainRoom extends Room {
         fill(this.achievementR, this.achievement3G, this.achievement3B);
         rect(this.achievement3X, this.achievementY, this.achievementWidth, this.achievementHeight);
 
-      }
-      if (achievedSenses.length > 3){
-
         // 4th Achievement Door
         fill(this.achievementR, this.achievement4G, this.achievement4B);
         rect(this.achievement4X, this.achievementY, this.achievementWidth, this.achievementHeight);
       }
-      if (achievedSenses.length > 4){
+      if (achievedSenses.length > 3){
 
         // 5th Achievement Door
         fill(this.achievement5R, this.achievement5G, this.achievement5B);

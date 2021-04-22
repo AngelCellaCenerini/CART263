@@ -20,7 +20,7 @@ class ChasingLevel{
     this.doorSpeed = 0.5;          // Door moves downwards
     this.activeDoor = false;       // To reset Door
     this.doorTimer = 0;            // To activate Door
-    this.levelDuration = 8;        // How long User has to last before Door activates
+    this.levelDuration = 3;        // How long User has to last before Door activates
     this.opacity = 255;            // Elements' oOpacity
     this.state = `mainRoom`;       // State level switches to (if User doesn't lose, obv)
     this.enteringX = 395;          // Spawn avatar in middle of Main Room
