@@ -57,6 +57,9 @@ let obstacle = undefined;
 let obstacles = [];
 let numberObstacles = 3;
 
+// Ending Screen
+let ending = undefined;
+
 // States
 // let state = `title` // Title, Instrucitons, Starter Room, Main Room, First Room - will be renamed-, To be continued
 let gameData = JSON.parse(localStorage.getItem(`gameData`));
@@ -131,6 +134,9 @@ function setup() {
   obstacle = new Obstacle(obstacle);
   // Create Obstacles array
   createObstacles();
+
+  // Ending
+  ending = new Ending();
 
 
 }
@@ -229,6 +235,12 @@ function draw() {
 
     // Obstacles
     updateObstacles(firstAvatar, chasingLevel2);
+
+  }
+  else if ( gameData.state === `finale` ){
+
+    // Final Screen
+    ending.update(dialogueBox);
 
   }
 

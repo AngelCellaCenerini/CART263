@@ -57,6 +57,9 @@ class MainRoom extends Room {
     this.achievement5R = 14;
     this.achievement5G = 114;
     this.achievement5B = 246;
+
+    // Room Status
+    this.active = true;
   }
 
   roomSystem(avatar, dialogueBox){
