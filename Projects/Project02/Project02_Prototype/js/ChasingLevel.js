@@ -76,8 +76,8 @@ class ChasingLevel{
       avatar.x = this.enteringX;
       avatar.y = this.enteringY;
       // Add achievement to User Progress
-      achievedSenses.push(achievedSense);
-      // console.log(achievedSenses.length);
+      gameData.achievedSenses++;
+      localStorage.setItem(`gameData`,JSON.stringify(gameData));
     }
   }
 

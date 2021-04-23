@@ -42,6 +42,12 @@ class FifthRoom extends Room {
     this.achievement4B = 153;
   }
 
+  endProgram(mainRoom){
+    // Switch program name to "complete" status
+    // (dramatic name, yes)
+    mainRoom.ongoing = false;
+  }
+
   displayPreviousAchievements(){
     // Display Colored Rectangles Associated with Previous Achievements
     push();

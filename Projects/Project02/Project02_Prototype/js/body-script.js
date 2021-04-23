@@ -20,7 +20,6 @@ if (!gameData) {
 
 $(`#body-webpage`).on(`click`, function() {
   gameData.state = `chasingLevel4`;
-  gameData.achievedSenses = [0, 1];
   localStorage.setItem(`gameData`,JSON.stringify(gameData));
   window.location = `index.html`;
 });

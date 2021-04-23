@@ -28,16 +28,15 @@ class FirstRoom extends Room {
     // Identigy HTML Element
     let roomButton = document.getElementById(this.buttonId);
 
+    // Relocate User in webpage
     roomButton.onclick = function() {
-      // window.location = this.destinationHTML;
-      // achievedSenses.push(achievedSense);
       let destination = `vision.html`;
       window.location = destination;
     };
 
     // Display Button
     // Check User progress (otherwise button would always display in their room, wheter user has surpassed level or not)
-    if (achievedSenses.length === this.progress){
+    if (gameData.achievedSenses === this.progress){
       roomButton.style.visibility = `visible`;
     }
 

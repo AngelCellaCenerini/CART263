@@ -58,14 +58,26 @@ class MainRoom extends Room {
     this.achievement5R = 14;
     this.achievement5G = 114;
     this.achievement5B = 246;
+
+    // Final mechanics before end of program
+    // Avatar Destination
+    this.positionX = 400;
+    this.positionY = -20;
+    this.timing = 0;
+
   }
 
   roomSystem(avatar, dialogueBox){
-    if (this.ongoing){
+    if (this.ongoing === true ){
       // Once Room system is no longer Random, User can select specific Rooms
       this.switchRelevantRooms(avatar, dialogueBox);
       this.displayAchievementsDoors();
     }
+    // Deactivate White Door depending on User progress
+    this.deactivateDoor();
+
+    // Ending Mechanism before the end of the program
+    this.engulf(avatar, dialogueBox);
 
   }
 
@@ -84,18 +96,25 @@ class MainRoom extends Room {
     }
   }
 
+  deactivateDoor(){
+    if (gameData.achievedSenses > 2){
+      // Make Default (White) Door Disappear
+      this.randomness = false;
+    }
+  }
+
   selectDestinationRoom(){
     // Only called if Door System is random
     if(this.randomness){
       // Randomize Room User Reaches from Main Room
       // Check User Progress
-      if (achievedSenses.length === 0){
+      if (gameData.achievedSenses === 0){
         this.firstOption = `firstRoom`;
       }
-      else if(achievedSenses.length === 1 ){ // this necessary?
+      else if(gameData.achievedSenses === 1 ){ // this necessary?
         this.firstOption = `secondRoom`;
       }
-      else if(achievedSenses.length === 2){
+      else if(gameData.achievedSenses === 2){
         this.firstOption = `thirdRoom`;
       }
 
@@ -114,7 +133,7 @@ class MainRoom extends Room {
   switchRelevantRooms(avatar, dialogueBox){
     if(!this.randomness){
     // Swith To Relevant Rooms depending on User progress
-    if (achievedSenses.length > 2){
+    if (gameData.achievedSenses > 2){
     // Body Room
     let d2 = dist(this.achievement1X, this.achievementY, avatar.x, avatar.y);
     if (d2 < (this.achievementWidth/6 + avatar.size/7)){
@@ -155,7 +174,7 @@ class MainRoom extends Room {
       avatar.y = this.enteringY;
     }
     }
-    if (achievedSenses.length > 3){
+    if (gameData.achievedSenses > 3){
     // Will Room
     let d6 = dist(this.achievement5X, this.achievementY, avatar.x, avatar.y);
     if (d6 < (this.achievementWidth/6 + avatar.size/7)){
@@ -169,6 +188,51 @@ class MainRoom extends Room {
   }
   }
 
+  engulf(avatar, dialogueBox){
+    // Final Scene before program ends
+    // Check if journey is complete
+    if (!this.ongoing){
+
+      // CHange Room borders (avatar restraint)
+      this.roomUpBorder = -20;
+
+      // Change Avatar speed
+      avatar.speed = 0.8;
+      // Drag User towards the light (amen?)
+      let dx = avatar.x - (this.positionX);
+      let dy = avatar.y - (this.positionY);
+
+      if (dx < 0){
+      avatar.vx = avatar.speed;
+      }
+      else if(dx > 0){
+        avatar.vx = -avatar.speed;
+      }
+
+      if (dy < 0){
+        avatar.vy = avatar.speed;
+      }
+      else if(dy > 0){
+        avatar.vy = -avatar.speed;
+      }
+
+
+      // Switch State to Ending Screen (after 7 seconds)
+      // Start counting
+      this.timing ++;
+      if (this.timing > 7*60){
+          // Switch state
+          gameData.state = `finale`;
+          // Reset State dialogues
+          dialogueBox.reset();
+          // Start next State dialogue Box
+          setTimeout( ()=>{
+            this.activateDialogueBox(dialogueBox);
+          }, 3000);
+      }
+    }
+  }
+
   displayDoor(){
     // Only called if Room Status is Random and ongoing
     if(this.randomness === true){
@@ -179,21 +243,18 @@ class MainRoom extends Room {
       rect(this.doorX, this.doorY, this.doorWidth, this.doorHeight, this.radius);
       pop();
     }
-    else{
-      return;
-    }
   }
 
   displayAchievementsDoors(){
     // Display Doors to "relevant" Rooms
     push();
     // Display only if User has achieved 3 "senses", then display door according to next level
-    if (achievedSenses.length > 0){
+    if (gameData.achievedSenses > 0){
 
-      if (achievedSenses.length > 2){
+      if (gameData.achievedSenses > 2){
 
         // Make Default (White) Door Disappear
-        this.randomness = false;
+        // this.randomness = false;
 
 
         // 1st Achievement Door
@@ -212,7 +273,7 @@ class MainRoom extends Room {
         fill(this.achievementR, this.achievement4G, this.achievement4B);
         rect(this.achievement4X, this.achievementY, this.achievementWidth, this.achievementHeight);
       }
-      if (achievedSenses.length > 3){
+      if (gameData.achievedSenses > 3){
 
         // 5th Achievement Door
         fill(this.achievement5R, this.achievement5G, this.achievement5B);

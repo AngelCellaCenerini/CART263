@@ -76,6 +76,8 @@ class FirstAvatar {
 
   display(){
     // Display Avatar
+    push();
     image(this.image, this.x, this.y, this.size);
+    pop();
   }
 }

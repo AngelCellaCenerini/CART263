@@ -48,12 +48,18 @@ class Room{
     this.constrain(avatar);
     this.displayWalls();
     this.displayDoor();
-    this.displayLights();  // only active in Starter + Main Rooms
     this.switchState(avatar, dialogueBox);
     // Call Avatar in Room class(es)
     avatar.update(avatarImage);
+    // Lights - only active in Starter + Main Rooms
+    // called after Avatar so that it overlaps it
+    this.displayLights();
     // Call Dialogue Box in Room class (rather than main script)
-    dialogueBox.display(dialogueBox);
+    // Check if program has been completed
+    if (this.ongoing){
+      dialogueBox.display(dialogueBox);
+    }
+
   }
   addSecondDoor(avatar, dialogueBox){
     // Add Second Door Mechanics

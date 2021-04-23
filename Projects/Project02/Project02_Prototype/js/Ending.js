@@ -1,54 +1,39 @@
 class Ending{
-  // Ending screen is a dark screen fading into Blade Runner quote
+  // Ending screen displays a Blade Runner quote fading into the dark background
   constructor(){
-    this.x = 400;
-    this.y = 300;
-    this.opacity = 255;            // To create Fading Effect
-    this.transparency = -1;      // To create Fading Effect
-    this.active = false;           // Turns true after 2 sec
-    this.timer = 0;                // Initially time state
+    this.x = 400;                // Center DIalogue Box
+    this.y = 300;                // Center DIalogue Box
+    this.opacity = 0;            // Create Fading Effect
+    this.transparency = 1;       // Create Fading Effect
+
   }
 
   update(dialogueBox){
-      // Run State after 2 sec
-      this.activateState();
-      this.run(dialogueBox);
-    }
-
-  activateState(){
-    // Time 2 sec before "activating" Ending State
-    this.timer++;
-     if (this.timer > 2*60){
-       this.active = true;
-    }
-  }
-
-  run(dialogueBox){
-    // Only called when State status turns active
-    if(this.active){
-      // Update and display Dialogue Box
-      this.activateDialogueBox(dialogueBox);
-      dialogueBox.display(dialogueBox);
+      // Adjust Dialogue Box
+      this.customizeDialogueBox(dialogueBox);
       // Update and create Fading Effect
-      this.fade();
+      setTimeout( ()=>{
+        this.fade();
+      }, 8000);
+      // Display Fading Effect
       this.display();
     }
+
+  customizeDialogueBox(dialogueBox){
+    // Center Dialogue Box
+    dialogueBox.x = this.x;
+    dialogueBox.y = this.y;
+    // Change Text color to white
+    dialogueBox.fontColor = 255;
+    // Make Dialogue Box Transparent
+    dialogueBox.transparency = true;
+    // Display Dialogue
+    dialogueBox.display(dialogueBox);
   }
 
   fade(){
     // Create Fading Effect
     this.opacity += this.transparency;
-  }
-
-  activateDialogueBox(dialogueBox){
-    // Center Dialogue Box to canvas
-    dialogueBox.x = this.x;
-    dialogueBox.y = this.y;
-    // Reset and Activate Dialogue box each time User enters state
-    dialogueBox.reset();
-    setTimeout(function() {
-      dialogueBox.typewriter(dialogues.simulation_dialogues[gameData.state]);
-    }, 1000);
   }
 
   display(){

@@ -34,6 +34,7 @@ let blinkingLightImage = undefined;
 let mainRoom = undefined;
 // Blinking Teal Light
 let blinkingTealLightImage = undefined;
+
 // Relevant Rooms
 // First Room
 let firstRoom = undefined;
@@ -66,7 +67,7 @@ let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
     state: `title`,
-    achievedSenses: []
+    achievedSenses: 0
   }
 }
 
@@ -170,11 +171,6 @@ function draw() {
     mainRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
     mainRoom.addSecondDoor(firstAvatar, dialogueBox);
 
-    if(achievedSenses.length !== 0){
-      console.log(achievedSenses.length);
-    }
-
-
   }
   // else if ( state === `firstRoom` ){
   else if ( gameData.state === `firstRoom` ){
@@ -209,7 +205,11 @@ function draw() {
 
     // Fifth Room
     fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    // Update Door system
     fifthRoom.displayPreviousAchievements();
+
+    // Trigger Program Ending
+    fifthRoom.endProgram(mainRoom);
 
   }
   else if ( gameData.state === `emptyRoom` ){
@@ -240,7 +240,7 @@ function draw() {
   else if ( gameData.state === `finale` ){
 
     // Final Screen
-    ending.update(dialogueBox);
+    ending.update(dialogueBox, mainRoom);
 
   }
 

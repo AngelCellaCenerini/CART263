@@ -10,19 +10,4 @@ class SecondRoom extends FirstRoom {
     this.progress = 1;
 
   }
-  manageButton(){
-    // Identigy HTML Element
-    let roomButton = document.getElementById(this.buttonId);
-
-    roomButton.onclick = function() {
-      // achievedSenses.push(achievedSense);
-      // window.location = this.destinationHTML;
-      let destination = `memory.html`;
-      window.location = destination;
-    };
-
-    // Display Button
-    roomButton.style.visibility = `visible`;
-
-  }
 }

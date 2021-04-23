@@ -12,6 +12,8 @@ class DialogueBox {
     this.interval = undefined;
     this.timeout = undefined;
     this.active = true;
+    this.transparency = false;
+    this.fontColor = 20;
 
   }
 
@@ -22,16 +24,18 @@ class DialogueBox {
 
   display(){
       // Dialogue Box
-      push();
-      stroke(255);
-      strokeWeight(5);
-      fill(255, 200);
-      rect(this.x, this.y, this.boxWidth, this.boxHeight);
-      pop();
+      if(!this.transparency){
+        push();
+        stroke(255);
+        strokeWeight(5);
+        fill(255, 200);
+        rect(this.x, this.y, this.boxWidth, this.boxHeight);
+        pop();
+      }
 
       // Text
       push();
-      fill(20);
+      fill(this.fontColor);
       textSize(18);
       textAlign(CENTER, CENTER);
       text(this.displayText, this.x, this.y);

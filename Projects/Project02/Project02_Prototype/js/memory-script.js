@@ -14,13 +14,13 @@ let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
     state: `memoryWebpage`,
-    achievedSenses: [0]
+    achievedSenses: 0
+
   }
 }
 
 $(`#memory-webpage`).on(`click`, function() {
   gameData.state = `chasingLevel2`;
-  gameData.achievedSenses = [0, 1];
   localStorage.setItem(`gameData`,JSON.stringify(gameData));
   window.location = `index.html`;
 });
