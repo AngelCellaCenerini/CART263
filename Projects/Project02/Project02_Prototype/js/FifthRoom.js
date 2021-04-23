@@ -1,5 +1,6 @@
 class FifthRoom extends Room {
   // Description and Comments explained in main class Room
+  // Fifth Room is subdivided into subclasses to facilitate the scrolling of dialogues
   constructor(){
     super();
     this.roomX = 400;
@@ -18,6 +19,10 @@ class FifthRoom extends Room {
     this.enteringX = 580;
     this.enteringY = 430;
     this.active = false;
+    this.roomTimer = 0;                         // Timer to switch class/state
+    this.stateDuration = 12;                     // How long state lasts
+    this.currentState = `fifthRoom`;            // Current state of User location
+    this.nextState = `fifthRoom2`;              // State User will be redirected after the time expressed by "this.stateDuration"
     // Previous Achievements "Symbols"
     this.achievementY = 270;
     this.achievementR = 255;
@@ -42,11 +47,41 @@ class FifthRoom extends Room {
     this.achievement4B = 153;
   }
 
-  endProgram(mainRoom){
-    // Switch program name to "complete" status
-    // (dramatic name, yes)
-    mainRoom.ongoing = false;
+  add(dialogueBox){
+    // Add methods to fifthRoom.update (hence the name)
+    this.switchToNextPhase(dialogueBox);
+    this.displayPreviousAchievements();
   }
+
+  switchToNextPhase(dialogueBox){
+    // Switch state to next phase of Fifth Room
+    // Start timer
+    if ( gameData.state === this.currentState ){
+      this.roomTimer++;
+    }
+    else{
+      // Interrupt and restart timer if User leaves Room
+      this.roomTimer = 0;
+      this.activateDialogueBox(dialogueBox);
+    }
+
+    if( this.roomTimer > this.stateDuration*60 ){
+      // Switch Room
+      gameData.state = this.nextState;
+      // Reset State dialogues
+      // dialogueBox.reset();
+      // Start next State dialogue Box
+      // setTimeout( ()=>{
+        this.activateDialogueBox(dialogueBox);
+      // }, 3000);
+    }
+  }
+  //
+  // reset(){
+  //   if(gameData.state !== `fifthRoom`){
+  //
+  //   }
+  // }
 
   displayPreviousAchievements(){
     // Display Colored Rectangles Associated with Previous Achievements

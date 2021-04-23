@@ -228,7 +228,7 @@ class MainRoom extends Room {
           // Start next State dialogue Box
           setTimeout( ()=>{
             this.activateDialogueBox(dialogueBox);
-          }, 3000);
+          }, 4000);
       }
     }
   }

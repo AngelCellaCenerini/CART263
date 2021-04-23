@@ -46,6 +46,10 @@ let thirdRoom = undefined;
 let fourthRoom = undefined;
 // Fifth Room
 let fifthRoom = undefined;
+// Fifth Room phases
+let fifthRoom2 = undefined;
+let fifthRoom3 = undefined;
+let fifthRoom4 = undefined;
 
 // Empty Room
 let emptyRoom = undefined;
@@ -67,7 +71,7 @@ let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
     state: `title`,
-    achievedSenses: 0
+    achievedSenses: 4
   }
 }
 
@@ -124,6 +128,14 @@ function setup() {
   fourthRoom = new FourthRoom(crosshairCursorImage);
   // Fifth Room
   fifthRoom = new FifthRoom(crosshairCursorImage);
+  // Fifth Room Phases
+  // Fifth Room
+  fifthRoom2 = new FifthRoom2(crosshairCursorImage);
+  // Fifth Room
+  fifthRoom3 = new FifthRoom3(crosshairCursorImage);
+  // Fifth Room
+  fifthRoom4 = new FifthRoom4(crosshairCursorImage);
+
   // Empty Room
   emptyRoom = new EmptyRoom(crosshairCursorImage);
 
@@ -205,11 +217,33 @@ function draw() {
 
     // Fifth Room
     fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
-    // Update Door system
-    fifthRoom.displayPreviousAchievements();
+    // Add to Room system
+    fifthRoom.add(dialogueBox);
 
+  }
+  else if (gameData.state === `fifthRoom2`){
+
+    // Fifth Room
+    fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    // Add to Room system
+    fifthRoom2.add(dialogueBox);
+
+  }
+  else if (gameData.state === `fifthRoom3`){
+
+    // Fifth Room
+    fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    // Add to Room system
+    fifthRoom3.add(dialogueBox);
+
+  }
+  else if (gameData.state === `fifthRoom4`){
+
+    // Fifth Room
+    fifthRoom4.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    // Add to Room system
     // Trigger Program Ending
-    fifthRoom.endProgram(mainRoom);
+    fifthRoom4.add(dialogueBox, mainRoom);
 
   }
   else if ( gameData.state === `emptyRoom` ){
