@@ -22,15 +22,16 @@ class FirstRoom extends Room {
     this.buttonId = `first-room-button`;   // Id of Button HTML Element (one button per "relevant" Rooms)
     this.destinationHTML = `vision.html`;  // .html file - button destination
     this.progress = 0;                     // Check User Progress (achievedSenses.length);
+    this.currentRoom = `firstRoom`;        // Only display Button in its room
   }
 
-  manageButton(){
+  manageButton(destination){
     // Identigy HTML Element
     let roomButton = document.getElementById(this.buttonId);
 
     // Relocate User in webpage
     roomButton.onclick = function() {
-      let destination = `vision.html`;
+      // let destination = `body.html`;
       window.location = destination;
     };
 
@@ -38,6 +39,9 @@ class FirstRoom extends Room {
     // Check User progress (otherwise button would always display in their room, wheter user has surpassed level or not)
     if (gameData.achievedSenses === this.progress){
       roomButton.style.visibility = `visible`;
+      if ( gameData.state !== this.currentRoom ){
+        roomButton.style.visibility = `hidden`;
+      }
     }
 
   }

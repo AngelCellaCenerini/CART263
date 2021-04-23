@@ -37,6 +37,7 @@ class ChasingLevel{
     this.stringWidth2 = 700;
     this.stringHeight1 = 200;
     this.stringHeight2 = 600;
+    this.additions = 0;            // Add obstacles each level to increase difficulty
   }
 
   update(avatar, avatarImage, dialogueBox, obstacle){

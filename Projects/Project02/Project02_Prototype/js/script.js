@@ -36,6 +36,8 @@ let mainRoom = undefined;
 let blinkingTealLightImage = undefined;
 
 // Relevant Rooms
+// Destination - Relocate User in Webpage
+let destination = undefined;
 // First Room
 let firstRoom = undefined;
 // Second Room
@@ -57,10 +59,16 @@ let emptyRoom = undefined;
 // Chasing Levels
 let chasingLevel = undefined;
 let chasingLevel2 = undefined;
+let chasingLevel3 = undefined;
+let chasingLevel4 = undefined;
 // Obstacles (Chasing Levels)
 let obstacle = undefined;
 let obstacles = [];
-let numberObstacles = 3;
+let numberObstacles = undefined;
+let numberObstaclesLevel1 = 3;
+let numberObstaclesLevel2 = 5;
+let numberObstaclesLevel3 = 7;
+let numberObstaclesLevel4 = 10;
 
 // Ending Screen
 let ending = undefined;
@@ -149,6 +157,8 @@ function setup() {
   // Chasing Levels
   chasingLevel = new ChasingLevel();
   chasingLevel2 = new ChasingLevel2();
+  chasingLevel3 = new ChasingLevel3();
+  chasingLevel4 = new ChasingLevel4();
 
   // Obstacle(s) - Within Chasing Levels
   obstacle = new Obstacle(obstacle);
@@ -169,7 +179,7 @@ function draw() {
   // Color Background
   background(20);
 
-  
+
   // Select Dialogue based on Room (state) and User progress
   // Check User Progree
   if (gameData.achievedSenses >= 4){
@@ -202,28 +212,32 @@ function draw() {
 
     // First Room
     firstRoom.update(avatar, avatarImage, dialogueBox);
-    firstRoom.manageButton();
+    // Relocate Page via Button Input
+    firstRoom.manageButton(`body.html`);
 
   }
   else if (gameData.state === `secondRoom`){
 
     // Second Room
     secondRoom.update(avatar, avatarImage, dialogueBox);
-    secondRoom.manageButton();
+    // Relocate Page via Button Input
+    secondRoom.manageButton(`vision.html`);
 
   }
   else if (gameData.state === `thirdRoom`){
 
     // Third Room
     thirdRoom.update(avatar, avatarImage, dialogueBox);
-    thirdRoom.manageButton();
+    // Relocate Page via Button Input
+    thirdRoom.manageButton(`memory.html`);
 
   }
   else if (gameData.state === `fourthRoom`){
 
     // Fourth Room
     fourthRoom.update(avatar, avatarImage, dialogueBox);
-    fourthRoom.manageButton();
+    // Relocate Page via Button Input
+    fourthRoom.manageButton(`language.html`);
 
   }
   else if (gameData.state === `fifthRoom`){
@@ -336,6 +350,21 @@ function instructionsText(){
 }
 // Obstacles (called in Chasing Levels)
 function createObstacles(){
+  // Check current Chasing Level
+  if ( gameData.state === `chasingLevel` ){
+    numberObstacles = numberObstaclesLevel1;
+  }
+  if ( gameData.state === `chasingLevel2` ){
+    numberObstacles = numberObstaclesLevel2;
+  }
+  if ( gameData.state === `chasingLevel3` ){
+    numberObstacles = numberObstaclesLevel3;
+  }
+  if ( gameData.state === `chasingLevel4` ){
+    numberObstacles = numberObstaclesLevel4;
+  }
+
+
   // Create Obstacles
   for(let i = 0; i < numberObstacles; i ++){
      let x = random(300, 510);

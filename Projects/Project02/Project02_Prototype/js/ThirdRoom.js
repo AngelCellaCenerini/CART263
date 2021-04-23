@@ -8,6 +8,7 @@ class ThirdRoom extends FirstRoom {
     this.blue = 215;
     this.buttonId = `third-room-button`;
     this.progress = 2;
+    this.currentRoom = `thirdRoom`; 
 
   }
 }

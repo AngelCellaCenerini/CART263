@@ -19,7 +19,7 @@ if (!gameData) {
 }
 
 $(`#language-webpage`).on(`click`, function() {
-  gameData.state = `chasingLevel3`;
+  gameData.state = `chasingLevel4`;
   localStorage.setItem(`gameData`,JSON.stringify(gameData));
   window.location = `index.html`;
 });
