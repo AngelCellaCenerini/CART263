@@ -12,14 +12,14 @@ Tested linking p5.js program with jQuery(UI).js webpage
 // Dialogue Box
 let dialogueBox = undefined;
 let dialogues = undefined;
+let incomprehensibleDialogues = undefined;
 let comprehensibleDialogues = undefined;
-let roomDialogues = undefined;
-let roomDialogue = undefined;
-let index = 0;
 
 // User Initial Avatar
 let crosshairCursorImage = undefined;
-let firstAvatar = undefined;
+let flameImage = undefined;
+let avatarImage = undefined;
+let avatar = undefined;
 
 // Store Achieved Senses
 let achievedSense = undefined;
@@ -71,7 +71,7 @@ let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
     state: `title`,
-    achievedSenses: 4
+    achievedSenses: 0
   }
 }
 
@@ -83,11 +83,12 @@ function preload() {
 
   // JSON File
   // Dialogues
-  dialogues =  loadJSON(`assets/data/dialogues.json`);
-  comprehensibleDialogues =  loadJSON(`assets/data/dialogues.json`);
+  incomprehensibleDialogues =  loadJSON(`assets/data/incomprehensibleDialogues.json`);
+  comprehensibleDialogues =  loadJSON(`assets/data/comprehensibleDialogues.json`);
 
   // Image Files
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
+  flameImage = loadImage(`assets/images/stressed-avatar.png`);
   blinkingLightImage = loadImage(`assets/images/light.png`);
   blinkingTealLightImage = loadImage(`assets/images/tealLight.png`);
 }
@@ -107,37 +108,43 @@ function setup() {
   textFont(`Courier`);
   textAlign(LEFT, RIGHT);
 
+  // Assign Starter Icon to Avatar
+  avatarImage = crosshairCursorImage;
+
   // Create First Avatar
-  firstAvatar = new FirstAvatar(crosshairCursorImage);
+  avatar = new Avatar(avatarImage);
+
+  // Assign JSON file to Dialogues
+  dialogues = incomprehensibleDialogues;
 
   // Create Dialogue Box(es)
   dialogueBox = new DialogueBox();
 
   // Create Rooms
   // Starter Room
-  starterRoom = new Room(crosshairCursorImage, blinkingLightImage);
+  starterRoom = new Room(avatarImage, blinkingLightImage);
   // Main Room
-  mainRoom = new MainRoom(crosshairCursorImage, blinkingTealLightImage);
+  mainRoom = new MainRoom(avatarImage, blinkingTealLightImage);
   // First Room
-  firstRoom = new FirstRoom(crosshairCursorImage);
+  firstRoom = new FirstRoom(avatarImage);
   // Second Room
-  secondRoom = new SecondRoom(crosshairCursorImage);
+  secondRoom = new SecondRoom(avatarImage);
   // Third Room
-  thirdRoom = new ThirdRoom(crosshairCursorImage);
+  thirdRoom = new ThirdRoom(avatarImage);
   // Fourth Room
-  fourthRoom = new FourthRoom(crosshairCursorImage);
+  fourthRoom = new FourthRoom(avatarImage);
   // Fifth Room
-  fifthRoom = new FifthRoom(crosshairCursorImage);
+  fifthRoom = new FifthRoom(avatarImage);
   // Fifth Room Phases
   // Fifth Room
-  fifthRoom2 = new FifthRoom2(crosshairCursorImage);
+  fifthRoom2 = new FifthRoom2(avatarImage);
   // Fifth Room
-  fifthRoom3 = new FifthRoom3(crosshairCursorImage);
+  fifthRoom3 = new FifthRoom3(avatarImage);
   // Fifth Room
-  fifthRoom4 = new FifthRoom4(crosshairCursorImage);
+  fifthRoom4 = new FifthRoom4(avatarImage);
 
   // Empty Room
-  emptyRoom = new EmptyRoom(crosshairCursorImage);
+  emptyRoom = new EmptyRoom(avatarImage);
 
   // Chasing Levels
   chasingLevel = new ChasingLevel();
@@ -162,6 +169,13 @@ function draw() {
   // Color Background
   background(20);
 
+  
+  // Select Dialogue based on Room (state) and User progress
+  // Check User Progree
+  if (gameData.achievedSenses >= 4){
+    dialogues = comprehensibleDialogues;
+  }
+
   if ( gameData.state === `title`){
     titleText();
   }
@@ -171,52 +185,51 @@ function draw() {
   else if( gameData.state === `starterRoom` ){
 
     // Starter Room
-    starterRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    starterRoom.update(avatar, avatarImage, dialogueBox);
 
 
   }
   else if( gameData.state === `mainRoom` ){
 
     // Main Room
-    mainRoom.roomSystem(firstAvatar, dialogueBox);
-    // mainRoom.selectDestinationRoom(firstAvatar, dialogueBox);
-    mainRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
-    mainRoom.addSecondDoor(firstAvatar, dialogueBox);
+    mainRoom.roomSystem(avatar, dialogueBox);
+    mainRoom.update(avatar, avatarImage, dialogueBox);
+    mainRoom.addSecondDoor(avatar, dialogueBox);
 
   }
   // else if ( state === `firstRoom` ){
   else if ( gameData.state === `firstRoom` ){
 
     // First Room
-    firstRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    firstRoom.update(avatar, avatarImage, dialogueBox);
     firstRoom.manageButton();
 
   }
   else if (gameData.state === `secondRoom`){
 
     // Second Room
-    secondRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    secondRoom.update(avatar, avatarImage, dialogueBox);
     secondRoom.manageButton();
 
   }
   else if (gameData.state === `thirdRoom`){
 
     // Third Room
-    thirdRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    thirdRoom.update(avatar, avatarImage, dialogueBox);
     thirdRoom.manageButton();
 
   }
   else if (gameData.state === `fourthRoom`){
 
     // Fourth Room
-    fourthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    fourthRoom.update(avatar, avatarImage, dialogueBox);
     fourthRoom.manageButton();
 
   }
   else if (gameData.state === `fifthRoom`){
 
     // Fifth Room
-    fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    fifthRoom.update(avatar, avatarImage, dialogueBox);
     // Add to Room system
     fifthRoom.add(dialogueBox);
 
@@ -224,7 +237,7 @@ function draw() {
   else if (gameData.state === `fifthRoom2`){
 
     // Fifth Room
-    fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    fifthRoom.update(avatar, avatarImage, dialogueBox);
     // Add to Room system
     fifthRoom2.add(dialogueBox);
 
@@ -232,7 +245,7 @@ function draw() {
   else if (gameData.state === `fifthRoom3`){
 
     // Fifth Room
-    fifthRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    fifthRoom.update(avatar, avatarImage, dialogueBox);
     // Add to Room system
     fifthRoom3.add(dialogueBox);
 
@@ -240,7 +253,7 @@ function draw() {
   else if (gameData.state === `fifthRoom4`){
 
     // Fifth Room
-    fifthRoom4.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    fifthRoom4.update(avatar, avatarImage, dialogueBox);
     // Add to Room system
     // Trigger Program Ending
     fifthRoom4.add(dialogueBox, mainRoom);
@@ -249,26 +262,44 @@ function draw() {
   else if ( gameData.state === `emptyRoom` ){
 
     // Empty Room
-    emptyRoom.update(firstAvatar, crosshairCursorImage, dialogueBox);
+    emptyRoom.update(avatar, avatarImage, dialogueBox);
 
   }
   else if ( gameData.state === `chasingLevel` ){
 
     // Chasing Level
-    chasingLevel.update(firstAvatar, crosshairCursorImage, dialogueBox, obstacle);
+    chasingLevel.update(avatar, avatarImage, dialogueBox, obstacle);
 
     // Obstacles
-    updateObstacles(firstAvatar, chasingLevel);
+    updateObstacles(avatar, chasingLevel);
 
 
   }
   else if ( gameData.state === `chasingLevel2` ){
 
     // Chasing Level
-    chasingLevel2.update(firstAvatar, crosshairCursorImage, dialogueBox, obstacle);
+    chasingLevel2.update(avatar, avatarImage, dialogueBox, obstacle);
 
     // Obstacles
-    updateObstacles(firstAvatar, chasingLevel2);
+    updateObstacles(avatar, chasingLevel2);
+
+  }
+  else if ( gameData.state === `chasingLevel3` ){
+
+    // Chasing Level
+    chasingLevel3.update(avatar, avatarImage, dialogueBox, obstacle);
+
+    // Obstacles
+    updateObstacles(avatar, chasingLevel3);
+
+  }
+  else if ( gameData.state === `chasingLevel4` ){
+
+    // Chasing Level
+    chasingLevel4.update(avatar, avatarImage, dialogueBox, obstacle);
+
+    // Obstacles
+    updateObstacles(avatar, chasingLevel4);
 
   }
   else if ( gameData.state === `finale` ){
@@ -313,15 +344,15 @@ function createObstacles(){
      obstacles.push(obstacle);
   }
 }
-function updateObstacles(firstAvatar, chasingLevel){
+function updateObstacles(avatar, chasingLevel){
   // Update Obstacles Array
   for (let i = 0; i < obstacles.length; i ++){
     let obstacle = obstacles[i];
     if( gameData.state === `chasingLevel`){
-      obstacle.update(firstAvatar, chasingLevel);
+      obstacle.update(avatar, chasingLevel);
     }
     else if( gameData.state === `chasingLevel2`){
-      obstacle.update(firstAvatar, chasingLevel2);
+      obstacle.update(avatar, chasingLevel2);
     }
 
   }
@@ -356,10 +387,12 @@ function keyPressed(){
 
 //
 function selectDialogue(){
-  // Starter Room
+  // Select Dialogue
   dialogueBox.reset();
   setTimeout(function() {
+    // Check current Room
     dialogueBox.typewriter(dialogues.simulation_dialogues[gameData.state]);
   }, 1000);
+
 }
 //

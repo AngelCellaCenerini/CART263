@@ -77,6 +77,7 @@ class ChasingLevel{
       avatar.y = this.enteringY;
       // Add achievement to User Progress
       gameData.achievedSenses++;
+      // Save Progress
       localStorage.setItem(`gameData`,JSON.stringify(gameData));
     }
   }
@@ -177,6 +178,14 @@ class ChasingLevel{
       }
   }
 }
+
+  assignIconToAvatar(){
+    // Assign Icon to Avatar
+    // Check User progress
+    if (gameData.achievedSenses >= 1){
+      avatarImage = flameImage;
+    }
+  }
 
   displayWalls(){
     // Room Walls

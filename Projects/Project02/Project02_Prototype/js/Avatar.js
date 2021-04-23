@@ -1,9 +1,9 @@
-class FirstAvatar {
+class Avatar {
   // Disembodied Avatar, controlled by Arrow Keys
   constructor(image){
     this.x = 400;
     this.y = 300;
-    this.image = image;
+    this.image = undefined;
     this.size = 32;
     this.vx = 0;
     this.vy = 0;
@@ -76,8 +76,15 @@ class FirstAvatar {
 
   display(){
     // Display Avatar
-    push();
-    image(this.image, this.x, this.y, this.size);
-    pop();
-  }
+   // Assign Icon to Avatar
+   // Check User progress
+   if (gameData.achievedSenses >= 1){
+     this.image = flameImage;
+   }
+   else {
+     this.image = crosshairCursorImage;
+   }
+
+   image(this.image, this.x, this.y, this.size);
+}
 }

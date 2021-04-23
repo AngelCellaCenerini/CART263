@@ -20,7 +20,7 @@ class Room{
     this.red = 255;             // Some Rooms vary in colors
     this.green = 255;           // Some Rooms vary in colors
     this.blue = 255;            // Some Rooms vary in colors
-    this.opacity = 255;
+    this.opacity = 10;
     this.state = `mainRoom`;
     this.secondState = ``;
     this.enteringX = 180;       // To spawn avatar exactly in front of linking door of next roon rather than randomly
@@ -70,8 +70,11 @@ class Room{
 
   constrain(avatar){
     // Constrain Avatar to Room
-    avatar.x = constrain(avatar.x, this.roomLeftBorder, this.roomRightBorder);
-    avatar.y = constrain(avatar.y, this.roomUpBorder, this.roomDownBorder);
+    // Check if User has obtained first achievemnt (body)
+    if ( gameData.achievedSenses > 0){
+      avatar.x = constrain(avatar.x, this.roomLeftBorder, this.roomRightBorder);
+      avatar.y = constrain(avatar.y, this.roomUpBorder, this.roomDownBorder);
+    }
   }
 
   switchState(avatar, dialogueBox){
@@ -103,6 +106,8 @@ class Room{
 
   displayWalls(){
     // Room Walls
+    // Check User Progress
+    this.checkUserProgress();
     push();
     noFill();
     stroke(this.red, this.green, this.blue, this.opacity);
@@ -115,6 +120,8 @@ class Room{
     if (this.ongoing){     // only turns false in Main Room
     // Door
     // (Not really, more like a shape through which the User navigates the rooms)
+    // Check User Progress
+    this.checkUserProgress();
     push();
     noStroke();
     fill(255, this.opacity);
@@ -127,11 +134,20 @@ class Room{
     if (this.ongoing){     // only turns false in Main Room
     // Door
     // (Not really, more like a shape through which the User navigates the rooms)
+    // Check User Progress
+    this.checkUserProgress();
     push();
     noStroke();
     fill(255, this.opacity);
     rect(this.secondDoorX, this.secondDoorY, this.doorHeight, this.doorWidth, this.radius);
     pop();
+    }
+  }
+
+  checkUserProgress(){
+    // Check Achievements obtained
+    if ( gameData.achievedSenses >= 2){
+      this.opacity = 255;
     }
   }
 
