@@ -1,12 +1,19 @@
 /**
-Title of Project
-Author Name
+Project 02 - "Vision Webpage"
+ANgel Cella Cenerini
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+By mouse and keyboard input, User discovers elements withing the page that eventually bring them to the Button (thus, back to main program)
 */
 
 "use strict";
+
+let gameData = JSON.parse(localStorage.getItem(`gameData`));
+if (!gameData) {
+  gameData = {
+    state: `visionWebpage`,
+    achievedSenses: 0
+  }
+}
 
 // Pressed Key by User
 let pressedKey = undefined;
@@ -134,6 +141,12 @@ $(document).on(`keydown`, (function(event) {
 
 triggerKeyReaction();
 }));
+
+$(`#vision-webpage`).on(`click`, function() {
+  gameData.state = `chasingLevel2`;
+  localStorage.setItem(`gameData`,JSON.stringify(gameData));
+  window.location = `index.html`;
+});
 
 function triggerKeyReaction(){
   $(document).keydown(function(event) {
