@@ -14,6 +14,8 @@ let pressedKey = undefined;
 let playedNote = undefined;
 // Correspondant Red Rectangle
 let displayedNote = undefined;
+// Keep track of Played notes
+let playedNotes = 0;
 // Amout of lifting applied on "Eyelid"
 let lifting = undefined;
 
@@ -120,24 +122,33 @@ $(document).on(`keydown`, (function(event) {
     playedNote = `#la`;
     displayedNote = `#note1`;
     lifting = `-10%`;
+
+    // Display Button
+    setTimeout( ()=>{
+      $(`#vision-webpage`).animate({
+        "opacity": `1`
+      }, 200);
+    }, 2000);
+
   }
 
 triggerKeyReaction();
 }));
 
 function triggerKeyReaction(){
-  $(document).keyup(function(event) {
+  $(document).keydown(function(event) {
     // User presses Keys (spelling PLAYING)
     // Press 'P'
     if ( event.which === pressedKey ) {
       // Display Played Note
       $(playedNote).addClass(`displayed`);
       // setTimeout(function(){
-      $(displayedNote).addClass(`displayed`)
+      $(displayedNote).addClass(`displayed`);
       // Lift eyelid
       $(`#eyelid`).animate({
         "top": lifting
       }, 600);
+
       // PLay SFX
       audio.play();
     }

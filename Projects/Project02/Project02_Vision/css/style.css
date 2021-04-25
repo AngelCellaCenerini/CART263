@@ -44,16 +44,11 @@ body{
   border-bottom: double white;
 }
 
-.visible{
-  visibility: visible;
-}
-
 .pentagram{
   border-top: 1px solid;
   margin-top: -2px;
   margin-left: 0px;
   width: 4%;
-  /* visibility: hidden; */
   opacity: 0;
 }
 
@@ -121,4 +116,12 @@ body{
 
 .displayed{
   visibility: visible;
+}
+
+#vision-webpage{
+  position: absolute;
+  margin-top: -25%;
+  margin-left: 48%;
+  /* visibility: hidden; */
+  opacity: 0;
 }
