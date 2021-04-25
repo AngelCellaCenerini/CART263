@@ -9,3 +9,7 @@ author, and this description to match your project!
 "use strict";
 
 // Code goes here
+
+setInterval( ()=>{
+  $(`#blinking-dot`).toggleClass(`invisible`);
+}, 700);

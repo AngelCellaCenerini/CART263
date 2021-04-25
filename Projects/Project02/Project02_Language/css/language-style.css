@@ -67,3 +67,12 @@ body{
 #second-varied-data{
   visibility: hidden;
 }
+
+#blinking-dot{
+  margin-left: 155px;
+  margin-top: -38px;
+}
+
+.invisible{
+  visibility: hidden;
+}
