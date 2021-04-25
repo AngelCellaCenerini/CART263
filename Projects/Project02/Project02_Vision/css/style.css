@@ -109,3 +109,16 @@ body{
   border-radius: 6px;
   visibility: hidden;
 }
+
+.instructions{
+  margin-top: -22vw;
+  font-family: monospace;
+  color: #FFFFFF;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  visibility: hidden;
+}
+
+.displayed{
+  visibility: visible;
+}
