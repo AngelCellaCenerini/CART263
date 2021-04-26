@@ -6,7 +6,8 @@ By default that's nothing.
 **********************************************/
 body{
   background-color: #000000;
-  font-family: monospace;
+  /* font-family: monospace; */
+  font-family: 'Share Tech Mono', monospace;
   color: #79FBCB;
   font-size: 1.1rem;
 }
@@ -27,6 +28,12 @@ body{
   height: 350px;
 }
 
+.hand-symbol{
+  position: absolute;
+  margin-top: -290px;
+  margin-left: 130px;
+}
+
 #question-marks{
   position: absolute;
   font-size: 2.2rem;
@@ -34,7 +41,7 @@ body{
   margin-top: -360px;
 }
 
-#guess{
+#text-input{
   position: absolute;
   margin-left: 460px;
   margin-top: -280px;
@@ -44,6 +51,7 @@ body{
   position: absolute;
   margin-left: 630px;
   margin-top: -280px;
+  width: 50px;
 }
 
 .numeric-data{
@@ -57,22 +65,12 @@ body{
   position: absolute;
   margin-left: 460px;
   margin-top: -220px;
-  visibility: visible;
 }
 
-#second-numeric-data{
-  visibility: hidden;
-}
-
-#second-varied-data{
-  visibility: hidden;
-}
-
-#blinking-dot{
-  margin-left: 155px;
-  margin-top: -38px;
-}
-
-.invisible{
-  visibility: hidden;
+#progressbar{
+  width: 45%;
+  height: 20px;
+  margin-top: 50px;
+  border-radius: 2px;
+  background-color: #000000;
 }

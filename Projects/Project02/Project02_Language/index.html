@@ -9,6 +9,7 @@
     <!-- CSS stylesheet(s) -->
     <link rel="stylesheet" type="text/css" href="css/language-style.css" />
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="text/html" href="assets/images/clown.png">
 
     <!-- Library script(s) go here -->
@@ -23,9 +24,10 @@
 
     <section id="first-guess">
       <p id="frame"></p>
-      <h2 id="question-marks">?????????</h2>
-      <input id="guess" type="text">
-      <input id="sumbit-guess" type="button" value="sdf">
+      <img id="okay" class="hand-symbol" src="assets/images/clown.png" alt="hand-emoji">
+      <h2 id="question-marks">?<span class="blinking-effect-1">?</span>?<span class="blinking-effect-2">?</span>?<span class="blinking-effect-1">?</span><span class="blinking-effect-1">?</span>?<span class="blinking-effect-2">?</span></h2>
+      <input id="text-input" type="text">
+      <input id="sumbit-guess" type="button" value="">
       <p id="first-varied-data" class="varied-data">
         Ashe1CbNNv <br>
         rIS4F3Rkzs <br>
@@ -74,8 +76,10 @@
           6985275144 <br>
           7903190640 <br>
       </p>
-      <p id="description">z01Q00f1 <br> 1aD0b1C01u0 <br> ................ </p>
-      <p id="blinking-dot">.</p>
+      <p id="description">z01Q00f1 <br> 1aD0b1C01u0 <br> ................<span id="blinking-dot">.</span> </p>
+
+      <div id="progressbar"></div>
+      <!-- <p id="blinking-dot">.</p> -->
     </section>
 
     <!-- My script(s) -->
