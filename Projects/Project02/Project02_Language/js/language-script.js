@@ -8,8 +8,17 @@ of capitalism >:)
 
 "use strict";
 
+// Check for earlier Progress
+let gameData = JSON.parse(localStorage.getItem(`gameData`));
+if (!gameData) {
+  gameData = {
+    state: `visionWebpage`,
+    achievedSenses: 0
+  }
+}
+
 // Store all Images Id
-let handSymbols = [
+let icons = [
 `#okay`,
 `#okay2`,
 `#okay3`,
@@ -32,7 +41,7 @@ let solutions = [
 
 // Solutions Array Index
 let index = 0;
-// Hand Symbols Array Index
+// Icons Array Index
 let iconIndex = 0;
 
 // Progressbar Values
@@ -41,8 +50,9 @@ let currentProgressbarValue = 0;
 // Added Value
 let addedProgressbarValue = 10;
 
-// Create SFX
+// Create SFXs
 const audio = new Audio("assets/sounds/bark.wav");
+const failSFX = new Audio("assets/sounds/bark.wav");  // because failure has a sound :|
 
 // Display Progressbar
 displayProgressbar();
@@ -50,9 +60,9 @@ displayProgressbar();
 // Randomized Blinking Effect
 visualEffects();
 
-// Guess Hand Symbol
+// Guess Icons
 // Insert Guess
-$(`#sumbit-guess`).on(`click`, guessHandMeaning);
+$(`#sumbit-guess`).on(`click`, guessIconMeaning);
 
 
 
@@ -98,7 +108,7 @@ function visualEffects(){
   }, 2000);
 }
 
-function guessHandMeaning(){
+function guessIconMeaning(){
 // Check Text Input
 let input = $(`#text-input`).val();
 // Check Current Solution/Correct Answer
@@ -113,10 +123,11 @@ if (input === currentSolution){
   // Apply Progress to Progressbar
   updateProgressBar();
   // Apply Progress to Icon
-  updateHandIcon();
+  updateIcon();
 }
 else {
-  console.log(`nope`);
+  // PLay SFX
+  failSFX.play()
 }
 }
 
@@ -135,9 +146,9 @@ function updateProgressBar(){
     }
 }
 
-function updateHandIcon(){
+function updateIcon(){
   // Apply Disappearing Effect on Prp=progressbar
-  let currentIcon = handSymbols[iconIndex];
+  let currentIcon = icons[iconIndex];
     $(currentIcon).effect( "blind", "slow" );
       iconIndex++;
 }
