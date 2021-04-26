@@ -54,6 +54,8 @@ let addedProgressbarValue = 10;
 const audio = new Audio("assets/sounds/bark.wav");
 const failSFX = new Audio("assets/sounds/bark.wav");  // because failure has a sound :|
 
+
+
 // Display Progressbar
 displayProgressbar();
 
@@ -61,8 +63,10 @@ displayProgressbar();
 visualEffects();
 
 // Guess Icons
-// Insert Guess
-$(`#sumbit-guess`).on(`click`, guessIconMeaning);
+guessIcons();
+
+// Click Button to return to Main Program
+returnToMainProgram();
 
 
 
@@ -108,6 +112,11 @@ function visualEffects(){
   }, 2000);
 }
 
+function guessIcons(){
+  // Guess Icons
+  $(`#sumbit-guess`).on(`click`, guessIconMeaning);
+}
+
 function guessIconMeaning(){
 // Check Text Input
 let input = $(`#text-input`).val();
@@ -151,5 +160,14 @@ function updateIcon(){
   let currentIcon = icons[iconIndex];
     $(currentIcon).effect( "blind", "slow" );
       iconIndex++;
+}
+
+function returnToMainProgram(){
+  // Click Button to return to Main Program
+  $(`#language-webpage`).on(`click`, function() {
+    gameData.state = `chasingLevel4`;
+    localStorage.setItem(`gameData`,JSON.stringify(gameData));
+    window.location = `index.html`;
+  });
 }
 //
