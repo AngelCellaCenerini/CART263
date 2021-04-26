@@ -17,6 +17,15 @@ body{
   opacity: 0;
 }
 
+#second-string{
+  position: absolute;
+  margin-left: 8%;
+  font-size: 2rem;
+  margin-top: -10%;
+  opacity: 0;
+  visibility: hidden;
+}
+
 #text-input{
   margin-left: 40.5%;
   margin-top: 12%;
