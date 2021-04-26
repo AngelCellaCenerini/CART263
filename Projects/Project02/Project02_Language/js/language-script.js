@@ -124,6 +124,15 @@ function updateProgressBar(){
   // Update Progressbar after User guesses correctly
   currentProgressbarValue += addedProgressbarValue;
     $("#progressbar").progressbar(`value`, currentProgressbarValue);
+    // Check Progress
+    if(currentProgressbarValue > 10){
+      // Display Button to return to Main Program
+      setTimeout( ()=>{
+        $(`#language-webpage`).animate({
+                "opacity": `1`
+              }, 400);
+          }, 800);
+    }
 }
 
 function updateHandIcon(){
