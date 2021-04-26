@@ -1,0 +1,47 @@
+/*********************************************
+
+Here is a description of any special CSS used.
+By default that's nothing.
+
+**********************************************/
+body{
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: monospace;
+  font-size: 3rem;
+}
+
+#first-string{
+  margin-left: 38%;
+  margin-top: 20%;
+  opacity: 0;
+}
+
+#text-input{
+  margin-left: 40.5%;
+  margin-top: 12%;
+  width: 250px;
+}
+
+.submit-guess{
+  position: absolute;
+  margin-top: 182px;
+  width: 50px;
+}
+
+#second-button{
+  margin-left: -370px;
+}
+
+input {
+    text-align: center;
+}
+
+#memory-webpage{
+  opacity: 0
+}
+
+/* .found {
+  font-weight: bold;
+  text-decoration: underline;
+} */
