@@ -121,6 +121,11 @@ function rememberString(){
     updateString();
 
     displayButton();
+
+    $(document.body).css(`background-color`, `#FFFFFF`);
+    setTimeout( ()=>{
+      $(document.body).css(`background-color`, `#000000`);
+    }, 100);
   }
 }
 
