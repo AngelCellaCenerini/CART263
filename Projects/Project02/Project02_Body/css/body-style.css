@@ -4,3 +4,64 @@ Here is a description of any special CSS used.
 By default that's nothing.
 
 **********************************************/
+body{
+  background-color: #000000;
+  font-family:monospace;
+  color: #FFFFFF;
+}
+
+#statue-section{
+  position: absolute;
+  margin-left: 50%;
+  margin-top: 30%;
+}
+
+#statue-silhouette{
+  position: absolute;
+  margin-top: 5%;
+  margin-left: 65%;
+}
+
+#artist-name{
+  position: absolute;
+  margin-top: 2%;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  opacity: 1;
+}
+
+.horizantal-walls{
+  position: absolute;
+}
+
+#right-side{
+  margin-left: 75%;
+}
+
+.horizantal-wall{
+  background-color: #FFFFFF;
+  opacity: 0.7;
+  border-radius: 2px;
+  padding: 10px;
+  width: 330px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+#vertical-walls{
+  position: absolute;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  margin-left: 15%;
+}
+
+.vertical-wall{
+  background-color: #FFFFFF;
+  opacity: 0.7;
+  border-radius: 2px;
+  padding: 10px;
+  width: 100px;
+  height: 330px;
+  margin-bottom: 10px;
+  margin-right: 60px;
+}
