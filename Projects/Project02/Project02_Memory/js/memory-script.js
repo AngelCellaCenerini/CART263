@@ -2,9 +2,10 @@
 Title of Project
 Author Name
 
-User discovers (randomized)strings of text via mouse to then rewrite them in the input bar;
+User discovers (incomprehensible)strings of text via mouse and has to rewrite them in the input bar;
 if correctly rewritten, new strings will appear.
 Yet, the old ones won't deactivate, therefore the User must remember which are the new one.
+In addition, non-relevant strings will ventually appear to increase program's difficulty and push the User to use their memory even more.
 */
 
 "use strict";
@@ -43,11 +44,31 @@ let index = 0;
 // Keep track of displayed strings
 let indexStrings = 0;
 
+// How long String is displayed
+let duration = 1800;
+
+// Create SFXs
+const audio = new Audio("assets/sounds/bark.wav");
+
+// Program
+// Submit Strings
+$(`#submit-guess`).on(`click`, rememberString);
+
 // Discover Letters
 discoverString();
 
+// Discover Unrelevant Strings
+// These strings supposedly confuse User and pushes them to use their memory
+discoverFirstSetofDistractions();
+discoverSecondSetofDistractions();
+
 // Click Button to return to Main Program
 returnToMainProgram();
+
+//
+
+
+// Functions
 function discoverString(){
   $( `.all-strings`).on(`mouseover`, function(event) {
     // Display Text
@@ -64,53 +85,53 @@ function discoverString(){
       $(this).animate({
           "opacity": `0`
         }, 700);
-    }, 1500);
+    }, duration);
   });
 
   });
 }
 
-$( `.random-strings1`).on(`mouseover`, function(event) {
-if(index > 2){
-  $(this).animate({
-      "opacity": `1`
-    }, 700);
-    // Bounce Text
-    $(this).effect(`bounce`);
+function discoverFirstSetofDistractions(){
+  $( `.random-strings1`).on(`mouseover`, function(event) {
+  if(index > 2){
+    $(this).animate({
+        "opacity": `1`
+      }, 700);
+      // Bounce Text
+      $(this).effect(`bounce`);
 
-    // Make Text Disappear
-    $(this).on(`mouseleave`, function(event) {
-    setTimeout( ()=>{
-      $(this).animate({
-          "opacity": `0`
-        }, 700);
-    }, 1500);
+      // Make Text Disappear
+      $(this).on(`mouseleave`, function(event) {
+      setTimeout( ()=>{
+        $(this).animate({
+            "opacity": `0`
+          }, 700);
+      }, duration);
+    });
+  }
   });
 }
-});
 
-$( `.random-strings2`).on(`mouseover`, function(event) {
-if(index > 4){
-  $(this).animate({
-      "opacity": `1`
-    }, 700);
-    // Bounce Text
-    $(this).effect(`bounce`);
+function discoverSecondSetofDistractions(){
+  $( `.random-strings2`).on(`mouseover`, function(event) {
+  if(index > 4){
+    $(this).animate({
+        "opacity": `1`
+      }, 700);
+      // Bounce Text
+      $(this).effect(`bounce`);
 
-    // Make Text Disappear
-    $(this).on(`mouseleave`, function(event) {
-    setTimeout( ()=>{
-      $(this).animate({
-          "opacity": `0`
-        }, 700);
-    }, 1500);
+      // Make Text Disappear
+      $(this).on(`mouseleave`, function(event) {
+      setTimeout( ()=>{
+        $(this).animate({
+            "opacity": `0`
+          }, 700);
+      }, duration);
+    });
+  }
   });
 }
-});
-
-// Guess Strings
-$(`#submit-guess`).on(`click`, rememberString);
-
 
 function rememberString(){
   // Check Text Input
@@ -121,35 +142,39 @@ function rememberString(){
   if (input === currentSolution){
 
     // PLay SFX
-    // audio.play();
+    audio.play();
+
     // Reset Input Value
     // (input var didn't work)
     $(`#text-input`).val(``);
+
     // Proceed to next Guess/Answer
     index++;
+
     // Apply Progress to String
     indexStrings++;
     updateString();
 
+    // Display Button based on User progress
     displayButton();
 
-    $(document.body).css(`background-color`, `#FFFFFF`);
-    setTimeout( ()=>{
-      $(document.body).css(`background-color`, `#000000`);
-    }, 100);
+    // Trigger visual reaction
+    flashLight();
   }
 }
 
-// }
-
 function updateString(){
-  // Apply Disappearing Effect on Prp=progressbar
+  // Apply Appearing Effect on Strings based on prograss
+  // Relevant Strings
   let currentString = strings[indexStrings];
   $(currentString).css(`visibility`, `visible`);
 
+  // Check Progress
+  // First Set of non-relevant Strings
   if(index > 2){
     $(`.random-strings1`).css(`visibility`, `visible`);
   }
+  // Second Set of non-relevant Strings
   if(index > 4){
     $(`.random-strings2`).css(`visibility`, `visible`);
   }
@@ -170,9 +195,19 @@ function displayButton(){
 
 function returnToMainProgram(){
   // Click Button to return to Main Program
-  $(`#language-webpage`).on(`click`, function() {
-    gameData.state = `chasingLevel4`;
+  $(`#memory-webpage`).on(`click`, function() {
+    gameData.state = `chasingLevel5`;
     localStorage.setItem(`gameData`,JSON.stringify(gameData));
     window.location = `index.html`;
   });
 }
+
+function flashLight(){
+  // Change Page's BG color to white
+  $(document.body).css(`background-color`, `#FFFFFF`);
+  // Change color back to Black
+  setTimeout( ()=>{
+    $(document.body).css(`background-color`, `#000000`);
+  }, 100);
+}
+//

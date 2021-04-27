@@ -136,5 +136,7 @@ input {
 }
 
 #memory-webpage{
-  opacity: 0
+  opacity: 0;
+  margin-left: -30%;
+
 }
