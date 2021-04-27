@@ -8,6 +8,15 @@ Canova's "Venere Italica".
 
 "use strict";
 
+// Check for earlier Progress
+let gameData = JSON.parse(localStorage.getItem(`gameData`));
+if (!gameData) {
+  gameData = {
+    state: `bodyWebpage`,
+    achievedSenses: 0
+  }
+}
+
 // Keep Track of Statue Progress
 // Statue parts collected so far
 let collectedParts = 0;
@@ -41,6 +50,9 @@ dragPiece();
 
 // Drop Statue Section upon Statue
 dropPiece();
+
+// Return to Main Program once completed Program
+returnToMainProgram();
 
 //
 
@@ -105,6 +117,9 @@ function dropPiece(){
 
       // Update State
       displayUpdatedStatue(collectedPart);
+
+      // Keep track of progress for Button
+      checkProgress();
 
       }
   });
@@ -177,4 +192,24 @@ function slideVerticalWalls(){
   });
 }
 
+function checkProgress(){
+// Check Progress
+if(index === 4){
+  // Display Button to return to Main Program
+  setTimeout( ()=>{
+    $(`#body-webpage`).animate({
+            "opacity": `1`
+          }, 400);
+      }, 1000);
+}
+}
+
+function returnToMainProgram(){
+  // Click Button to return to Main Program
+  $(`#body-webpage`).on(`click`, function() {
+    gameData.state = `chasingLevel`;
+    localStorage.setItem(`gameData`,JSON.stringify(gameData));
+    window.location = `index.html`;
+  });
+}
 //
