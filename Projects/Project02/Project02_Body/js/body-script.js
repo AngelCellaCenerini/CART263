@@ -2,38 +2,50 @@
 Project02 Body Webpage
 Angel Cella Cenerini
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+User has to take into consideration page's "physics" (sliding walls obstructing the way) to collect statue pieces and re-assemble
+Canova's "Venere Italica".
 */
 
 "use strict";
 
 // Keep Track of Statue Progress
+// Statue parts collected so far
 let collectedParts = 0;
 let collectedPart = undefined;
 let index = 0;
+
+// Statue Parts/Sections
 let parts = [
   `#bust-section`,
   `#left-leg-section`,
   `#head-section`,
   `#right-leg-section`
 ];
-
+// Statue Section Currently concerned
 let currentPart = parts[index];
 
+// Delay Statue Fade In
 let delay = 2500;
 
-// Fade In Statue Section
 
+
+// Program
+// Fade In Statue Section
 displayStatueSection(delay);
 
 // Sliding Animations
 slidingWalls();
 
+// Drag Circle (representing Statue Section)
 dragPiece();
 
+// Drop Statue Section upon Statue
 dropPiece();
 
+//
+
+
+// Functions
 function displayStatueSection(delay){
   setTimeout( ()=>{
     $(currentPart).animate({
@@ -58,7 +70,7 @@ function dragPiece(){
 function dropPiece(){
   // Set Up Droppable Element
   $(`#statue-silhouette`).droppable({
-    // PLace Statue part upon statue
+    // PLace Statue part upon Statue
     drop: function(event, ui){
 
       // Hide part once dropped
@@ -69,6 +81,7 @@ function dropPiece(){
       currentPart = parts[index];
 
       // Display Next Statue Section
+      // Change delay - take less time to start animation
       delay = 1000;
       displayStatueSection(delay);
 
@@ -98,6 +111,7 @@ function dropPiece(){
 }
 
 function displayUpdatedStatue(collectedPart){
+    // Animate fade in effect for newly achieved Statue Part
     $(collectedPart).animate({
       "opacity": `1`
     }, 300);
@@ -113,6 +127,8 @@ function slidingWalls(){
   slideLeftHorizontalWalls();
   slideVerticalWalls();
 }
+
+// Horizontal Walls sliding from right to left
 function slideRightHorizontalWalls(){
   $(`#left-side`).animate({
     "left": `75%`
@@ -128,7 +144,7 @@ function slideRightHorizontalWalls(){
   }
   });
 }
-
+// Horizontal Walls sliding from left to right
 function slideLeftHorizontalWalls(){
   $(`#right-side`).animate({
     "left": `0%`
@@ -144,7 +160,7 @@ function slideLeftHorizontalWalls(){
   }
   });
 }
-
+// Vertical Walls sliding aling Y axis
 function slideVerticalWalls(){
   $(`#vertical-walls`).animate({
     "top": `50%`
@@ -160,3 +176,5 @@ function slideVerticalWalls(){
   }
   });
 }
+
+//
