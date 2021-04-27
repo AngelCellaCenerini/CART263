@@ -10,16 +10,29 @@ body{
   color: #FFFFFF;
 }
 
-#statue-section{
+#maze{
   position: absolute;
-  margin-left: 50%;
-  margin-top: 30%;
+  width: 95%;
+  height: 95%;
 }
 
 #statue-silhouette{
   position: absolute;
   margin-top: 5%;
   margin-left: 65%;
+}
+
+#statue-bust{
+  position: absolute;
+  margin-top: 5%;
+  margin-left: 65%;
+  visibility: hidden;
+}
+
+#statue-section{
+  position: absolute;
+  left: 50%;
+  top: 50%;
 }
 
 #artist-name{
@@ -40,7 +53,7 @@ body{
 
 .horizantal-wall{
   background-color: #FFFFFF;
-  opacity: 0.7;
+  opacity: 0.5;
   border-radius: 2px;
   padding: 10px;
   width: 330px;
@@ -57,7 +70,7 @@ body{
 
 .vertical-wall{
   background-color: #FFFFFF;
-  opacity: 0.7;
+  opacity: 0.5;
   border-radius: 2px;
   padding: 10px;
   width: 100px;
