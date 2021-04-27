@@ -29,10 +29,31 @@ body{
   visibility: hidden;
 }
 
-#statue-section{
+#bust-section{
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 55%;
+  top: 15%;
+}
+
+#left-leg-section{
+  position: absolute;
+  left: 13%;
+  top: 6%;
+  visibility: hidden;
+}
+
+#head-section{
+  position: absolute;
+  left: 20%;
+  top: 70%;
+  visibility: hidden;
+}
+
+#right-leg-section{
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  visibility: hidden;
 }
 
 #artist-name{
