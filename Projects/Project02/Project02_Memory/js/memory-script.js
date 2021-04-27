@@ -2,8 +2,9 @@
 Title of Project
 Author Name
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+User discovers (randomized)strings of text via mouse to then rewrite them in the input bar;
+if correctly rewritten, new strings will appear.
+Yet, the old ones won't deactivate, therefore the User must remember which are the new one.
 */
 
 "use strict";
@@ -14,42 +15,86 @@ let solutions = [
  `jrY6BLaYTe`,
  `oPaRy93LVt`,
  `buplCqPhs6`,
- `dARkXta8Zm`
+ `dARkXta8Zm`,
+ `vVaBphhwtB`
 ]
 
-// Store all Solutions
+// Store all Strings ID
 let strings = [
  `#first-string`,
  `#second-string`,
  `#third-string`,
  `#fourth-string`,
- `#fifth-string`
+ `#fifth-string`,
+ `#sixth-string`
 ]
 
+// Keep track of Solutions guessed
 let index = 0;
+// Keep track of displayed strings
 let indexStrings = 0;
 
 // Discover Letters
 let currentString = strings[indexStrings];
+discoverString();
+function discoverString(){
+  $( `.all-strings`).on(`mouseover`, function(event) {
+    // Display Text
+      $(this).animate({
+          "opacity": `1`
+        }, 700);
 
-$( `.all-strings`).on(`mouseover`, function(event) {
-  // Display Text
-  setTimeout( ()=>{
-    $(this).animate({
-        "opacity": `1`
-      }, 700);
-  }, 200);
+    // Bounce Text
+    $(this).effect(`bounce`);
 
-  // Bounce Text
-  $(this).effect(`bounce`);
+    // Make Text Disappear
+    $(this).on(`mouseleave`, function(event) {
+    setTimeout( ()=>{
+      $(this).animate({
+          "opacity": `0`
+        }, 700);
+    }, 1500);
+  });
 
-  // Make Text Disappear
-  setTimeout( ()=>{
-    $(this).animate({
-        "opacity": `0`
-      }, 700);
-  }, 1500);
+  });
+}
 
+$( `.random-strings1`).on(`mouseover`, function(event) {
+if(index > 2){
+  $(this).animate({
+      "opacity": `1`
+    }, 700);
+    // Bounce Text
+    $(this).effect(`bounce`);
+
+    // Make Text Disappear
+    $(this).on(`mouseleave`, function(event) {
+    setTimeout( ()=>{
+      $(this).animate({
+          "opacity": `0`
+        }, 700);
+    }, 1500);
+  });
+}
+});
+
+$( `.random-strings2`).on(`mouseover`, function(event) {
+if(index > 4){
+  $(this).animate({
+      "opacity": `1`
+    }, 700);
+    // Bounce Text
+    $(this).effect(`bounce`);
+
+    // Make Text Disappear
+    $(this).on(`mouseleave`, function(event) {
+    setTimeout( ()=>{
+      $(this).animate({
+          "opacity": `0`
+        }, 700);
+    }, 1500);
+  });
+}
 });
 
 // Guess Strings
@@ -64,19 +109,18 @@ function rememberString(){
   // Check if User has guessed correctly
   if (input === currentSolution){
 
-    console.log(`yes`);
-
     // PLay SFX
     // audio.play();
+    // Reset Input Value
+    // (input var didn't work)
+    $(`#text-input`).val(``);
     // Proceed to next Guess/Answer
     index++;
     // Apply Progress to String
     indexStrings++;
     updateString();
-    // $(currentString).remove();
-  }
-  else {
-console.log(`no`);
+
+    displayButton();
   }
 }
 
@@ -87,4 +131,23 @@ function updateString(){
   let currentString = strings[indexStrings];
   $(currentString).css(`visibility`, `visible`);
 
+  if(index > 2){
+    $(`.random-strings1`).css(`visibility`, `visible`);
+  }
+  if(index > 4){
+    $(`.random-strings2`).css(`visibility`, `visible`);
+  }
+
+}
+
+function displayButton(){
+  // Check User progress
+  if(index > 5){
+    // Display Button to return to Main Program
+    setTimeout( ()=>{
+      $(`#memory-webpage`).animate({
+              "opacity": `1`
+            }, 400);
+        }, 800);
+  }
 }
