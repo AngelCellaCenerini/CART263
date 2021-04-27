@@ -10,6 +10,7 @@ author, and this description to match your project!
 
 // Keep Track of Statue Progress
 let collectedParts = 0;
+let collectedPart = undefined;
 let index = 0;
 let parts = [
   `#bust-section`,
@@ -72,25 +73,34 @@ function dropPiece(){
       displayStatueSection(delay);
 
       // Eventually complete Statue
-      if ( collectedParts >= 0){
+      if ( index === 1){
         // Display Bust
-        $(`#statue-bust`).css( `visibility`, `visible`);
-        if (collectedParts = 1){
-          // Display Left Leg
-          $(`#statue-left-leg`).css( `visibility`, `visible`);
-        }
-        if (collectedParts = 2){
-          // Display Head
-          $(`#statue-head`).css( `visibility`, `visible`);
-        }
-        if (collectedParts = 3){
-          // Display Right Leg
-          $(`#statue-right-leg`).css( `visibility`, `visible`);
-        }
+        collectedPart = `#statue-bust`;
       }
-      collectedParts++;
+      else if (index === 2){
+         // Display Left Leg
+         collectedPart = `#statue-left-leg`;
+        }
+      else if (index === 3){
+         // Display Head
+         collectedPart = `#statue-head`;
+        }
+      else if (index === 4){
+         // Display Right Leg
+         collectedPart = `#statue-right-leg`;
+        }
+
+      // Update State
+      displayUpdatedStatue(collectedPart);
+
       }
   });
+}
+
+function displayUpdatedStatue(collectedPart){
+    $(collectedPart).animate({
+      "opacity": `1`
+    }, 300);
 }
 
 

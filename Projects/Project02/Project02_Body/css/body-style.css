@@ -16,17 +16,25 @@ body{
   height: 95%;
 }
 
-#statue-silhouette{
+.statue{
   position: absolute;
   margin-top: 5%;
   margin-left: 65%;
 }
 
 #statue-bust{
-  position: absolute;
-  margin-top: 5%;
-  margin-left: 65%;
-  visibility: hidden;
+  opacity: 0;
+}
+
+#statue-head{
+  opacity: 0;
+}
+
+.statue-section{
+  padding: 40px;
+  border-color: #80BDB6;
+  border-radius: 100px;
+  border-style: solid;
 }
 
 #bust-section{
@@ -45,7 +53,7 @@ body{
 
 #head-section{
   position: absolute;
-  left: 20%;
+  left: 30%;
   top: 40%;
   opacity: 0;
 }
