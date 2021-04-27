@@ -21,6 +21,16 @@ class Obstacle{
     this.display();
   }
 
+  float(){
+    // Same Object but mostly visual function; helps confusing User and increasing Level difficulty
+    // This "Obstacle" won't reset if User restarts level
+    // (trying to suggest the idea that there's a constant typing on "the other side of the screen")
+    // Default Behaviour
+    this.rise();
+    this.reoccur();
+    this.display();
+  }
+
   randomMovement(){
     // Create Unstable movements
     // Calculate Probability
@@ -44,7 +54,30 @@ class Obstacle{
 
     // Constrain to Walls
     this.x = constrain( this.x, 0, width);
-    // this.y = constrain( this.y, 0, height);
+  }
+
+  rise(){
+
+    // Default Movement
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Invert Direction, change pace
+    this.speed = -0.5;
+    this.vy = this.speed;
+
+    // Add radomness to Movement
+    this.derail();
+
+    // Constrain to Screen
+    this.x = constrain( this.x, 0, width);
+  }
+
+  reoccur(){
+    // Reset Floating Obstacle once off screen
+    if (this.y < 0){
+      this.y = random(900, 800);
+    }
   }
 
   derail(){
@@ -55,6 +88,17 @@ class Obstacle{
     if (change < 0.5){
       this.vx = random(-this.speed, this.speed);
       this.vy = random(-this.speed, this.speed);
+    }
+  }
+
+  derail2(){
+    // Occasionally change trajectory
+    this.y = this.y + this.vy;
+    this.x = this.x + this.vx;
+    let change = random(0, 1);
+    if (change < 0.5){
+      this.vx = random(this.speed, -this.speed);
+      this.vy = random(this.speed, -this.speed);
     }
   }
 

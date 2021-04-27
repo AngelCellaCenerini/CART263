@@ -63,12 +63,17 @@ let chasingLevel3 = undefined;
 let chasingLevel4 = undefined;
 // Obstacles (Chasing Levels)
 let obstacle = undefined;
+let floatingObstacle = undefined;
 let obstacles = [];
+let floatingObstacles = [];
 let numberObstacles = undefined;
 let numberObstaclesLevel1 = 3;
 let numberObstaclesLevel2 = 5;
 let numberObstaclesLevel3 = 7;
 let numberObstaclesLevel4 = 10;
+let numberFloatingObstacles = undefined;
+let numberFloatingObstaclesLv3 = 30;
+let numberFloatingObstaclesLv4 = 70;
 
 // Ending Screen
 let ending = undefined;
@@ -78,7 +83,7 @@ let ending = undefined;
 let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
-    state: `title`,
+    state: `chasingLevel4`,
     achievedSenses: 0
   }
 }
@@ -109,7 +114,6 @@ function setup() {
   // Canvas
   createCanvas(800, 600);
   // General Settings
-  noCursor();
   noStroke();
   imageMode(CENTER);
   rectMode(CENTER);
@@ -160,10 +164,22 @@ function setup() {
   chasingLevel3 = new ChasingLevel3();
   chasingLevel4 = new ChasingLevel4();
 
-  // Obstacle(s) - Within Chasing Levels
-  obstacle = new Obstacle(obstacle);
+  // // Obstacle(s) - Within Chasing Levels
+  // obstacle = new Obstacle(obstacle);
+  // // Floating Obstacle(s) - mostly visual effect
+  // floatingObstacle = new Obstacle(obstacle);
+
+  establishNumObstacles();
+  establishNumFloatingObstacles();
+
+
+
   // Create Obstacles array
+
   createObstacles();
+
+  // Create Floating Obstacles array
+  createFloatingObstacles();
 
   // Ending
   ending = new Ending();
@@ -287,7 +303,6 @@ function draw() {
     // Obstacles
     updateObstacles(avatar, chasingLevel);
 
-
   }
   else if ( gameData.state === `chasingLevel2` ){
 
@@ -305,6 +320,8 @@ function draw() {
 
     // Obstacles
     updateObstacles(avatar, chasingLevel3);
+    // Floating Obstacles
+    updateFloatingObstacles(chasingLevel);
 
   }
   else if ( gameData.state === `chasingLevel4` ){
@@ -314,6 +331,8 @@ function draw() {
 
     // Obstacles
     updateObstacles(avatar, chasingLevel4);
+    // Floating Obstacles
+    updateFloatingObstacles(chasingLevel);
 
   }
   else if ( gameData.state === `finale` ){
@@ -326,6 +345,86 @@ function draw() {
 }
 
 // Functions
+// Set Up
+function establishNumObstacles(){
+  // Check Current Level to establish Number of Obstacles
+  if (gameData.state === `chasingLevel`){
+    numberObstacles = numberObstaclesLevel1;
+  }
+  else if (gameData.state === `chasingLevel2`){
+    numberObstacles = numberObstaclesLevel2;
+  }
+  else if (gameData.state === `chasingLevel3`){
+    numberObstacles = numberObstaclesLevel3;
+  }
+  else if (gameData.state === `chasingLevel4`){
+    numberObstacles = numberObstaclesLevel4;
+  }
+}
+
+function establishNumFloatingObstacles(){
+  // Check Current Level to establish Number of Floating Obstacles
+  if (gameData.state === `chasingLevel3`){
+    numberFloatingObstacles = numberFloatingObstaclesLv3;
+  }
+  else if (gameData.state === `chasingLevel4`){
+    numberFloatingObstacles = numberFloatingObstaclesLv4;
+  }
+}
+// Obstacles (called in Chasing Levels)
+function createObstacles(){
+  // Create Obstacles
+  for(let i = 0; i < numberObstacles; i ++){
+     let x = random(300, 510);
+     let y = random(-450, -10);
+     let obstacle = new Obstacle(x, y);
+     obstacles.push(obstacle);
+  }
+}
+function createFloatingObstacles(){
+
+  // Create Floating Obstacles
+  for(let i = 0; i < numberFloatingObstacles; i ++){
+     let x = random(200, 600);
+     let y = random(1000, 800);
+     let floatingObstacle = new Obstacle(x, y);
+     floatingObstacles.push(floatingObstacle);
+  }
+}
+
+function updateObstacles(avatar, chasingLevel){
+  // Update Obstacles Array
+  for (let i = 0; i < obstacles.length; i ++){
+    let obstacle = obstacles[i];
+    if( gameData.state === `chasingLevel`){
+      obstacle.update(avatar, chasingLevel);
+    }
+    else if( gameData.state === `chasingLevel2`){
+      obstacle.update(avatar, chasingLevel2);
+    }
+    else if( gameData.state === `chasingLevel3`){
+      obstacle.update(avatar, chasingLevel3);
+    }
+    else if( gameData.state === `chasingLevel4`){
+      obstacle.update(avatar, chasingLevel4);
+    }
+
+  }
+}
+
+function updateFloatingObstacles(chasingLevel){
+  // Update Floating Obstacles Array
+  for (let i = 0; i < floatingObstacles.length; i ++){
+    let floatingObstacle = floatingObstacles[i];
+    if( gameData.state === `chasingLevel3`){
+      floatingObstacle.float(chasingLevel3);
+    }
+    else if( gameData.state === `chasingLevel4`){
+      floatingObstacle.float(chasingLevel4);
+    }
+
+  }
+}
 // Title
 function titleText(){
   push();
@@ -347,44 +446,6 @@ function instructionsText(){
   textSize(16);
   text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
   pop();
-}
-// Obstacles (called in Chasing Levels)
-function createObstacles(){
-  // Check current Chasing Level
-  if ( gameData.state === `chasingLevel` ){
-    numberObstacles = numberObstaclesLevel1;
-  }
-  if ( gameData.state === `chasingLevel2` ){
-    numberObstacles = numberObstaclesLevel2;
-  }
-  if ( gameData.state === `chasingLevel3` ){
-    numberObstacles = numberObstaclesLevel3;
-  }
-  if ( gameData.state === `chasingLevel4` ){
-    numberObstacles = numberObstaclesLevel4;
-  }
-
-
-  // Create Obstacles
-  for(let i = 0; i < numberObstacles; i ++){
-     let x = random(300, 510);
-     let y = random(-200, -10);
-     let obstacle = new Obstacle(x, y);
-     obstacles.push(obstacle);
-  }
-}
-function updateObstacles(avatar, chasingLevel){
-  // Update Obstacles Array
-  for (let i = 0; i < obstacles.length; i ++){
-    let obstacle = obstacles[i];
-    if( gameData.state === `chasingLevel`){
-      obstacle.update(avatar, chasingLevel);
-    }
-    else if( gameData.state === `chasingLevel2`){
-      obstacle.update(avatar, chasingLevel2);
-    }
-
-  }
 }
 //
 

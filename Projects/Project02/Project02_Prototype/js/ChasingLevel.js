@@ -20,24 +20,23 @@ class ChasingLevel{
     this.doorSpeed = 0.5;          // Door moves downwards
     this.activeDoor = false;       // To reset Door
     this.doorTimer = 0;            // To activate Door
-    this.levelDuration = 3;        // How long User has to last before Door activates
+    this.levelDuration = 20;        // How long User has to last before Door activates
     this.opacity = 255;            // Elements' oOpacity
     this.state = `mainRoom`;       // State level switches to (if User doesn't lose, obv)
     this.enteringX = 395;          // Spawn avatar in middle of Main Room
     this.enteringY = 305;          // Spawn avatar in middle of Main Room
-    this.limit = 430;              // Line User has to surpass to lose level
+    this.limit = 420;              // Line User has to surpass to lose level
     this.active = true;            // Turns false when User loses
     this.dotsNumber = 20;          // Static Effect
     this.numericStrings = 3;       // "Lines of code" Effect (intended as "reprogramming" of Avatar/User)
     this.stringX1 = 380;           // String values (vary in different Chasing Levels)
     this.stringX2 = 400;
-    this.stringY1 = 420;
+    this.stringY1 = 415;
     this.stringY2 = 600;
     this.stringWidth1 = 100;
     this.stringWidth2 = 700;
     this.stringHeight1 = 200;
     this.stringHeight2 = 600;
-    this.additions = 0;            // Add obstacles each level to increase difficulty
   }
 
   update(avatar, avatarImage, dialogueBox, obstacle){
@@ -46,7 +45,6 @@ class ChasingLevel{
     this.switchState(avatar, dialogueBox);
     this.capture(avatar);
     this.fail(avatar);
-    // this.hit(obstacle, avatar);
     this.activateDoor();
     this.moveDoor();
     this.resetLevel(avatar, obstacle);
