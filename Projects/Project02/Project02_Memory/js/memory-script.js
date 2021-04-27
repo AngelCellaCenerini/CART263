@@ -9,6 +9,15 @@ Yet, the old ones won't deactivate, therefore the User must remember which are t
 
 "use strict";
 
+// Check for earlier Progress
+let gameData = JSON.parse(localStorage.getItem(`gameData`));
+if (!gameData) {
+  gameData = {
+    state: `memoryWebpage`,
+    achievedSenses: 0
+  }
+}
+
 // Store all Solutions
 let solutions = [
  `vlck8jGzA8`,
@@ -35,8 +44,10 @@ let index = 0;
 let indexStrings = 0;
 
 // Discover Letters
-let currentString = strings[indexStrings];
 discoverString();
+
+// Click Button to return to Main Program
+returnToMainProgram();
 function discoverString(){
   $( `.all-strings`).on(`mouseover`, function(event) {
     // Display Text
@@ -155,4 +166,13 @@ function displayButton(){
             }, 400);
         }, 800);
   }
+}
+
+function returnToMainProgram(){
+  // Click Button to return to Main Program
+  $(`#language-webpage`).on(`click`, function() {
+    gameData.state = `chasingLevel4`;
+    localStorage.setItem(`gameData`,JSON.stringify(gameData));
+    window.location = `index.html`;
+  });
 }
