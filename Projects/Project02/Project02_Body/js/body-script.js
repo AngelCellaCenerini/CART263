@@ -20,7 +20,11 @@ let parts = [
 
 let currentPart = parts[index];
 
+let delay = 2500;
 
+// Fade In Statue Section
+
+displayStatueSection(delay);
 
 // Sliding Animations
 slidingWalls();
@@ -28,6 +32,14 @@ slidingWalls();
 dragPiece();
 
 dropPiece();
+
+function displayStatueSection(delay){
+  setTimeout( ()=>{
+    $(currentPart).animate({
+      "opacity": `1`
+    }, 800);
+  }, delay);
+}
 
 function dragPiece(){
   // Drag Statue Pieces
@@ -56,7 +68,8 @@ function dropPiece(){
       currentPart = parts[index];
 
       // Display Next Statue Section
-      $(currentPart).css( `visibility`, `visible`);
+      delay = 1000;
+      displayStatueSection(delay);
 
       // Eventually complete Statue
       if ( collectedParts >= 0){

@@ -32,28 +32,29 @@ body{
 #bust-section{
   position: absolute;
   left: 55%;
-  top: 15%;
+  top: 25%;
+  opacity: 0;
 }
 
 #left-leg-section{
   position: absolute;
-  left: 13%;
-  top: 6%;
-  visibility: hidden;
+  left: 20%;
+  top: 35%;
+  opacity: 0;
 }
 
 #head-section{
   position: absolute;
   left: 20%;
-  top: 70%;
-  visibility: hidden;
+  top: 40%;
+  opacity: 0;
 }
 
 #right-leg-section{
   position: absolute;
   left: 40%;
   top: 40%;
-  visibility: hidden;
+  opacity: 0;
 }
 
 #artist-name{
