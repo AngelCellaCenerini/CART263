@@ -14,7 +14,7 @@ class Ending{
       // Update and create Fading Effect
       setTimeout( ()=>{
         this.fade();
-      }, 10000);
+      }, 14000);
       // Display Fading Effect
       this.display();
     }
