@@ -84,7 +84,7 @@ let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
     state: `title`,
-    achievedSenses: 2
+    achievedSenses: 0
   }
 }
 
@@ -430,9 +430,9 @@ function titleText(){
   push();
   fill(255);
   textSize(25);
-  text(`CART263 - Project 02: Prototype`, width/8, height/2);
+  text(`It Chooses`, width/8, height/2);
   textSize(16);
-  text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
+  text(`Press ENTER to continue`, 2*width/3, 9*height/10);
   pop();
 }
 // Instructions
@@ -440,11 +440,10 @@ function instructionsText(){
   push();
   fill(255);
   textSize(22);
-  text(`Instrucitons (Rough Draft):
-   - move with arrow keys;
-   - press ENTER to repeat dialogues;`, width/8, height/2);
+  text(`- move with arrow keys;
+- press ENTER to repeat dialogues;`, width/8, height/2);
   textSize(16);
-  text(`Press ENTER to continue >`, 2*width/3, 9*height/10);
+  text(`Press ENTER to continue`, 2*width/3, 9*height/10);
   pop();
 }
 //
