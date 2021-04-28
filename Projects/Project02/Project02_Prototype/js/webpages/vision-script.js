@@ -27,7 +27,7 @@ let displayedNote = undefined;
 // let lifting = undefined;
 
 // SFX
-const audio = new Audio("assets/sounds/bark.wav");
+const audio = new Audio("assets/sounds/beep.mp3");
 
 // Store and keep track of all keys required in specific order
 let keySequence = [

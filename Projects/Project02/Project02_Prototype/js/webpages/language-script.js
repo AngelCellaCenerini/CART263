@@ -49,9 +49,7 @@ let currentProgressbarValue = 0;
 let addedProgressbarValue = 18;
 
 // Create SFXs
-const audio = new Audio("assets/sounds/bark.wav");
-const failSFX = new Audio("assets/sounds/bark.wav");  // because failure has a sound :|
-
+const audio = new Audio("assets/sounds/beep.mp3");
 
 
 // Display Progressbar
@@ -131,10 +129,6 @@ if (input === currentSolution){
   updateProgressBar();
   // Apply Progress to Icon
   updateIcon();
-}
-else {
-  // PLay SFX
-  failSFX.play()
 }
 }
 

@@ -48,7 +48,7 @@ let indexStrings = 0;
 let duration = 1800;
 
 // Create SFXs
-const audio = new Audio("assets/sounds/bark.wav");
+const audio = new Audio("assets/sounds/beep.mp3");
 
 // Program
 // Submit Strings

@@ -1,12 +1,10 @@
 "use strict";
 
 /**
-Project02 Draft
+Project02 - "It Chooses"
 Angel Cella Cenerini
 
-Tested Rooms Structure;
-Tested Dialogus Strucutre;
-Tested linking p5.js program with jQuery(UI).js webpage
+Description and detailes in "Artist Statement"
 */
 
 // Dialogue Box
@@ -84,7 +82,7 @@ let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
     state: `title`,
-    achievedSenses: 3
+    achievedSenses: 0
   }
 }
 
@@ -460,6 +458,7 @@ function keyPressed(){
     // In Instrucitons State
     else if( gameData.state === `instructions`){
       gameData.state = `starterRoom`;
+
       // Trigger Dialogue Box - Typewriter Effect
       selectDialogue();
     }

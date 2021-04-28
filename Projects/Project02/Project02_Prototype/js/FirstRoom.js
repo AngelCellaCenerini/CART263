@@ -31,6 +31,7 @@ class FirstRoom extends Room {
 
     // Relocate User in webpage
     roomButton.onclick = function() {
+
       // let destination = `body.html`;
       window.location = destination;
     };
