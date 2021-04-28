@@ -1,0 +1,137 @@
+
+body{
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: monospace;
+  font-size: 3rem;
+}
+
+#first-string{
+  margin-left: 38%;
+  margin-top: 20%;
+  opacity: 0;
+}
+
+#second-string{
+  position: absolute;
+  margin-left: 5%;
+  font-size: 2rem;
+  margin-top: -10%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#third-string{
+  position: absolute;
+  margin-left: 15%;
+  font-size: 2rem;
+  margin-top: -11%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#fourth-string{
+  position: absolute;
+  margin-left: 8%;
+  font-size: 2rem;
+  margin-left: 60%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#fifth-string{
+  position: absolute;
+  margin-left: 90%;
+  margin-top: -18%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#sixth-string{
+  position: absolute;
+  margin-left: 70%;
+  font-size: 2rem;
+  margin-top: -20%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#text-input{
+  margin-left: 40.5%;
+  margin-top: 12%;
+  width: 250px;
+}
+
+#irrelevant-strings{
+  color: #B9B9B9;
+}
+
+#first-trick{
+  position: absolute;
+  margin-left: 70%;
+  margin-top: -20%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#second-trick{
+  position: absolute;
+  margin-left: 11%;
+  margin-top: -18%;
+  font-size: 2.8rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#third-trick{
+  position: absolute;
+  margin-left: 35%;
+  margin-top: 5%;
+  font-size: 2.2rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#fourth-trick{
+  position: absolute;
+  margin-left: 25%;
+  margin-top: -3%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#fifth-trick{
+  position: absolute;
+  margin-left: 50%;
+  margin-top: -25%;
+  font-size: 2rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#sixth-trick{
+  position: absolute;
+  margin-left: 53%;
+  margin-top: -15%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#seventh-trick{
+  position: absolute;
+  margin-left: 15%;
+  margin-top: -20%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+input {
+    text-align: center;
+}
+
+#memory-webpage{
+  opacity: 0;
+  margin-left: -30%;
+
+}

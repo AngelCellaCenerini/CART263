@@ -1,0 +1,125 @@
+
+body{
+  background-color: #191919;
+}
+
+/* Eye elements */
+#eye-constrainer{
+  right: 41%;
+  width: 200px;
+  height: 400px;
+  border-color: #FFFFFF;
+}
+#eye{
+  position: fixed;
+  top: 30%;
+  right: 42%;
+  text-align: center;
+  background-color: #FF0000;
+  padding: 90px;
+  width: 70px;
+  height: 50px;
+  border-radius: 500px;
+}
+#eyelid{
+  position: fixed;
+  top: 29%;
+  right: 41%;
+  text-align: center;
+  background-color: #191919;
+  padding: 100px;
+  width: 80px;
+  height: 60px;
+  border-radius: 500px;
+}
+
+/* Highlight eyelid bottom border */
+.found{
+  border-bottom: double white;
+}
+
+/* Music Pentagram */
+.pentagram{
+  border-top: 1px solid;
+  margin-top: -2px;
+  margin-left: 0px;
+  width: 4%;
+  opacity: 0;
+}
+
+.notes{
+  position: absolute;
+  background-color: #FFFFFF;
+  padding: 2px;
+  border-radius: 500px;
+  width: 6px;
+  height: 5px;
+  margin-top: -30px;
+  visibility: hidden;
+}
+
+/* Notes */
+#sol{
+  margin-top: -20px;
+  margin-left: 30%;
+}
+
+#mi{
+  margin-top: -41px;
+  margin-left: 70%;
+}
+
+#si{
+  margin-top: -30px;
+  margin-left: 80%;
+}
+
+#do{
+  margin-top: -33px;
+  margin-left: 10%;
+}
+
+#la{
+  margin-top: -25px;
+  margin-left: 89%;
+}
+
+#fa{
+  margin-top: -17px;
+  margin-left: 86%;
+}
+
+#re{
+  margin-top: -37px;
+  margin-left: 21%;
+}
+
+.played-notes{
+  background-color: #FF0000;
+  padding: 10px;
+  border-radius: 6px;
+  visibility: hidden;
+}
+
+/* Display Instructions */
+.instructions{
+  margin-top: -22vw;
+  font-family: monospace;
+  color: #FFFFFF;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  visibility: hidden;
+}
+
+/* Change Element Visibility */
+.displayed{
+  visibility: visible;
+}
+
+/* Button Input */
+#vision-webpage{
+  position: absolute;
+  margin-top: -25%;
+  margin-left: 48%;
+  opacity: 0;
+}

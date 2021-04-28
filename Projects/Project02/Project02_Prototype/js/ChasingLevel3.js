@@ -2,10 +2,10 @@ class ChasingLevel3 extends ChasingLevel{
   // Class/elements exaplines/commented in main Chasing Level class
   constructor(avatarImage){
     super();
-    this.doorSpeed = 0.8;
+    this.doorSpeed = 1;
     this.levelDuration = 30;
     this.limit = 370;
-    this.dotsNumber = 30;
+    this.dotsNumber = 40;
     this.numericStrings = 7;
     this.stringX1 = 350;
     this.stringX2 = 460;

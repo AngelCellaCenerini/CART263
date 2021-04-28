@@ -67,9 +67,9 @@ let floatingObstacle = undefined;
 let obstacles = [];
 let floatingObstacles = [];
 let numberObstacles = undefined;
-let numberObstaclesLevel1 = 3;
-let numberObstaclesLevel2 = 5;
-let numberObstaclesLevel3 = 7;
+let numberObstaclesLevel1 = 5;
+let numberObstaclesLevel2 = 7;
+let numberObstaclesLevel3 = 8;
 let numberObstaclesLevel4 = 10;
 let numberFloatingObstacles = undefined;
 let numberFloatingObstaclesLv3 = 30;
@@ -83,8 +83,8 @@ let ending = undefined;
 let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
-    state: `chasingLevel4`,
-    achievedSenses: 0
+    state: `title`,
+    achievedSenses: 2
   }
 }
 

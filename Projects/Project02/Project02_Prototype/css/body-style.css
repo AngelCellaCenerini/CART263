@@ -1,0 +1,121 @@
+
+body{
+  background-color: #000000;
+  font-family:monospace;
+  color: #FFFFFF;
+}
+
+#maze{
+  position: absolute;
+  width: 95%;
+  height: 95%;
+}
+
+.statue{
+  position: absolute;
+  margin-top: 5%;
+  margin-left: 65%;
+}
+
+#statue-bust{
+  opacity: 0;
+}
+
+#statue-left-leg{
+  opacity: 0;
+}
+
+#statue-head{
+  opacity: 0;
+}
+
+#statue-right-leg{
+  opacity: 0;
+}
+
+
+.statue-section{
+  padding: 40px;
+  border-color: #80BDB6;
+  border-radius: 100px;
+  border-style: solid;
+}
+
+#bust-section{
+  position: absolute;
+  left: 55%;
+  top: 35%;
+  opacity: 0;
+}
+
+#left-leg-section{
+  position: absolute;
+  left: 23%;
+  top: 43%;
+  opacity: 0;
+}
+
+#head-section{
+  position: absolute;
+  left: 30%;
+  top: 41%;
+  opacity: 0;
+}
+
+#right-leg-section{
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  opacity: 0;
+}
+
+#artist-name{
+  position: absolute;
+  margin-top: 2%;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  opacity: 1;
+}
+
+.horizantal-walls{
+  position: absolute;
+}
+
+#right-side{
+  left: 75%;
+}
+
+.horizantal-wall{
+  background-color: #FFFFFF;
+  opacity: 0.5;
+  border-radius: 2px;
+  padding: 10px;
+  width: 330px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+#vertical-walls{
+  position: absolute;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  margin-left: 15%;
+}
+
+.vertical-wall{
+  background-color: #FFFFFF;
+  opacity: 0.5;
+  border-radius: 2px;
+  padding: 10px;
+  width: 100px;
+  height: 330px;
+  margin-bottom: 10px;
+  margin-right: 60px;
+}
+
+#body-webpage{
+  position: absolute;
+  margin-left: 8px;
+  margin-top: 29%;
+  opacity: 0;
+}

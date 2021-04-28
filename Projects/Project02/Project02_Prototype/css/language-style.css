@@ -1,0 +1,78 @@
+
+body{
+  background-color: #000000;
+  /* font-family: monospace; */
+  font-family: 'Share Tech Mono', monospace;
+  color: #79FBCB;
+  font-size: 1.1rem;
+}
+
+#caption{
+  border-style: solid;
+  border-radius: 4px;
+  padding: 15px;
+  width: 45%;
+  font-size: 1.6rem;
+}
+
+#frame{
+  border-style: solid;
+  border-radius: 4px;
+  padding: 15px;
+  width: 25%;
+  height: 350px;
+}
+
+.hand-symbol{
+  position: absolute;
+  margin-top: -290px;
+  margin-left: 130px;
+}
+
+#question-marks{
+  position: absolute;
+  font-size: 2.2rem;
+  margin-left: 452px;
+  margin-top: -360px;
+}
+
+#text-input{
+  position: absolute;
+  margin-left: 460px;
+  margin-top: -280px;
+}
+
+#submit-guess{
+  position: absolute;
+  margin-left: 630px;
+  margin-top: -280px;
+  width: 50px;
+}
+
+.numeric-data{
+  position: absolute;
+  margin-left: 590px;
+  margin-top: -220px;
+  visibility: visible;
+}
+
+.varied-data{
+  position: absolute;
+  margin-left: 460px;
+  margin-top: -220px;
+}
+
+#progressbar{
+  width: 45%;
+  height: 20px;
+  margin-top: 50px;
+  border-radius: 2px;
+  background-color: #000000;
+}
+
+#language-webpage{
+  position: absolute;
+  margin-top: -22px;
+  margin-left: 45%;
+  opacity: 0;
+}
