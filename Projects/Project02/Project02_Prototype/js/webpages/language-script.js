@@ -30,11 +30,11 @@ let icons = [
 // Store all Solutions
 let solutions = [
  `okay`,
- `okay2`,
- `okay3`,
- `okay4`,
- `okay5`,
- `okay6`
+ `stop`,
+ `perfect`,
+ `promise`,
+ `shy`,
+ `italian`
 ]
 
 // Solutions Array Index

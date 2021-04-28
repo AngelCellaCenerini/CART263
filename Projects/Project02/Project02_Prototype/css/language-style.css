@@ -1,7 +1,6 @@
 
 body{
   background-color: #000000;
-  /* font-family: monospace; */
   font-family: 'Share Tech Mono', monospace;
   color: #79FBCB;
   font-size: 1.1rem;
@@ -25,8 +24,8 @@ body{
 
 .hand-symbol{
   position: absolute;
-  margin-top: -290px;
-  margin-left: 130px;
+  margin-top: -310px;
+  margin-left: 102px;
 }
 
 #question-marks{

@@ -4,7 +4,7 @@ class Avatar {
     this.x = 400;
     this.y = 300;
     this.image = undefined;
-    this.size = 32;
+    this.size = 38;
     this.vx = 0;
     this.vy = 0;
     this.speed = 4;
@@ -85,6 +85,6 @@ class Avatar {
      this.image = crosshairCursorImage;
    }
 
-   image(this.image, this.x, this.y, this.size);
+   image(this.image, this.x, this.y, this.size, this.size);
 }
 }

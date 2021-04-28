@@ -84,7 +84,7 @@ let gameData = JSON.parse(localStorage.getItem(`gameData`));
 if (!gameData) {
   gameData = {
     state: `title`,
-    achievedSenses: 0
+    achievedSenses: 3
   }
 }
 
@@ -101,7 +101,7 @@ function preload() {
 
   // Image Files
   crosshairCursorImage = loadImage(`assets/images/crosshair-cursor.png`);
-  flameImage = loadImage(`assets/images/stressed-avatar.png`);
+  flameImage = loadImage(`assets/images/avatar.png`);
   blinkingLightImage = loadImage(`assets/images/light.png`);
   blinkingTealLightImage = loadImage(`assets/images/tealLight.png`);
 }

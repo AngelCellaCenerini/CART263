@@ -34,8 +34,8 @@ class Room{
     this.lightImage = lightImage;
     this.lightX = 400;
     this.lightY = 300;
-    this.opacityValue1 = 70;    // Blinking Effect Intensity Varies depending on Lights
-    this.opacityValue2 = 180;   // Blinking Effect Intensity Varies depending on Lights
+    this.opacityValue1 = 100;    // Blinking Effect Intensity Varies depending on Lights
+    this.opacityValue2 = 200;   // Blinking Effect Intensity Varies depending on Lights
 
     // Room Status - Complete only when User finishes program
     // Will only turn false for Main Room at the end of program (but it saves a lot of code lines to set the mechanism here)
