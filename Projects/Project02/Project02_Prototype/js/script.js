@@ -4,7 +4,7 @@
 Project02 - "It Chooses"
 Angel Cella Cenerini
 
-Description and detailes in "Artist Statement"
+Description and details in "Artist Statement"
 */
 
 // Dialogue Box

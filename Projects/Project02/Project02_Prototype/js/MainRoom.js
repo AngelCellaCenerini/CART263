@@ -119,12 +119,12 @@ class MainRoom extends Room {
       }
 
       // Calculate Probability
-       if (random(0, 1) < 0.3){
-         // 30% Chance to reach relevant Room
+       if (random(0, 1) < 0.2){
+         // 20% Chance to reach relevant Room
          this.state = this.firstOption;
        }
        else{
-         // 70% Chance to reach Empty Room
+         // 80% Chance to reach Empty Room
          this.state = this.secondOption;
        }
     }
